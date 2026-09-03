@@ -10,8 +10,8 @@ curva: Árbitro
 
 Concesiona el recurso y norma (ámbito federal).
 
-> [!info] Sin incidencia asignada
+> **Sin incidencia asignada**
 > Concesiona el recurso y emite norma en el ámbito federal, pero el diagnóstico no le atribuye hoy ninguna causa ni ninguna responsabilidad de reparación.
 
 
-→ [[Los actores]]
+→ [Los actores](./Los%20actores.md)

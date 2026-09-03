@@ -10,8 +10,8 @@ curva: Oferta privada
 
 Oferta sustituta ante la intermitencia.
 
-> [!info] Sin incidencia asignada
-> Aparece nombrada en [[E10 · El gasto privado forzado]] pero no está asignada como causa ni como responsable en ninguna de las diez.
+> **Sin incidencia asignada**
+> Aparece nombrada en [E10 · El gasto privado forzado](../2%20%C2%B7%20Las%20causas/E10%20%C2%B7%20El%20gasto%20privado%20forzado.md) pero no está asignada como causa ni como responsable en ninguna de las diez.
 
 
-→ [[Los actores]]
+→ [Los actores](./Los%20actores.md)

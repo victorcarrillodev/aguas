@@ -12,13 +12,13 @@ La idea es precisa. El sistema no falla de manera pareja. Falla de una forma que
 
 ## Dónde se ve
 
-**En el tandeo** — el corte es peor para quien no tiene tinaco ni aljibe: la misma interrupción produce una molestia para unos y desabasto para otros. → [[E2 · El tandeo]]
+**En el tandeo** — el corte es peor para quien no tiene tinaco ni aljibe: la misma interrupción produce una molestia para unos y desabasto para otros. → [E2 · El tandeo](../2%20%C2%B7%20Las%20causas/E2%20%C2%B7%20El%20tandeo.md)
 
-**En la tarifa** — los subsidios se diluyen de forma universal en vez de focalizarse, de modo que quien no los necesita también los recibe, y la carga tarifaria sobre el ingreso resulta más pesada en los deciles bajos. → [[E3 · La tarifa]]
+**En la tarifa** — los subsidios se diluyen de forma universal en vez de focalizarse, de modo que quien no los necesita también los recibe, y la carga tarifaria sobre el ingreso resulta más pesada en los deciles bajos. → [E3 · La tarifa](../2%20%C2%B7%20Las%20causas/E3%20%C2%B7%20La%20tarifa.md)
 
-**En la cuenca** — quien recibe la carga contaminante son las comunidades ribereñas aguas abajo, que no son las que se sirven del agua tratada. El daño y el beneficio están geográficamente separados. → [[E5 · La carga a la cuenca]]
+**En la cuenca** — quien recibe la carga contaminante son las comunidades ribereñas aguas abajo, que no son las que se sirven del agua tratada. El daño y el beneficio están geográficamente separados. → [E5 · La carga a la cuenca](../2%20%C2%B7%20Las%20causas/E5%20%C2%B7%20La%20carga%20a%20la%20cuenca.md)
 
-**En el gasto del hogar** — la doble facturación por embotellada y la triple por pipa pesan sobre el ingreso disponible en proporción inversa a ese ingreso. → [[E10 · El gasto privado forzado]]
+**En el gasto del hogar** — la doble facturación por embotellada y la triple por pipa pesan sobre el ingreso disponible en proporción inversa a ese ingreso. → [E10 · El gasto privado forzado](../2%20%C2%B7%20Las%20causas/E10%20%C2%B7%20El%20gasto%20privado%20forzado.md)
 
 ## Su expresión medible
 

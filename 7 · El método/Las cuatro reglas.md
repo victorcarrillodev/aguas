@@ -24,7 +24,7 @@ La diferencia no es de estilo. La primera formulación ya trae la solución dent
 > ✗ «El Congreso.»
 > ✓ «El contrapeso legislativo opera para exonerar al Ejecutivo.»
 
-El actor no desaparece del análisis: se registra aparte, en las columnas de quién causa y quién debe resolver. Ahí es donde sirve. → [[Quién causa y quién debe resolver]]
+El actor no desaparece del análisis: se registra aparte, en las columnas de quién causa y quién debe resolver. Ahí es donde sirve. → [Quién causa y quién debe resolver](./Qui%C3%A9n%20causa%20y%20qui%C3%A9n%20debe%20resolver.md)
 
 ## 4 · La causa genera el nivel superior; no lo redescribe
 
@@ -32,7 +32,7 @@ Si una supuesta causa es solo otra manera de decir el problema de arriba, no es 
 
 Ejemplo: *«gasto de imagen sobre gasto operativo»* no causa la captura del presupuesto — **la retrata**. Como causa estorbaría; como indicador es oro.
 
-Lo que falla esta regla no se tira: se guarda. → [[Las mediciones]]
+Lo que falla esta regla no se tira: se guarda. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
 
 ---
 

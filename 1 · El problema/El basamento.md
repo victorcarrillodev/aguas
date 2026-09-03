@@ -8,7 +8,7 @@ titulo: El basamento
 
 ## El hecho concreto
 
-El **Decreto 24805/LX/13** retiró la participación municipal del gobierno del organismo operador y concentró el control en el Ejecutivo estatal. Es uno de los pocos hechos jurídicos verificables anclados en todo el diagnóstico, y está registrado como nodo en [[E8.1]].
+El **Decreto 24805/LX/13** retiró la participación municipal del gobierno del organismo operador y concentró el control en el Ejecutivo estatal. Es uno de los pocos hechos jurídicos verificables anclados en todo el diagnóstico, y está registrado como nodo en [E8.1](../3%20%C2%B7%20Las%20fichas/E8.1.md).
 
 ## Por qué es basamento y no causa
 
@@ -18,4 +18,4 @@ Su huella es visible en un detalle del propio diagnóstico. El catálogo de acto
 
 No es un descuido. Es coherente: al actor con el vínculo territorial más directo con el habitante se le retiró el asiento en el órgano que decide, y por lo tanto no hay atribución que endosarle. **La ausencia es el argumento.**
 
-Sobre este piso se levanta [[La raíz maestra]].
+Sobre este piso se levanta [La raíz maestra](./La%20ra%C3%ADz%20maestra.md).

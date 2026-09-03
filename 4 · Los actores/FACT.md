@@ -11,4 +11,4 @@ curva: Ambas
 Autoriza la incorporación de nueva demanda (bisagra).
 
 
-→ [[Los actores]]
+→ [Los actores](./Los%20actores.md)

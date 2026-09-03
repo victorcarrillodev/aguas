@@ -11,8 +11,8 @@ Hipótesis del bosque, no causa. Anotada para vigilancia, no colgada del árbol.
 
 ## Lo produce
 
-- [[E10 · El gasto privado forzado]] — Los hogares del AMG erogan un gasto privado creciente en agua —doble facturación por embotellada, triple por pipa— para suplir un servicio público deteriorado.
+- [E10 · El gasto privado forzado](../2%20%C2%B7%20Las%20causas/E10%20%C2%B7%20El%20gasto%20privado%20forzado.md) — Los hogares del AMG erogan un gasto privado creciente en agua —doble facturación por embotellada, triple por pipa— para suplir un servicio público deteriorado.
 
 
-> [!warning] La copa no se interviene
-> Los efectos se leen. Intervenir un efecto es tratar el síntoma. → [[Las cuatro reglas]]
+> **La copa no se interviene**
+> Los efectos se leen. Intervenir un efecto es tratar el síntoma. → [Las cuatro reglas](../7%20%C2%B7%20El%20m%C3%A9todo/Las%20cuatro%20reglas.md)

@@ -26,7 +26,7 @@ La cadena de valor interna del organismo (10 macroprocesos).
 
 Quién ofrece y quién demanda; quién hace y quién padece.
 
-→ [[Los actores]]
+→ [Los actores](../4%20%C2%B7%20Los%20actores/Los%20actores.md)
 
 ## C3 · Factores
 
@@ -50,13 +50,13 @@ Las siete lentes de análisis que atraviesan todo.
 
 | Capa dominante | Causas |
 |---|---|
-| Macroprocesos | [[E1 · La calidad del agua]], [[E2 · El tandeo]], [[E3 · La tarifa]], [[E4 · Las inundaciones]], [[E5 · La carga a la cuenca]] |
-| Actores | [[E9 · La exigencia débil]] |
-| Factores | [[E6 · El mercado negro]], [[E7 · La captura del presupuesto]], [[E8 · La fiscalización invertida]], [[E10 · El gasto privado forzado]] |
+| Macroprocesos | [E1 · La calidad del agua](../2%20%C2%B7%20Las%20causas/E1%20%C2%B7%20La%20calidad%20del%20agua.md), [E2 · El tandeo](../2%20%C2%B7%20Las%20causas/E2%20%C2%B7%20El%20tandeo.md), [E3 · La tarifa](../2%20%C2%B7%20Las%20causas/E3%20%C2%B7%20La%20tarifa.md), [E4 · Las inundaciones](../2%20%C2%B7%20Las%20causas/E4%20%C2%B7%20Las%20inundaciones.md), [E5 · La carga a la cuenca](../2%20%C2%B7%20Las%20causas/E5%20%C2%B7%20La%20carga%20a%20la%20cuenca.md) |
+| Actores | [E9 · La exigencia débil](../2%20%C2%B7%20Las%20causas/E9%20%C2%B7%20La%20exigencia%20d%C3%A9bil.md) |
+| Factores | [E6 · El mercado negro](../2%20%C2%B7%20Las%20causas/E6%20%C2%B7%20El%20mercado%20negro.md), [E7 · La captura del presupuesto](../2%20%C2%B7%20Las%20causas/E7%20%C2%B7%20La%20captura%20del%20presupuesto.md), [E8 · La fiscalización invertida](../2%20%C2%B7%20Las%20causas/E8%20%C2%B7%20La%20fiscalizaci%C3%B3n%20invertida.md), [E10 · El gasto privado forzado](../2%20%C2%B7%20Las%20causas/E10%20%C2%B7%20El%20gasto%20privado%20forzado.md) |
 
 Y hay un detalle que vale la pena mirar. Al nivel de las diez causas, la capa que más pesa es la de los **macroprocesos**: el diagnóstico empieza hablando de la cadena de valor interna del organismo. Pero al bajar un nivel, a las condiciones que generan esas causas, la capa dominante más frecuente pasa a ser la de los **factores** — poder político, intereses particulares, economía ilícita.
 
 Dicho de otro modo: **conforme el análisis profundiza, deja de hablar de procesos y empieza a hablar de poder.** Y la fuerza de presión más frecuente en todo el diagnóstico es *Poder político y control de grupos*, que aparece en cuatro de las diez.
 
-> [!warning] El número de capas no mide importancia
+> **El número de capas no mide importancia**
 > Que un nodo toque cuatro capas y otro toque una no dice cuál pesa más. Mide densidad de incidencia, no gravedad. La ponderación —dar más peso a lo que toca la raíz— es una decisión pendiente, y se tomará revisando árbol por árbol.

@@ -11,4 +11,4 @@ curva: Oferta
 Rectoría hídrica estatal.
 
 
-→ [[Los actores]]
+→ [Los actores](./Los%20actores.md)

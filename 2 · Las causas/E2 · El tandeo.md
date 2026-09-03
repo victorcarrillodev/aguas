@@ -7,7 +7,7 @@ atribucion: SIAPA
 
 # E2 · El tandeo
 
-> [!quote] El problema
+> **El problema**
 > Habitantes del AMG, conectados a la red del SIAPA, reciben un servicio discontinuo de agua.
 
 El tandeo no es una avería: es la forma en que el sistema administra un déficit que no reconoce en público. Este árbol explica de dónde sale ese déficit —la mitad del agua se pierde antes de llegar— y por qué el reparto de lo que queda no tiene calendario ni criterio.
@@ -20,10 +20,10 @@ El tandeo no es una avería: es la forma en que el sistema administra un défici
 
 *Lo que produce:* menos agua para repartir.
 
-*Causa directa · Omisión · atribución SIAPA · ficha [[E2.1]]*
+*Causa directa · Omisión · atribución SIAPA · ficha [E2.1](../3%20%C2%B7%20Las%20fichas/E2.1.md)*
 
 > **Y eso, ¿por qué?** La reposición anual de red se mantiene muy por debajo de la tasa de deterioro (meta de 172 km/año no ejecutada).
-> *Omisión · atribución SIAPA · ficha [[E2.1.1]]*
+> *Omisión · atribución SIAPA · ficha [E2.1.1](../3%20%C2%B7%20Las%20fichas/E2.1.1.md)*
 
 ---
 
@@ -31,15 +31,15 @@ El tandeo no es una avería: es la forma en que el sistema administra un défici
 
 *Lo que produce:* racionamiento por incapacidad de control.
 
-*Causa directa · Omisión · atribución SIAPA · ficha [[E2.2]]*
+*Causa directa · Omisión · atribución SIAPA · ficha [E2.2](../3%20%C2%B7%20Las%20fichas/E2.2.md)*
 
 ---
 
 **3 · La capacidad de fuentes y conducción es insuficiente frente a la demanda en estiaje.**
 
-*Lo que produce:* déficit estacional de oferta. Esta misma condición toca a [[E6 · El mercado negro]].
+*Lo que produce:* déficit estacional de oferta. Esta misma condición toca a [E6 · El mercado negro](./E6%20%C2%B7%20El%20mercado%20negro.md).
 
-*Causa directa · Mixta · atribución SIAPA · ficha [[E2.3]]*
+*Causa directa · Mixta · atribución SIAPA · ficha [E2.3](../3%20%C2%B7%20Las%20fichas/E2.3.md)*
 
 ---
 
@@ -47,15 +47,15 @@ El tandeo no es una avería: es la forma en que el sistema administra un défici
 
 *Lo que produce:* interrupciones no programadas.
 
-*Causa directa · Omisión · atribución SIAPA · ficha [[E2.4]]*
+*Causa directa · Omisión · atribución SIAPA · ficha [E2.4](../3%20%C2%B7%20Las%20fichas/E2.4.md)*
 
 ---
 
 **5 · El tandeo se administra como racionamiento no declarado, sin criterio equitativo ni calendario público.**
 
-*Lo que produce:* discontinuidad opaca e inequitativa. Esta misma condición toca a [[E3 · La tarifa]] y [[E9 · La exigencia débil]].
+*Lo que produce:* discontinuidad opaca e inequitativa. Esta misma condición toca a [E3 · La tarifa](./E3%20%C2%B7%20La%20tarifa.md) y [E9 · La exigencia débil](./E9%20%C2%B7%20La%20exigencia%20d%C3%A9bil.md).
 
-*Causa directa · Acción · atribución SIAPA · ficha [[E2.5]]*
+*Causa directa · Acción · atribución SIAPA · ficha [E2.5](../3%20%C2%B7%20Las%20fichas/E2.5.md)*
 
 ---
 
@@ -63,11 +63,11 @@ El tandeo no es una avería: es la forma en que el sistema administra un défici
 
 Hay condiciones que este árbol necesita y que **no puede resolver por dentro**: pertenecen a otros. Se anotan aparte para no contarlas dos veces.
 
-**Supuesto con [[E7 · La captura del presupuesto]].** La inversión en reposición de red se ejecuta (Propósito de E7).
+**Supuesto con [E7 · La captura del presupuesto](./E7%20%C2%B7%20La%20captura%20del%20presupuesto.md).** La inversión en reposición de red se ejecuta (Propósito de E7).
 
-**Supuesto con [[E6 · El mercado negro]].** La fuente no se sobreexplota por el circuito informal (Propósito de E6).
+**Supuesto con [E6 · El mercado negro](./E6%20%C2%B7%20El%20mercado%20negro.md).** La fuente no se sobreexplota por el circuito informal (Propósito de E6).
 
-**Desde la raíz.** Sin balance hídrico auditado no se dimensiona el déficit ni el tandeo. → [[La raíz maestra]]
+**Desde la raíz.** Sin balance hídrico auditado no se dimensiona el déficit ni el tandeo. → [La raíz maestra](../1%20%C2%B7%20El%20problema/La%20ra%C3%ADz%20maestra.md)
 
 ---
 
@@ -75,30 +75,30 @@ Hay condiciones que este árbol necesita y que **no puede resolver por dentro**:
 
 Estos son **efectos**. Viajan hacia arriba y alimentan otros árboles. No se intervienen: se leen.
 
-**[[5 · Los efectos/Almacenamiento domiciliario|Almacenamiento domiciliario]]** — Almacenamiento domiciliario que degrada la calidad del agua ya entregada.
+**[Almacenamiento domiciliario](../5%20%C2%B7%20Los%20efectos/Almacenamiento%20domiciliario.md)** — Almacenamiento domiciliario que degrada la calidad del agua ya entregada.
 
-**[[5 · Los efectos/Gasto en pipas|Gasto en pipas]]** — Gasto en pipas para suplir la intermitencia.
+**[Gasto en pipas](../5%20%C2%B7%20Los%20efectos/Gasto%20en%20pipas.md)** — Gasto en pipas para suplir la intermitencia.
 
-**[[5 · Los efectos/La inequidad del tandeo|La inequidad del tandeo]]** — Inequidad del tandeo: es peor para quien no tiene tinaco ni aljibe.
+**[La inequidad del tandeo](../5%20%C2%B7%20Los%20efectos/La%20inequidad%20del%20tandeo.md)** — Inequidad del tandeo: es peor para quien no tiene tinaco ni aljibe.
 
 ---
 
 ## Cómo se mediría
 
-- **[[6 · Las mediciones/Horas de suministro al día|Horas de suministro al día]]** — Horas de suministro al día por zona
-- **[[6 · Las mediciones/Pérdidas físicas de la red|Pérdidas físicas de la red]]** — % de pérdidas físicas (agua no contabilizada)
-- **[[6 · Las mediciones/Sectorización y reposición de red|Sectorización y reposición de red]]** — % de red sectorizada; tasa de reposición contra tasa de deterioro
+- **[Horas de suministro al día](../6%20%C2%B7%20Las%20mediciones/Horas%20de%20suministro%20al%20d%C3%ADa.md)** — Horas de suministro al día por zona
+- **[Pérdidas físicas de la red](../6%20%C2%B7%20Las%20mediciones/P%C3%A9rdidas%20f%C3%ADsicas%20de%20la%20red.md)** — % de pérdidas físicas (agua no contabilizada)
+- **[Sectorización y reposición de red](../6%20%C2%B7%20Las%20mediciones/Sectorizaci%C3%B3n%20y%20reposici%C3%B3n%20de%20red.md)** — % de red sectorizada; tasa de reposición contra tasa de deterioro
 
-Ninguna de estas mediciones tiene hoy una línea base pública. → [[Las mediciones]]
+Ninguna de estas mediciones tiene hoy una línea base pública. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
 
 ---
 
 ## Quién lo causa y quién debería resolverlo
 
-**Lo causa:** [[4 · Los actores/DIST|DIST]] *(Distribución)* · [[4 · Los actores/PLAN|PLAN]] *(Planeación)*
-**Debería resolverlo:** [[4 · Los actores/DIST|DIST]] *(Distribución)* · [[4 · Los actores/PLAN|PLAN]] *(Planeación)*
+**Lo causa:** [DIST](../4%20%C2%B7%20Los%20actores/DIST.md) *(Distribución)* · [PLAN](../4%20%C2%B7%20Los%20actores/PLAN.md) *(Planeación)*
+**Debería resolverlo:** [DIST](../4%20%C2%B7%20Los%20actores/DIST.md) *(Distribución)* · [PLAN](../4%20%C2%B7%20Los%20actores/PLAN.md) *(Planeación)*
 
-El mismo actor causa el problema y es el responsable de corregirlo: **juez y parte**. → [[Quién causa y quién debe resolver]]
+El mismo actor causa el problema y es el responsable de corregirlo: **juez y parte**. → [Quién causa y quién debe resolver](../7%20%C2%B7%20El%20m%C3%A9todo/Qui%C3%A9n%20causa%20y%20qui%C3%A9n%20debe%20resolver.md)
 
 **Naturaleza:** Omisión — no se hace lo debido.
 **Ámbito de atribución:** SIAPA
@@ -109,20 +109,20 @@ El mismo actor causa el problema y es el responsable de corregirlo: **juez y par
 
 **Este árbol depende de:**
 
-- [[E7 · La captura del presupuesto]] — da por supuesto que ahí funciona lo que aquí hace falta
-- [[E6 · El mercado negro]] — da por supuesto que ahí funciona lo que aquí hace falta
+- [E7 · La captura del presupuesto](./E7%20%C2%B7%20La%20captura%20del%20presupuesto.md) — da por supuesto que ahí funciona lo que aquí hace falta
+- [E6 · El mercado negro](./E6%20%C2%B7%20El%20mercado%20negro.md) — da por supuesto que ahí funciona lo que aquí hace falta
 
 **Y sostiene a:**
 
-- [[E10 · El gasto privado forzado]] — lo da por supuesto
+- [E10 · El gasto privado forzado](./E10%20%C2%B7%20El%20gasto%20privado%20forzado.md) — lo da por supuesto
 
 **Puntos de contacto:**
 
-- [[E6 · El mercado negro]] — por [[E2.3]]
-- [[E3 · La tarifa]] — por [[E2.5]], [[E3.4]]
-- [[E9 · La exigencia débil]] — por [[E2.5]]
-- [[E1 · La calidad del agua]] — por [[E1.3]], [[E1.5]]
-- [[E10 · El gasto privado forzado]] — por [[E10.3]]
+- [E6 · El mercado negro](./E6%20%C2%B7%20El%20mercado%20negro.md) — por [E2.3](../3%20%C2%B7%20Las%20fichas/E2.3.md)
+- [E3 · La tarifa](./E3%20%C2%B7%20La%20tarifa.md) — por [E2.5](../3%20%C2%B7%20Las%20fichas/E2.5.md), [E3.4](../3%20%C2%B7%20Las%20fichas/E3.4.md)
+- [E9 · La exigencia débil](./E9%20%C2%B7%20La%20exigencia%20d%C3%A9bil.md) — por [E2.5](../3%20%C2%B7%20Las%20fichas/E2.5.md)
+- [E1 · La calidad del agua](./E1%20%C2%B7%20La%20calidad%20del%20agua.md) — por [E1.3](../3%20%C2%B7%20Las%20fichas/E1.3.md), [E1.5](../3%20%C2%B7%20Las%20fichas/E1.5.md)
+- [E10 · El gasto privado forzado](./E10%20%C2%B7%20El%20gasto%20privado%20forzado.md) — por [E10.3](../3%20%C2%B7%20Las%20fichas/E10.3.md)
 
 
 ---
@@ -137,4 +137,4 @@ El mismo actor causa el problema y es el responsable de corregirlo: **juez y par
 | Fuerza de presión | Tiempo y obsolescencia |
 | Lente de análisis | Biofísica-técnica |
 | Causas directas | 5 |
-| Mapa | [[E2 · El tandeo (mapa).canvas]] |
+| Mapa | [Ver el mapa](../8%20%C2%B7%20Mapas/E2%20%C2%B7%20El%20tandeo%20%C2%B7%20mapa.canvas) |

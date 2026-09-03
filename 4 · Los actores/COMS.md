@@ -11,4 +11,4 @@ curva: Ambas
 Provee servicio y moldea la percepción del usuario.
 
 
-→ [[Los actores]]
+→ [Los actores](./Los%20actores.md)

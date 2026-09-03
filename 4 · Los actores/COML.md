@@ -11,4 +11,4 @@ curva: Ambas
 Cobra (oferta) y es la interfaz con el usuario (demanda).
 
 
-→ [[Los actores]]
+→ [Los actores](./Los%20actores.md)

@@ -7,7 +7,7 @@ atribucion: SIAPA
 
 # E3 · La tarifa
 
-> [!quote] El problema
+> **El problema**
 > Los usuarios del SIAPA soportan un modelo tarifario ajeno a los principios de equidad, racionalidad, asequibilidad y transparencia, incapaz de solventar un servicio de calidad en el presente y el largo plazo, que afecta especialmente a los más desprotegidos.
 
 El precio del agua no lo fija un regulador técnico: lo aprueba el Congreso dentro de la ley de ingresos. Este árbol explica qué se rompe cuando la tarifa se decide como un ingreso público y no como el costo de un servicio, y por qué el resultado castiga más a quien menos tiene.
@@ -18,9 +18,9 @@ El precio del agua no lo fija un regulador técnico: lo aprueba el Congreso dent
 
 **1 · La tarifa se fija dentro de la ley de ingresos por el Congreso, como instrumento recaudatorio-político, no ante un regulador técnico.**
 
-*Lo que produce:* precio sin racionalidad económica. Esta misma condición toca a [[E8 · La fiscalización invertida]].
+*Lo que produce:* precio sin racionalidad económica. Esta misma condición toca a [E8 · La fiscalización invertida](./E8%20%C2%B7%20La%20fiscalizaci%C3%B3n%20invertida.md).
 
-*Causa directa · Acción · atribución Legislativo · ficha [[E3.1]]*
+*Causa directa · Acción · atribución Legislativo · ficha [E3.1](../3%20%C2%B7%20Las%20fichas/E3.1.md)*
 
 ---
 
@@ -28,7 +28,7 @@ El precio del agua no lo fija un regulador técnico: lo aprueba el Congreso dent
 
 *Lo que produce:* opacidad e insuficiencia.
 
-*Causa directa · Omisión · atribución SIAPA · ficha [[E3.2]]*
+*Causa directa · Omisión · atribución SIAPA · ficha [E3.2](../3%20%C2%B7%20Las%20fichas/E3.2.md)*
 
 ---
 
@@ -36,23 +36,23 @@ El precio del agua no lo fija un regulador técnico: lo aprueba el Congreso dent
 
 *Lo que produce:* regresividad del gasto.
 
-*Causa directa · Acción · atribución SIAPA · ficha [[E3.3]]*
+*Causa directa · Acción · atribución SIAPA · ficha [E3.3](../3%20%C2%B7%20Las%20fichas/E3.3.md)*
 
 ---
 
 **4 · La baja micromedición obliga a cuota fija, que anula la señal de ahorro y la equidad de pagar por lo usado.**
 
-*Lo que produce:* inequidad e ineficiencia. Esta misma condición toca a [[E2 · El tandeo]].
+*Lo que produce:* inequidad e ineficiencia. Esta misma condición toca a [E2 · El tandeo](./E2%20%C2%B7%20El%20tandeo.md).
 
-*Causa directa · Omisión · atribución SIAPA · ficha [[E3.4]]*
+*Causa directa · Omisión · atribución SIAPA · ficha [E3.4](../3%20%C2%B7%20Las%20fichas/E3.4.md)*
 
 ---
 
 **5 · La ineficiencia física y comercial del organismo se traslada al usuario vía tarifa (se factura sobre volumen reducido por pérdidas).**
 
-*Lo que produce:* el usuario paga la ineficiencia. Esta misma condición toca a [[E7 · La captura del presupuesto]].
+*Lo que produce:* el usuario paga la ineficiencia. Esta misma condición toca a [E7 · La captura del presupuesto](./E7%20%C2%B7%20La%20captura%20del%20presupuesto.md).
 
-*Causa directa · Acción · atribución SIAPA · ficha [[E3.5]]*
+*Causa directa · Acción · atribución SIAPA · ficha [E3.5](../3%20%C2%B7%20Las%20fichas/E3.5.md)*
 
 ---
 
@@ -60,11 +60,11 @@ El precio del agua no lo fija un regulador técnico: lo aprueba el Congreso dent
 
 Hay condiciones que este árbol necesita y que **no puede resolver por dentro**: pertenecen a otros. Se anotan aparte para no contarlas dos veces.
 
-**Supuesto con [[E8 · La fiscalización invertida]].** Existe fiscalización o regulación que verifique la estructura de costos (Propósito de E8).
+**Supuesto con [E8 · La fiscalización invertida](./E8%20%C2%B7%20La%20fiscalizaci%C3%B3n%20invertida.md).** Existe fiscalización o regulación que verifique la estructura de costos (Propósito de E8).
 
-**Bisagra con [[E7 · La captura del presupuesto]].** La ineficiencia interna (E7) es la que se traslada a tarifa.
+**Bisagra con [E7 · La captura del presupuesto](./E7%20%C2%B7%20La%20captura%20del%20presupuesto.md).** La ineficiencia interna (E7) es la que se traslada a tarifa.
 
-**Desde la raíz.** Sin costos por proceso auditables, la tarifa no es verificable. → [[La raíz maestra]]
+**Desde la raíz.** Sin costos por proceso auditables, la tarifa no es verificable. → [La raíz maestra](../1%20%C2%B7%20El%20problema/La%20ra%C3%ADz%20maestra.md)
 
 ---
 
@@ -72,32 +72,32 @@ Hay condiciones que este árbol necesita y que **no puede resolver por dentro**:
 
 Estos son **efectos**. Viajan hacia arriba y alimentan otros árboles. No se intervienen: se leen.
 
-**[[5 · Los efectos/Transferencia regresiva del costo|Transferencia regresiva del costo]]** — Transferencia regresiva del costo del ciclo hidrosocial hacia quien menos tiene y hacia el activo común (cuenca y erario).
-También lo produce [[E10 · El gasto privado forzado]], [[El problema central|el problema central]].
+**[Transferencia regresiva del costo](../5%20%C2%B7%20Los%20efectos/Transferencia%20regresiva%20del%20costo.md)** — Transferencia regresiva del costo del ciclo hidrosocial hacia quien menos tiene y hacia el activo común (cuenca y erario).
+También lo produce [E10 · El gasto privado forzado](./E10%20%C2%B7%20El%20gasto%20privado%20forzado.md), [el problema central](../1%20%C2%B7%20El%20problema/El%20problema%20central.md).
 
-**[[5 · Los efectos/Descapitalización del organismo|Descapitalización del organismo]]** — Descapitalización financiera del organismo.
-También lo produce [[E6 · El mercado negro]].
+**[Descapitalización del organismo](../5%20%C2%B7%20Los%20efectos/Descapitalizaci%C3%B3n%20del%20organismo.md)** — Descapitalización financiera del organismo.
+También lo produce [E6 · El mercado negro](./E6%20%C2%B7%20El%20mercado%20negro.md).
 
-**[[5 · Los efectos/Desincentivo al pago|Desincentivo al pago]]** — Desincentivo al pago de quien no ve contraprestación.
+**[Desincentivo al pago](../5%20%C2%B7%20Los%20efectos/Desincentivo%20al%20pago.md)** — Desincentivo al pago de quien no ve contraprestación.
 
 ---
 
 ## Cómo se mediría
 
-- **[[6 · Las mediciones/Carga tarifaria por decil|Carga tarifaria por decil]]** — Carga tarifaria sobre el ingreso, por decil
-- **[[6 · Las mediciones/Cobertura de micromedición|Cobertura de micromedición]]** — Cobertura de micromedición
-- **[[6 · Las mediciones/Tarifa contra costo de largo plazo|Tarifa contra costo de largo plazo]]** — Relación tarifa / costo marginal de largo plazo; % de subsidio que llega al decil I–III
+- **[Carga tarifaria por decil](../6%20%C2%B7%20Las%20mediciones/Carga%20tarifaria%20por%20decil.md)** — Carga tarifaria sobre el ingreso, por decil
+- **[Cobertura de micromedición](../6%20%C2%B7%20Las%20mediciones/Cobertura%20de%20micromedici%C3%B3n.md)** — Cobertura de micromedición
+- **[Tarifa contra costo de largo plazo](../6%20%C2%B7%20Las%20mediciones/Tarifa%20contra%20costo%20de%20largo%20plazo.md)** — Relación tarifa / costo marginal de largo plazo; % de subsidio que llega al decil I–III
 
-Ninguna de estas mediciones tiene hoy una línea base pública. → [[Las mediciones]]
+Ninguna de estas mediciones tiene hoy una línea base pública. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
 
 ---
 
 ## Quién lo causa y quién debería resolverlo
 
-**Lo causa:** [[4 · Los actores/SIAPA|SIAPA]] *(Organismo operador)*
-**Debería resolverlo:** [[4 · Los actores/SIAPA|SIAPA]] *(Organismo operador)* · [[4 · Los actores/CONGRESO|CONGRESO]] *(Poder Legislativo)*
+**Lo causa:** [SIAPA](../4%20%C2%B7%20Los%20actores/SIAPA.md) *(Organismo operador)*
+**Debería resolverlo:** [SIAPA](../4%20%C2%B7%20Los%20actores/SIAPA.md) *(Organismo operador)* · [CONGRESO](../4%20%C2%B7%20Los%20actores/CONGRESO.md) *(Poder Legislativo)*
 
-Hay traslape, pero no coincidencia: la responsabilidad está **compartida y difusa**, que es el caso más difícil de exigir. → [[Quién causa y quién debe resolver]]
+Hay traslape, pero no coincidencia: la responsabilidad está **compartida y difusa**, que es el caso más difícil de exigir. → [Quién causa y quién debe resolver](../7%20%C2%B7%20El%20m%C3%A9todo/Qui%C3%A9n%20causa%20y%20qui%C3%A9n%20debe%20resolver.md)
 
 **Naturaleza:** Acción — se hace algo que daña.
 **Ámbito de atribución:** SIAPA
@@ -108,14 +108,14 @@ Hay traslape, pero no coincidencia: la responsabilidad está **compartida y difu
 
 **Este árbol depende de:**
 
-- [[E8 · La fiscalización invertida]] — da por supuesto que ahí funciona lo que aquí hace falta
+- [E8 · La fiscalización invertida](./E8%20%C2%B7%20La%20fiscalizaci%C3%B3n%20invertida.md) — da por supuesto que ahí funciona lo que aquí hace falta
 
 **Puntos de contacto:**
 
-- [[E8 · La fiscalización invertida]] — por [[E3.1]]
-- [[E2 · El tandeo]] — por [[E3.4]], [[E2.5]]
-- [[E7 · La captura del presupuesto]] — por [[E3.5]]
-- [[E6 · El mercado negro]] — por [[E6.2]]
+- [E8 · La fiscalización invertida](./E8%20%C2%B7%20La%20fiscalizaci%C3%B3n%20invertida.md) — por [E3.1](../3%20%C2%B7%20Las%20fichas/E3.1.md)
+- [E2 · El tandeo](./E2%20%C2%B7%20El%20tandeo.md) — por [E3.4](../3%20%C2%B7%20Las%20fichas/E3.4.md), [E2.5](../3%20%C2%B7%20Las%20fichas/E2.5.md)
+- [E7 · La captura del presupuesto](./E7%20%C2%B7%20La%20captura%20del%20presupuesto.md) — por [E3.5](../3%20%C2%B7%20Las%20fichas/E3.5.md)
+- [E6 · El mercado negro](./E6%20%C2%B7%20El%20mercado%20negro.md) — por [E6.2](../3%20%C2%B7%20Las%20fichas/E6.2.md)
 
 
 ---
@@ -130,4 +130,4 @@ Hay traslape, pero no coincidencia: la responsabilidad está **compartida y difu
 | Fuerza de presión | Presupuesto y racionalidad del gasto |
 | Lente de análisis | Económica |
 | Causas directas | 5 |
-| Mapa | [[E3 · La tarifa (mapa).canvas]] |
+| Mapa | [Ver el mapa](../8%20%C2%B7%20Mapas/E3%20%C2%B7%20La%20tarifa%20%C2%B7%20mapa.canvas) |
