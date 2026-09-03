@@ -1,0 +1,280 @@
+{
+  "nodes": [
+    {
+      "id": "n121",
+      "type": "file",
+      "file": "2 · Las causas/E5 · La carga a la cuenca.md",
+      "x": 0,
+      "y": -400,
+      "width": 900,
+      "height": 260,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n122",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nDeterioro de la calidad de la fuente de abastecimiento.",
+      "x": -320,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n124",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nDaño a las comunidades ribereñas aguas abajo.",
+      "x": 180,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n126",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nAgotamiento cualitativo del activo-cuenca (insostenibilidad).",
+      "x": 680,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n128",
+      "type": "file",
+      "file": "3 · Las fichas/E5.1.md",
+      "x": 0,
+      "y": 60,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n130",
+      "type": "file",
+      "file": "3 · Las fichas/E5.2.md",
+      "x": 0,
+      "y": 320,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n132",
+      "type": "file",
+      "file": "3 · Las fichas/E5.3.md",
+      "x": 0,
+      "y": 580,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n134",
+      "type": "file",
+      "file": "3 · Las fichas/E5.3.1.md",
+      "x": 840,
+      "y": 580,
+      "width": 660,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n136",
+      "type": "file",
+      "file": "3 · Las fichas/E5.4.md",
+      "x": 0,
+      "y": 840,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n138",
+      "type": "file",
+      "file": "3 · Las fichas/E5.5.md",
+      "x": 0,
+      "y": 1100,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n140",
+      "type": "text",
+      "text": "**DEPENDE DE E8**\n\nSe vigila y se sanciona la descarga fuera de norma (Propósito de E8).",
+      "x": -980,
+      "y": -140,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n142",
+      "type": "text",
+      "text": "**DEPENDE DE E4**\n\nDrenaje combinado y descargas industriales alimentan la carga.",
+      "x": -980,
+      "y": 120,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n144",
+      "type": "text",
+      "text": "**DEPENDE DE E1**\n\nLa carga en origen degrada la fuente y regresa como problema de calidad (E1).",
+      "x": -980,
+      "y": 380,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n146",
+      "type": "text",
+      "text": "## RAÍZ MAESTRA\n\nSin medición verificable y sin fiscalización real, ninguna de estas causas encuentra corrección ni sanción.",
+      "x": 0,
+      "y": 1440,
+      "width": 1500,
+      "height": 240,
+      "color": "#E8A0BF"
+    },
+    {
+      "id": "n147",
+      "type": "text",
+      "text": "**C4**\nDimensiones",
+      "x": -1260,
+      "y": -840,
+      "width": 220,
+      "height": 180,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n148",
+      "type": "text",
+      "text": "**C3**\nFactores",
+      "x": -1260,
+      "y": -620,
+      "width": 220,
+      "height": 180,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n149",
+      "type": "text",
+      "text": "**C2**\nActores",
+      "x": -1260,
+      "y": -400,
+      "width": 220,
+      "height": 180,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n150",
+      "type": "text",
+      "text": "**C1**\nMacroprocesos",
+      "x": -1260,
+      "y": -180,
+      "width": 220,
+      "height": 180,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n151",
+      "type": "text",
+      "text": "**C0**\nCiclo hidrosocial",
+      "x": -1260,
+      "y": 40,
+      "width": 220,
+      "height": 180,
+      "color": "#E8A0BF"
+    }
+  ],
+  "edges": [
+    {
+      "id": "n123",
+      "fromNode": "n121",
+      "fromSide": "top",
+      "toNode": "n122",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n125",
+      "fromNode": "n121",
+      "fromSide": "top",
+      "toNode": "n124",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n127",
+      "fromNode": "n121",
+      "fromSide": "top",
+      "toNode": "n126",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n129",
+      "fromNode": "n128",
+      "fromSide": "top",
+      "toNode": "n121",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n131",
+      "fromNode": "n130",
+      "fromSide": "top",
+      "toNode": "n121",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n133",
+      "fromNode": "n132",
+      "fromSide": "top",
+      "toNode": "n121",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n135",
+      "fromNode": "n134",
+      "fromSide": "left",
+      "toNode": "n132",
+      "toSide": "right"
+    },
+    {
+      "id": "n137",
+      "fromNode": "n136",
+      "fromSide": "top",
+      "toNode": "n121",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n139",
+      "fromNode": "n138",
+      "fromSide": "top",
+      "toNode": "n121",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n141",
+      "fromNode": "n140",
+      "fromSide": "right",
+      "toNode": "n121",
+      "toSide": "left"
+    },
+    {
+      "id": "n143",
+      "fromNode": "n142",
+      "fromSide": "right",
+      "toNode": "n121",
+      "toSide": "left"
+    },
+    {
+      "id": "n145",
+      "fromNode": "n144",
+      "fromSide": "right",
+      "toNode": "n121",
+      "toSide": "left"
+    }
+  ]
+}

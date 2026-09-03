@@ -1,0 +1,263 @@
+{
+  "nodes": [
+    {
+      "id": "n266",
+      "type": "file",
+      "file": "2 · Las causas/E10 · El gasto privado forzado.md",
+      "x": 0,
+      "y": -400,
+      "width": 900,
+      "height": 260,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n267",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nTransferencia regresiva del costo del ciclo hidrosocial hacia quien menos tiene y hacia el activo común (cuenca y erario).",
+      "x": -320,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n269",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nDrenaje del ingreso disponible del hogar.",
+      "x": 180,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n271",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nFabrica el argumento pro-privatización.",
+      "x": 680,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n273",
+      "type": "file",
+      "file": "3 · Las fichas/E10.1.md",
+      "x": 0,
+      "y": 60,
+      "width": 760,
+      "height": 220,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n275",
+      "type": "file",
+      "file": "3 · Las fichas/E10.2.md",
+      "x": 0,
+      "y": 320,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n277",
+      "type": "file",
+      "file": "3 · Las fichas/E10.3.md",
+      "x": 0,
+      "y": 580,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n279",
+      "type": "file",
+      "file": "3 · Las fichas/E10.4.md",
+      "x": 0,
+      "y": 840,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n281",
+      "type": "file",
+      "file": "3 · Las fichas/E10.5.md",
+      "x": 0,
+      "y": 1100,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n283",
+      "type": "text",
+      "text": "**DEPENDE DE E1**\n\nCalidad conforme a la NOM-127 (Propósito de E1); su incumplimiento empuja a la embotellada.",
+      "x": -980,
+      "y": -140,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n285",
+      "type": "text",
+      "text": "**DEPENDE DE E2**\n\nContinuidad del servicio (Propósito de E2); su falla empuja a la pipa.",
+      "x": -980,
+      "y": 120,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n287",
+      "type": "text",
+      "text": "**DEPENDE DE E9**\n\nLa doble y triple facturación fragmenta y desactiva la exigencia (E9).",
+      "x": -980,
+      "y": 380,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n289",
+      "type": "text",
+      "text": "## RAÍZ MAESTRA\n\nSin medición verificable y sin fiscalización real, ninguna de estas causas encuentra corrección ni sanción.",
+      "x": 0,
+      "y": 1440,
+      "width": 1500,
+      "height": 240,
+      "color": "#E8A0BF"
+    },
+    {
+      "id": "n290",
+      "type": "text",
+      "text": "**C4**\nDimensiones",
+      "x": -1260,
+      "y": -840,
+      "width": 220,
+      "height": 180,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n291",
+      "type": "text",
+      "text": "**C3**\nFactores",
+      "x": -1260,
+      "y": -620,
+      "width": 220,
+      "height": 180,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n292",
+      "type": "text",
+      "text": "**C2**\nActores",
+      "x": -1260,
+      "y": -400,
+      "width": 220,
+      "height": 180,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n293",
+      "type": "text",
+      "text": "**C1**\nMacroprocesos",
+      "x": -1260,
+      "y": -180,
+      "width": 220,
+      "height": 180,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n294",
+      "type": "text",
+      "text": "**C0**\nCiclo hidrosocial",
+      "x": -1260,
+      "y": 40,
+      "width": 220,
+      "height": 180,
+      "color": "#E8A0BF"
+    }
+  ],
+  "edges": [
+    {
+      "id": "n268",
+      "fromNode": "n266",
+      "fromSide": "top",
+      "toNode": "n267",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n270",
+      "fromNode": "n266",
+      "fromSide": "top",
+      "toNode": "n269",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n272",
+      "fromNode": "n266",
+      "fromSide": "top",
+      "toNode": "n271",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n274",
+      "fromNode": "n273",
+      "fromSide": "top",
+      "toNode": "n266",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n276",
+      "fromNode": "n275",
+      "fromSide": "top",
+      "toNode": "n266",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n278",
+      "fromNode": "n277",
+      "fromSide": "top",
+      "toNode": "n266",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n280",
+      "fromNode": "n279",
+      "fromSide": "top",
+      "toNode": "n266",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n282",
+      "fromNode": "n281",
+      "fromSide": "top",
+      "toNode": "n266",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n284",
+      "fromNode": "n283",
+      "fromSide": "right",
+      "toNode": "n266",
+      "toSide": "left"
+    },
+    {
+      "id": "n286",
+      "fromNode": "n285",
+      "fromSide": "right",
+      "toNode": "n266",
+      "toSide": "left"
+    },
+    {
+      "id": "n288",
+      "fromNode": "n287",
+      "fromSide": "right",
+      "toNode": "n266",
+      "toSide": "left"
+    }
+  ]
+}

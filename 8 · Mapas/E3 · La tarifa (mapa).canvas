@@ -1,0 +1,263 @@
+{
+  "nodes": [
+    {
+      "id": "n63",
+      "type": "file",
+      "file": "2 · Las causas/E3 · La tarifa.md",
+      "x": 0,
+      "y": -400,
+      "width": 900,
+      "height": 260,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n64",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nTransferencia regresiva del costo del ciclo hidrosocial hacia quien menos tiene y hacia el activo común (cuenca y erario).",
+      "x": -320,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n66",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nDescapitalización financiera del organismo.",
+      "x": 180,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n68",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nDesincentivo al pago de quien no ve contraprestación.",
+      "x": 680,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n70",
+      "type": "file",
+      "file": "3 · Las fichas/E3.1.md",
+      "x": 0,
+      "y": 60,
+      "width": 760,
+      "height": 220,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n72",
+      "type": "file",
+      "file": "3 · Las fichas/E3.2.md",
+      "x": 0,
+      "y": 320,
+      "width": 760,
+      "height": 220,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n74",
+      "type": "file",
+      "file": "3 · Las fichas/E3.3.md",
+      "x": 0,
+      "y": 580,
+      "width": 760,
+      "height": 220,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n76",
+      "type": "file",
+      "file": "3 · Las fichas/E3.4.md",
+      "x": 0,
+      "y": 840,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n78",
+      "type": "file",
+      "file": "3 · Las fichas/E3.5.md",
+      "x": 0,
+      "y": 1100,
+      "width": 760,
+      "height": 220,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n80",
+      "type": "text",
+      "text": "**DEPENDE DE E8**\n\nExiste fiscalización o regulación que verifique la estructura de costos (Propósito de E8).",
+      "x": -980,
+      "y": -140,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n82",
+      "type": "text",
+      "text": "**DEPENDE DE E7**\n\nLa ineficiencia interna (E7) es la que se traslada a tarifa.",
+      "x": -980,
+      "y": 120,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n84",
+      "type": "text",
+      "text": "**DESDE LA RAÍZ**\n\nSin costos por proceso auditables, la tarifa no es verificable.",
+      "x": -980,
+      "y": 380,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n86",
+      "type": "text",
+      "text": "## RAÍZ MAESTRA\n\nSin medición verificable y sin fiscalización real, ninguna de estas causas encuentra corrección ni sanción.",
+      "x": 0,
+      "y": 1440,
+      "width": 1500,
+      "height": 240,
+      "color": "#E8A0BF"
+    },
+    {
+      "id": "n87",
+      "type": "text",
+      "text": "**C4**\nDimensiones",
+      "x": -1260,
+      "y": -840,
+      "width": 220,
+      "height": 180,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n88",
+      "type": "text",
+      "text": "**C3**\nFactores",
+      "x": -1260,
+      "y": -620,
+      "width": 220,
+      "height": 180,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n89",
+      "type": "text",
+      "text": "**C2**\nActores",
+      "x": -1260,
+      "y": -400,
+      "width": 220,
+      "height": 180,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n90",
+      "type": "text",
+      "text": "**C1**\nMacroprocesos",
+      "x": -1260,
+      "y": -180,
+      "width": 220,
+      "height": 180,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n91",
+      "type": "text",
+      "text": "**C0**\nCiclo hidrosocial",
+      "x": -1260,
+      "y": 40,
+      "width": 220,
+      "height": 180,
+      "color": "#E8A0BF"
+    }
+  ],
+  "edges": [
+    {
+      "id": "n65",
+      "fromNode": "n63",
+      "fromSide": "top",
+      "toNode": "n64",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n67",
+      "fromNode": "n63",
+      "fromSide": "top",
+      "toNode": "n66",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n69",
+      "fromNode": "n63",
+      "fromSide": "top",
+      "toNode": "n68",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n71",
+      "fromNode": "n70",
+      "fromSide": "top",
+      "toNode": "n63",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n73",
+      "fromNode": "n72",
+      "fromSide": "top",
+      "toNode": "n63",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n75",
+      "fromNode": "n74",
+      "fromSide": "top",
+      "toNode": "n63",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n77",
+      "fromNode": "n76",
+      "fromSide": "top",
+      "toNode": "n63",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n79",
+      "fromNode": "n78",
+      "fromSide": "top",
+      "toNode": "n63",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n81",
+      "fromNode": "n80",
+      "fromSide": "right",
+      "toNode": "n63",
+      "toSide": "left"
+    },
+    {
+      "id": "n83",
+      "fromNode": "n82",
+      "fromSide": "right",
+      "toNode": "n63",
+      "toSide": "left"
+    },
+    {
+      "id": "n85",
+      "fromNode": "n84",
+      "fromSide": "right",
+      "toNode": "n63",
+      "toSide": "left"
+    }
+  ]
+}

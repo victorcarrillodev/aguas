@@ -1,0 +1,263 @@
+{
+  "nodes": [
+    {
+      "id": "n92",
+      "type": "file",
+      "file": "2 · Las causas/E4 · Las inundaciones.md",
+      "x": 0,
+      "y": -400,
+      "width": 900,
+      "height": 260,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n93",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nCarga contaminante a la cuenca por desborde del drenaje combinado.",
+      "x": -320,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n95",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nRiesgo sanitario por contacto de la población con aguas negras.",
+      "x": 180,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n97",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nDaño patrimonial por anegamientos.",
+      "x": 680,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n99",
+      "type": "file",
+      "file": "3 · Las fichas/E4.1.md",
+      "x": 0,
+      "y": 60,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n101",
+      "type": "file",
+      "file": "3 · Las fichas/E4.2.md",
+      "x": 0,
+      "y": 320,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n103",
+      "type": "file",
+      "file": "3 · Las fichas/E4.3.md",
+      "x": 0,
+      "y": 580,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n105",
+      "type": "file",
+      "file": "3 · Las fichas/E4.4.md",
+      "x": 0,
+      "y": 840,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n107",
+      "type": "file",
+      "file": "3 · Las fichas/E4.5.md",
+      "x": 0,
+      "y": 1100,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n109",
+      "type": "text",
+      "text": "**DEPENDE DE E8**\n\nSe sancionan las descargas irregulares y las factibilidades sin drenaje (Propósito de E8).",
+      "x": -980,
+      "y": -140,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n111",
+      "type": "text",
+      "text": "**DEPENDE DE E5**\n\nLo que se desborda combinado llega a la cuenca como carga (E5).",
+      "x": -980,
+      "y": 120,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n113",
+      "type": "text",
+      "text": "**FACTIBILIDADES**\n\nBisagra factibilidades: la autorización de demanda condiciona la carga pluvial y sanitaria.",
+      "x": -980,
+      "y": 380,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n115",
+      "type": "text",
+      "text": "## RAÍZ MAESTRA\n\nSin medición verificable y sin fiscalización real, ninguna de estas causas encuentra corrección ni sanción.",
+      "x": 0,
+      "y": 1440,
+      "width": 1500,
+      "height": 240,
+      "color": "#E8A0BF"
+    },
+    {
+      "id": "n116",
+      "type": "text",
+      "text": "**C4**\nDimensiones",
+      "x": -1260,
+      "y": -840,
+      "width": 220,
+      "height": 180,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n117",
+      "type": "text",
+      "text": "**C3**\nFactores",
+      "x": -1260,
+      "y": -620,
+      "width": 220,
+      "height": 180,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n118",
+      "type": "text",
+      "text": "**C2**\nActores",
+      "x": -1260,
+      "y": -400,
+      "width": 220,
+      "height": 180,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n119",
+      "type": "text",
+      "text": "**C1**\nMacroprocesos",
+      "x": -1260,
+      "y": -180,
+      "width": 220,
+      "height": 180,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n120",
+      "type": "text",
+      "text": "**C0**\nCiclo hidrosocial",
+      "x": -1260,
+      "y": 40,
+      "width": 220,
+      "height": 180,
+      "color": "#E8A0BF"
+    }
+  ],
+  "edges": [
+    {
+      "id": "n94",
+      "fromNode": "n92",
+      "fromSide": "top",
+      "toNode": "n93",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n96",
+      "fromNode": "n92",
+      "fromSide": "top",
+      "toNode": "n95",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n98",
+      "fromNode": "n92",
+      "fromSide": "top",
+      "toNode": "n97",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n100",
+      "fromNode": "n99",
+      "fromSide": "top",
+      "toNode": "n92",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n102",
+      "fromNode": "n101",
+      "fromSide": "top",
+      "toNode": "n92",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n104",
+      "fromNode": "n103",
+      "fromSide": "top",
+      "toNode": "n92",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n106",
+      "fromNode": "n105",
+      "fromSide": "top",
+      "toNode": "n92",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n108",
+      "fromNode": "n107",
+      "fromSide": "top",
+      "toNode": "n92",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n110",
+      "fromNode": "n109",
+      "fromSide": "right",
+      "toNode": "n92",
+      "toSide": "left"
+    },
+    {
+      "id": "n112",
+      "fromNode": "n111",
+      "fromSide": "right",
+      "toNode": "n92",
+      "toSide": "left"
+    },
+    {
+      "id": "n114",
+      "fromNode": "n113",
+      "fromSide": "right",
+      "toNode": "n92",
+      "toSide": "left"
+    }
+  ]
+}

@@ -1,0 +1,263 @@
+{
+  "nodes": [
+    {
+      "id": "n183",
+      "type": "file",
+      "file": "2 · Las causas/E7 · La captura del presupuesto.md",
+      "x": 0,
+      "y": -400,
+      "width": 900,
+      "height": 260,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n184",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nMenos recursos para operación, mantenimiento y renovación.",
+      "x": -320,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n186",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nErosión de la disposición a pagar del usuario.",
+      "x": 180,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n188",
+      "type": "file",
+      "file": "3 · Las fichas/E7.1.md",
+      "x": 0,
+      "y": 60,
+      "width": 760,
+      "height": 220,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n190",
+      "type": "file",
+      "file": "3 · Las fichas/E7.1.1.md",
+      "x": 840,
+      "y": 60,
+      "width": 660,
+      "height": 220,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n192",
+      "type": "file",
+      "file": "3 · Las fichas/E7.2.md",
+      "x": 0,
+      "y": 320,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n194",
+      "type": "file",
+      "file": "3 · Las fichas/E7.3.md",
+      "x": 0,
+      "y": 580,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n196",
+      "type": "file",
+      "file": "3 · Las fichas/E7.3.1.md",
+      "x": 840,
+      "y": 580,
+      "width": 660,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n198",
+      "type": "file",
+      "file": "3 · Las fichas/E7.4.md",
+      "x": 0,
+      "y": 840,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n200",
+      "type": "file",
+      "file": "3 · Las fichas/E7.5.md",
+      "x": 0,
+      "y": 1100,
+      "width": 760,
+      "height": 220,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n202",
+      "type": "text",
+      "text": "**DEPENDE DE E8**\n\nEl contrapeso legislativo no fiscaliza el gasto ni impone sanción (Propósito de E8); sin ello, la captura persiste.",
+      "x": -980,
+      "y": -140,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n204",
+      "type": "text",
+      "text": "**DESDE LA RAÍZ**\n\nLa información presupuestal por proceso no es pública ni auditable: piso del doble sello.",
+      "x": -980,
+      "y": 120,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n206",
+      "type": "text",
+      "text": "## RAÍZ MAESTRA\n\nSin medición verificable y sin fiscalización real, ninguna de estas causas encuentra corrección ni sanción.",
+      "x": 0,
+      "y": 1440,
+      "width": 1500,
+      "height": 240,
+      "color": "#E8A0BF"
+    },
+    {
+      "id": "n207",
+      "type": "text",
+      "text": "**C4**\nDimensiones",
+      "x": -1260,
+      "y": -840,
+      "width": 220,
+      "height": 180,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n208",
+      "type": "text",
+      "text": "**C3**\nFactores",
+      "x": -1260,
+      "y": -620,
+      "width": 220,
+      "height": 180,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n209",
+      "type": "text",
+      "text": "**C2**\nActores",
+      "x": -1260,
+      "y": -400,
+      "width": 220,
+      "height": 180,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n210",
+      "type": "text",
+      "text": "**C1**\nMacroprocesos",
+      "x": -1260,
+      "y": -180,
+      "width": 220,
+      "height": 180,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n211",
+      "type": "text",
+      "text": "**C0**\nCiclo hidrosocial",
+      "x": -1260,
+      "y": 40,
+      "width": 220,
+      "height": 180,
+      "color": "#E8A0BF"
+    }
+  ],
+  "edges": [
+    {
+      "id": "n185",
+      "fromNode": "n183",
+      "fromSide": "top",
+      "toNode": "n184",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n187",
+      "fromNode": "n183",
+      "fromSide": "top",
+      "toNode": "n186",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n189",
+      "fromNode": "n188",
+      "fromSide": "top",
+      "toNode": "n183",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n191",
+      "fromNode": "n190",
+      "fromSide": "left",
+      "toNode": "n188",
+      "toSide": "right"
+    },
+    {
+      "id": "n193",
+      "fromNode": "n192",
+      "fromSide": "top",
+      "toNode": "n183",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n195",
+      "fromNode": "n194",
+      "fromSide": "top",
+      "toNode": "n183",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n197",
+      "fromNode": "n196",
+      "fromSide": "left",
+      "toNode": "n194",
+      "toSide": "right"
+    },
+    {
+      "id": "n199",
+      "fromNode": "n198",
+      "fromSide": "top",
+      "toNode": "n183",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n201",
+      "fromNode": "n200",
+      "fromSide": "top",
+      "toNode": "n183",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n203",
+      "fromNode": "n202",
+      "fromSide": "right",
+      "toNode": "n183",
+      "toSide": "left"
+    },
+    {
+      "id": "n205",
+      "fromNode": "n204",
+      "fromSide": "right",
+      "toNode": "n183",
+      "toSide": "left"
+    }
+  ]
+}

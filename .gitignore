@@ -1,0 +1,16 @@
+# Material de trabajo del equipo — no forma parte del documento
+_Trabajo interno/
+
+# Estado local de Obsidian (personal de cada máquina)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Plugins de terceros (cada quien los instala si los quiere)
+.obsidian/plugins/

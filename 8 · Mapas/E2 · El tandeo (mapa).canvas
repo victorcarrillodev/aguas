@@ -1,0 +1,280 @@
+{
+  "nodes": [
+    {
+      "id": "n32",
+      "type": "file",
+      "file": "2 · Las causas/E2 · El tandeo.md",
+      "x": 0,
+      "y": -400,
+      "width": 900,
+      "height": 260,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n33",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nAlmacenamiento domiciliario que degrada la calidad del agua ya entregada.",
+      "x": -320,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n35",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nGasto en pipas para suplir la intermitencia.",
+      "x": 180,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n37",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nInequidad del tandeo: es peor para quien no tiene tinaco ni aljibe.",
+      "x": 680,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n39",
+      "type": "file",
+      "file": "3 · Las fichas/E2.1.md",
+      "x": 0,
+      "y": 60,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n41",
+      "type": "file",
+      "file": "3 · Las fichas/E2.1.1.md",
+      "x": 840,
+      "y": 60,
+      "width": 660,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n43",
+      "type": "file",
+      "file": "3 · Las fichas/E2.2.md",
+      "x": 0,
+      "y": 320,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n45",
+      "type": "file",
+      "file": "3 · Las fichas/E2.3.md",
+      "x": 0,
+      "y": 580,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n47",
+      "type": "file",
+      "file": "3 · Las fichas/E2.4.md",
+      "x": 0,
+      "y": 840,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n49",
+      "type": "file",
+      "file": "3 · Las fichas/E2.5.md",
+      "x": 0,
+      "y": 1100,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n51",
+      "type": "text",
+      "text": "**DEPENDE DE E7**\n\nLa inversión en reposición de red se ejecuta (Propósito de E7).",
+      "x": -980,
+      "y": -140,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n53",
+      "type": "text",
+      "text": "**DEPENDE DE E6**\n\nLa fuente no se sobreexplota por el circuito informal (Propósito de E6).",
+      "x": -980,
+      "y": 120,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n55",
+      "type": "text",
+      "text": "**DESDE LA RAÍZ**\n\nSin balance hídrico auditado no se dimensiona el déficit ni el tandeo.",
+      "x": -980,
+      "y": 380,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n57",
+      "type": "text",
+      "text": "## RAÍZ MAESTRA\n\nSin medición verificable y sin fiscalización real, ninguna de estas causas encuentra corrección ni sanción.",
+      "x": 0,
+      "y": 1440,
+      "width": 1500,
+      "height": 240,
+      "color": "#E8A0BF"
+    },
+    {
+      "id": "n58",
+      "type": "text",
+      "text": "**C4**\nDimensiones",
+      "x": -1260,
+      "y": -840,
+      "width": 220,
+      "height": 180,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n59",
+      "type": "text",
+      "text": "**C3**\nFactores",
+      "x": -1260,
+      "y": -620,
+      "width": 220,
+      "height": 180,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n60",
+      "type": "text",
+      "text": "**C2**\nActores",
+      "x": -1260,
+      "y": -400,
+      "width": 220,
+      "height": 180,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n61",
+      "type": "text",
+      "text": "**C1**\nMacroprocesos",
+      "x": -1260,
+      "y": -180,
+      "width": 220,
+      "height": 180,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n62",
+      "type": "text",
+      "text": "**C0**\nCiclo hidrosocial",
+      "x": -1260,
+      "y": 40,
+      "width": 220,
+      "height": 180,
+      "color": "#E8A0BF"
+    }
+  ],
+  "edges": [
+    {
+      "id": "n34",
+      "fromNode": "n32",
+      "fromSide": "top",
+      "toNode": "n33",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n36",
+      "fromNode": "n32",
+      "fromSide": "top",
+      "toNode": "n35",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n38",
+      "fromNode": "n32",
+      "fromSide": "top",
+      "toNode": "n37",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n40",
+      "fromNode": "n39",
+      "fromSide": "top",
+      "toNode": "n32",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n42",
+      "fromNode": "n41",
+      "fromSide": "left",
+      "toNode": "n39",
+      "toSide": "right"
+    },
+    {
+      "id": "n44",
+      "fromNode": "n43",
+      "fromSide": "top",
+      "toNode": "n32",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n46",
+      "fromNode": "n45",
+      "fromSide": "top",
+      "toNode": "n32",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n48",
+      "fromNode": "n47",
+      "fromSide": "top",
+      "toNode": "n32",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n50",
+      "fromNode": "n49",
+      "fromSide": "top",
+      "toNode": "n32",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n52",
+      "fromNode": "n51",
+      "fromSide": "right",
+      "toNode": "n32",
+      "toSide": "left"
+    },
+    {
+      "id": "n54",
+      "fromNode": "n53",
+      "fromSide": "right",
+      "toNode": "n32",
+      "toSide": "left"
+    },
+    {
+      "id": "n56",
+      "fromNode": "n55",
+      "fromSide": "right",
+      "toNode": "n32",
+      "toSide": "left"
+    }
+  ]
+}

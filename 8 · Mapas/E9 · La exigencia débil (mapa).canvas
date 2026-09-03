@@ -1,0 +1,246 @@
+{
+  "nodes": [
+    {
+      "id": "n239",
+      "type": "file",
+      "file": "2 · Las causas/E9 · La exigencia débil.md",
+      "x": 0,
+      "y": -400,
+      "width": 900,
+      "height": 260,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n240",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nEl monopolio no encuentra presión social y persiste el mal desempeño.",
+      "x": -320,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n242",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nBaja apropiación social de las soluciones públicas.",
+      "x": 180,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n244",
+      "type": "file",
+      "file": "3 · Las fichas/E9.1.md",
+      "x": 0,
+      "y": 60,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n246",
+      "type": "file",
+      "file": "3 · Las fichas/E9.2.md",
+      "x": 0,
+      "y": 320,
+      "width": 760,
+      "height": 220,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n248",
+      "type": "file",
+      "file": "3 · Las fichas/E9.3.md",
+      "x": 0,
+      "y": 580,
+      "width": 760,
+      "height": 220,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n250",
+      "type": "file",
+      "file": "3 · Las fichas/E9.4.md",
+      "x": 0,
+      "y": 840,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n252",
+      "type": "file",
+      "file": "3 · Las fichas/E9.5.md",
+      "x": 0,
+      "y": 1100,
+      "width": 760,
+      "height": 220,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n254",
+      "type": "text",
+      "text": "**DEPENDE DE E8**\n\nExisten canales vinculantes y fiscalización que traduzcan la exigencia en corrección (Propósito de E8).",
+      "x": -980,
+      "y": -140,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n256",
+      "type": "text",
+      "text": "**DEPENDE DE E10**\n\nEl gasto privado (E10) desactiva la urgencia y la presión colectiva.",
+      "x": -980,
+      "y": 120,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n258",
+      "type": "text",
+      "text": "**DESDE LA RAÍZ**\n\nLa opacidad del desempeño impide la exigencia informada.",
+      "x": -980,
+      "y": 380,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n260",
+      "type": "text",
+      "text": "## RAÍZ MAESTRA\n\nSin medición verificable y sin fiscalización real, ninguna de estas causas encuentra corrección ni sanción.",
+      "x": 0,
+      "y": 1440,
+      "width": 1500,
+      "height": 240,
+      "color": "#E8A0BF"
+    },
+    {
+      "id": "n261",
+      "type": "text",
+      "text": "**C4**\nDimensiones",
+      "x": -1260,
+      "y": -840,
+      "width": 220,
+      "height": 180,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n262",
+      "type": "text",
+      "text": "**C3**\nFactores",
+      "x": -1260,
+      "y": -620,
+      "width": 220,
+      "height": 180,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n263",
+      "type": "text",
+      "text": "**C2**\nActores",
+      "x": -1260,
+      "y": -400,
+      "width": 220,
+      "height": 180,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n264",
+      "type": "text",
+      "text": "**C1**\nMacroprocesos",
+      "x": -1260,
+      "y": -180,
+      "width": 220,
+      "height": 180,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n265",
+      "type": "text",
+      "text": "**C0**\nCiclo hidrosocial",
+      "x": -1260,
+      "y": 40,
+      "width": 220,
+      "height": 180,
+      "color": "#E8A0BF"
+    }
+  ],
+  "edges": [
+    {
+      "id": "n241",
+      "fromNode": "n239",
+      "fromSide": "top",
+      "toNode": "n240",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n243",
+      "fromNode": "n239",
+      "fromSide": "top",
+      "toNode": "n242",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n245",
+      "fromNode": "n244",
+      "fromSide": "top",
+      "toNode": "n239",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n247",
+      "fromNode": "n246",
+      "fromSide": "top",
+      "toNode": "n239",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n249",
+      "fromNode": "n248",
+      "fromSide": "top",
+      "toNode": "n239",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n251",
+      "fromNode": "n250",
+      "fromSide": "top",
+      "toNode": "n239",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n253",
+      "fromNode": "n252",
+      "fromSide": "top",
+      "toNode": "n239",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n255",
+      "fromNode": "n254",
+      "fromSide": "right",
+      "toNode": "n239",
+      "toSide": "left"
+    },
+    {
+      "id": "n257",
+      "fromNode": "n256",
+      "fromSide": "right",
+      "toNode": "n239",
+      "toSide": "left"
+    },
+    {
+      "id": "n259",
+      "fromNode": "n258",
+      "fromSide": "right",
+      "toNode": "n239",
+      "toSide": "left"
+    }
+  ]
+}

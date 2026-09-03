@@ -1,0 +1,280 @@
+{
+  "nodes": [
+    {
+      "id": "n152",
+      "type": "file",
+      "file": "2 · Las causas/E6 · El mercado negro.md",
+      "x": 0,
+      "y": -400,
+      "width": 900,
+      "height": 260,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n153",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nEl acuífero se agota: la extracción supera la recarga.",
+      "x": -320,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n155",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nDescapitalización financiera del organismo.",
+      "x": 180,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n157",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nCompetencia desleal al servicio formal por parte del circuito informal.",
+      "x": 680,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n159",
+      "type": "file",
+      "file": "3 · Las fichas/E6.1.md",
+      "x": 0,
+      "y": 60,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n161",
+      "type": "file",
+      "file": "3 · Las fichas/E6.1.1.md",
+      "x": 840,
+      "y": 60,
+      "width": 660,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n163",
+      "type": "file",
+      "file": "3 · Las fichas/E6.2.md",
+      "x": 0,
+      "y": 320,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n165",
+      "type": "file",
+      "file": "3 · Las fichas/E6.3.md",
+      "x": 0,
+      "y": 580,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n167",
+      "type": "file",
+      "file": "3 · Las fichas/E6.4.md",
+      "x": 0,
+      "y": 840,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n169",
+      "type": "file",
+      "file": "3 · Las fichas/E6.5.md",
+      "x": 0,
+      "y": 1100,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n171",
+      "type": "text",
+      "text": "**DEPENDE DE E8**\n\nLa vigilancia y la sanción sobre extracción y descarga operan (Propósito de E8).",
+      "x": -980,
+      "y": -140,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n173",
+      "type": "text",
+      "text": "**DEPENDE DE E3**\n\nLos precios subsidiados sin focalización (E3) alimentan el arbitraje.",
+      "x": -980,
+      "y": 120,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n175",
+      "type": "text",
+      "text": "**DESDE LA RAÍZ**\n\nSin medición volumétrica de aprovechamientos, la sobreextracción es indetectable.",
+      "x": -980,
+      "y": 380,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n177",
+      "type": "text",
+      "text": "## RAÍZ MAESTRA\n\nSin medición verificable y sin fiscalización real, ninguna de estas causas encuentra corrección ni sanción.",
+      "x": 0,
+      "y": 1440,
+      "width": 1500,
+      "height": 240,
+      "color": "#E8A0BF"
+    },
+    {
+      "id": "n178",
+      "type": "text",
+      "text": "**C4**\nDimensiones",
+      "x": -1260,
+      "y": -840,
+      "width": 220,
+      "height": 180,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n179",
+      "type": "text",
+      "text": "**C3**\nFactores",
+      "x": -1260,
+      "y": -620,
+      "width": 220,
+      "height": 180,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n180",
+      "type": "text",
+      "text": "**C2**\nActores",
+      "x": -1260,
+      "y": -400,
+      "width": 220,
+      "height": 180,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n181",
+      "type": "text",
+      "text": "**C1**\nMacroprocesos",
+      "x": -1260,
+      "y": -180,
+      "width": 220,
+      "height": 180,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n182",
+      "type": "text",
+      "text": "**C0**\nCiclo hidrosocial",
+      "x": -1260,
+      "y": 40,
+      "width": 220,
+      "height": 180,
+      "color": "#E8A0BF"
+    }
+  ],
+  "edges": [
+    {
+      "id": "n154",
+      "fromNode": "n152",
+      "fromSide": "top",
+      "toNode": "n153",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n156",
+      "fromNode": "n152",
+      "fromSide": "top",
+      "toNode": "n155",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n158",
+      "fromNode": "n152",
+      "fromSide": "top",
+      "toNode": "n157",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n160",
+      "fromNode": "n159",
+      "fromSide": "top",
+      "toNode": "n152",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n162",
+      "fromNode": "n161",
+      "fromSide": "left",
+      "toNode": "n159",
+      "toSide": "right"
+    },
+    {
+      "id": "n164",
+      "fromNode": "n163",
+      "fromSide": "top",
+      "toNode": "n152",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n166",
+      "fromNode": "n165",
+      "fromSide": "top",
+      "toNode": "n152",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n168",
+      "fromNode": "n167",
+      "fromSide": "top",
+      "toNode": "n152",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n170",
+      "fromNode": "n169",
+      "fromSide": "top",
+      "toNode": "n152",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n172",
+      "fromNode": "n171",
+      "fromSide": "right",
+      "toNode": "n152",
+      "toSide": "left"
+    },
+    {
+      "id": "n174",
+      "fromNode": "n173",
+      "fromSide": "right",
+      "toNode": "n152",
+      "toSide": "left"
+    },
+    {
+      "id": "n176",
+      "fromNode": "n175",
+      "fromSide": "right",
+      "toNode": "n152",
+      "toSide": "left"
+    }
+  ]
+}

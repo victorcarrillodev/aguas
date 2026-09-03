@@ -1,0 +1,317 @@
+{
+  "nodes": [
+    {
+      "id": "n295",
+      "type": "file",
+      "file": "1 · El problema/El problema central.md",
+      "x": 0,
+      "y": 0,
+      "width": 1300,
+      "height": 340,
+      "color": "#E8A0BF"
+    },
+    {
+      "id": "n296",
+      "type": "text",
+      "text": "**LO QUE PRODUCE**\n\nErosión del Derecho Humano al Agua y al Saneamiento (DHAyS): la población del AMG no lo ejerce con calidad, equidad y sostenibilidad.",
+      "x": -240,
+      "y": -520,
+      "width": 520,
+      "height": 340,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n298",
+      "type": "text",
+      "text": "**LO QUE PRODUCE**\n\nTransferencia regresiva del costo del ciclo hidrosocial hacia quien menos tiene y hacia el activo común (cuenca y erario).",
+      "x": 320,
+      "y": -520,
+      "width": 520,
+      "height": 340,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n300",
+      "type": "text",
+      "text": "**LO QUE PRODUCE**\n\nEl acuífero se agota: la extracción supera la recarga.",
+      "x": 880,
+      "y": -520,
+      "width": 520,
+      "height": 340,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n302",
+      "type": "file",
+      "file": "2 · Las causas/E1 · La calidad del agua.md",
+      "x": -40,
+      "y": 520,
+      "width": 640,
+      "height": 270,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n304",
+      "type": "file",
+      "file": "2 · Las causas/E2 · El tandeo.md",
+      "x": 660,
+      "y": 520,
+      "width": 640,
+      "height": 270,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n306",
+      "type": "file",
+      "file": "2 · Las causas/E3 · La tarifa.md",
+      "x": -40,
+      "y": 820,
+      "width": 640,
+      "height": 270,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n308",
+      "type": "file",
+      "file": "2 · Las causas/E4 · Las inundaciones.md",
+      "x": 660,
+      "y": 820,
+      "width": 640,
+      "height": 270,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n310",
+      "type": "file",
+      "file": "2 · Las causas/E5 · La carga a la cuenca.md",
+      "x": -40,
+      "y": 1120,
+      "width": 640,
+      "height": 270,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n312",
+      "type": "file",
+      "file": "2 · Las causas/E6 · El mercado negro.md",
+      "x": 660,
+      "y": 1120,
+      "width": 640,
+      "height": 270,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n314",
+      "type": "file",
+      "file": "2 · Las causas/E7 · La captura del presupuesto.md",
+      "x": -40,
+      "y": 1420,
+      "width": 640,
+      "height": 270,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n316",
+      "type": "file",
+      "file": "2 · Las causas/E8 · La fiscalización invertida.md",
+      "x": 660,
+      "y": 1420,
+      "width": 640,
+      "height": 270,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n318",
+      "type": "file",
+      "file": "2 · Las causas/E9 · La exigencia débil.md",
+      "x": -40,
+      "y": 1720,
+      "width": 640,
+      "height": 270,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n320",
+      "type": "file",
+      "file": "2 · Las causas/E10 · El gasto privado forzado.md",
+      "x": 660,
+      "y": 1720,
+      "width": 640,
+      "height": 270,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n322",
+      "type": "text",
+      "text": "## EL EJE REGRESIVO\n\nLa inequidad regresiva no es una causa aislada: atraviesa las diez y agrava su incidencia sobre quien menos tiene. No cuelga del árbol; lo corta de lado a lado.",
+      "x": -1080,
+      "y": 780,
+      "width": 880,
+      "height": 340,
+      "color": "#E8A0BF"
+    },
+    {
+      "id": "n323",
+      "type": "text",
+      "text": "## EL BASAMENTO\n\nArreglo institucional fragmentado y sin árbitro —el Decreto 24805/LX/13 retiró la participación municipal del gobierno del SIAPA— que permite que las causas operen sin consecuencia.",
+      "x": -40,
+      "y": 2060,
+      "width": 1380,
+      "height": 260,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n324",
+      "type": "text",
+      "text": "## LA RAÍZ MAESTRA\n\nDoble sello: (1) ausencia de medición endógena verificable y (2) fiscalización legislativa inhibida o invertida. Mientras el doble sello persista, ninguna causa encuentra corrección ni sanción. La regulación es la raíz maestra, no el problema central.",
+      "x": -40,
+      "y": 2360,
+      "width": 1380,
+      "height": 300,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n325",
+      "type": "text",
+      "text": "**C4**\nDimensiones",
+      "x": -1400,
+      "y": -520,
+      "width": 240,
+      "height": 180,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n326",
+      "type": "text",
+      "text": "**C3**\nFactores",
+      "x": -1400,
+      "y": -300,
+      "width": 240,
+      "height": 180,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n327",
+      "type": "text",
+      "text": "**C2**\nActores",
+      "x": -1400,
+      "y": -80,
+      "width": 240,
+      "height": 180,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n328",
+      "type": "text",
+      "text": "**C1**\nMacroprocesos",
+      "x": -1400,
+      "y": 140,
+      "width": 240,
+      "height": 180,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n329",
+      "type": "text",
+      "text": "**C0**\nCiclo hidrosocial",
+      "x": -1400,
+      "y": 360,
+      "width": 240,
+      "height": 180,
+      "color": "#E8A0BF"
+    }
+  ],
+  "edges": [
+    {
+      "id": "n297",
+      "fromNode": "n295",
+      "fromSide": "top",
+      "toNode": "n296",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n299",
+      "fromNode": "n295",
+      "fromSide": "top",
+      "toNode": "n298",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n301",
+      "fromNode": "n295",
+      "fromSide": "top",
+      "toNode": "n300",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n303",
+      "fromNode": "n302",
+      "fromSide": "top",
+      "toNode": "n295",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n305",
+      "fromNode": "n304",
+      "fromSide": "top",
+      "toNode": "n295",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n307",
+      "fromNode": "n306",
+      "fromSide": "top",
+      "toNode": "n295",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n309",
+      "fromNode": "n308",
+      "fromSide": "top",
+      "toNode": "n295",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n311",
+      "fromNode": "n310",
+      "fromSide": "top",
+      "toNode": "n295",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n313",
+      "fromNode": "n312",
+      "fromSide": "top",
+      "toNode": "n295",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n315",
+      "fromNode": "n314",
+      "fromSide": "top",
+      "toNode": "n295",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n317",
+      "fromNode": "n316",
+      "fromSide": "top",
+      "toNode": "n295",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n319",
+      "fromNode": "n318",
+      "fromSide": "top",
+      "toNode": "n295",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n321",
+      "fromNode": "n320",
+      "fromSide": "top",
+      "toNode": "n295",
+      "toSide": "bottom"
+    }
+  ]
+}

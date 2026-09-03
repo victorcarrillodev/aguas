@@ -1,0 +1,246 @@
+{
+  "nodes": [
+    {
+      "id": "n212",
+      "type": "file",
+      "file": "2 · Las causas/E8 · La fiscalización invertida.md",
+      "x": 0,
+      "y": -400,
+      "width": 900,
+      "height": 260,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n213",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nNinguna falla de E1 a E7 encuentra corrección ni sanción.",
+      "x": -320,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n215",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nPersistencia estructural del mal desempeño.",
+      "x": 180,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n217",
+      "type": "file",
+      "file": "3 · Las fichas/E8.1.md",
+      "x": 0,
+      "y": 60,
+      "width": 760,
+      "height": 220,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n219",
+      "type": "file",
+      "file": "3 · Las fichas/E8.2.md",
+      "x": 0,
+      "y": 320,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n221",
+      "type": "file",
+      "file": "3 · Las fichas/E8.2.1.md",
+      "x": 840,
+      "y": 320,
+      "width": 660,
+      "height": 220,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n223",
+      "type": "file",
+      "file": "3 · Las fichas/E8.3.md",
+      "x": 0,
+      "y": 580,
+      "width": 760,
+      "height": 220,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n225",
+      "type": "file",
+      "file": "3 · Las fichas/E8.4.md",
+      "x": 0,
+      "y": 840,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n227",
+      "type": "file",
+      "file": "3 · Las fichas/E8.5.md",
+      "x": 0,
+      "y": 1100,
+      "width": 760,
+      "height": 220,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n229",
+      "type": "text",
+      "text": "**DESDE LA RAÍZ**\n\nE8 es una de las dos hojas de la raíz maestra (fiscalización); su efecto es que TODAS las demás causas persisten sin corrección.",
+      "x": -980,
+      "y": -140,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n231",
+      "type": "text",
+      "text": "**HACIA TODOS**\n\nBisagra universal: por eso ninguna falla de E1 a E7 encuentra sanción institucional.",
+      "x": -980,
+      "y": 120,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n233",
+      "type": "text",
+      "text": "## RAÍZ MAESTRA\n\nSin medición verificable y sin fiscalización real, ninguna de estas causas encuentra corrección ni sanción.",
+      "x": 0,
+      "y": 1440,
+      "width": 1500,
+      "height": 240,
+      "color": "#E8A0BF"
+    },
+    {
+      "id": "n234",
+      "type": "text",
+      "text": "**C4**\nDimensiones",
+      "x": -1260,
+      "y": -840,
+      "width": 220,
+      "height": 180,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n235",
+      "type": "text",
+      "text": "**C3**\nFactores",
+      "x": -1260,
+      "y": -620,
+      "width": 220,
+      "height": 180,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n236",
+      "type": "text",
+      "text": "**C2**\nActores",
+      "x": -1260,
+      "y": -400,
+      "width": 220,
+      "height": 180,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n237",
+      "type": "text",
+      "text": "**C1**\nMacroprocesos",
+      "x": -1260,
+      "y": -180,
+      "width": 220,
+      "height": 180,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n238",
+      "type": "text",
+      "text": "**C0**\nCiclo hidrosocial",
+      "x": -1260,
+      "y": 40,
+      "width": 220,
+      "height": 180,
+      "color": "#E8A0BF"
+    }
+  ],
+  "edges": [
+    {
+      "id": "n214",
+      "fromNode": "n212",
+      "fromSide": "top",
+      "toNode": "n213",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n216",
+      "fromNode": "n212",
+      "fromSide": "top",
+      "toNode": "n215",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n218",
+      "fromNode": "n217",
+      "fromSide": "top",
+      "toNode": "n212",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n220",
+      "fromNode": "n219",
+      "fromSide": "top",
+      "toNode": "n212",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n222",
+      "fromNode": "n221",
+      "fromSide": "left",
+      "toNode": "n219",
+      "toSide": "right"
+    },
+    {
+      "id": "n224",
+      "fromNode": "n223",
+      "fromSide": "top",
+      "toNode": "n212",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n226",
+      "fromNode": "n225",
+      "fromSide": "top",
+      "toNode": "n212",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n228",
+      "fromNode": "n227",
+      "fromSide": "top",
+      "toNode": "n212",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n230",
+      "fromNode": "n229",
+      "fromSide": "right",
+      "toNode": "n212",
+      "toSide": "left"
+    },
+    {
+      "id": "n232",
+      "fromNode": "n231",
+      "fromSide": "right",
+      "toNode": "n212",
+      "toSide": "left"
+    }
+  ]
+}

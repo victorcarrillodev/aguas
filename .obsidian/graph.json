@@ -1,0 +1,100 @@
+{
+  "collapse-filter": true,
+  "search": "",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": false,
+  "collapse-color-groups": true,
+  "colorGroups": [
+    {
+      "query": "path:\"20-Nodos\"",
+      "color": {
+        "a": 1,
+        "rgb": 14722136
+      }
+    },
+    {
+      "query": "path:\"30-Arboles\"",
+      "color": {
+        "a": 1,
+        "rgb": 5217702
+      }
+    },
+    {
+      "query": "path:\"40-Catalogos/Actores\"",
+      "color": {
+        "a": 1,
+        "rgb": 8300256
+      }
+    },
+    {
+      "query": "path:\"40-Catalogos/Macroprocesos\"",
+      "color": {
+        "a": 1,
+        "rgb": 8370046
+      }
+    },
+    {
+      "query": "path:\"40-Catalogos/Factores\"",
+      "color": {
+        "a": 1,
+        "rgb": 11110089
+      }
+    },
+    {
+      "query": "path:\"40-Catalogos/Dimensiones\"",
+      "color": {
+        "a": 1,
+        "rgb": 13154018
+      }
+    },
+    {
+      "query": "path:\"40-Catalogos/Capas\"",
+      "color": {
+        "a": 1,
+        "rgb": 15245503
+      }
+    },
+    {
+      "query": "path:\"50-Efectos\"",
+      "color": {
+        "a": 1,
+        "rgb": 13224393
+      }
+    },
+    {
+      "query": "path:\"60-Indicadores\"",
+      "color": {
+        "a": 1,
+        "rgb": 12035801
+      }
+    },
+    {
+      "query": "path:\"70-Evidencia\"",
+      "color": {
+        "a": 1,
+        "rgb": 14271594
+      }
+    },
+    {
+      "query": "path:\"10-Metodo\"",
+      "color": {
+        "a": 1,
+        "rgb": 15245503
+      }
+    }
+  ],
+  "collapse-display": true,
+  "showArrow": true,
+  "textFadeMultiplier": 0,
+  "nodeSizeMultiplier": 1,
+  "lineSizeMultiplier": 1,
+  "collapse-forces": true,
+  "centerStrength": 0.518713248970312,
+  "repelStrength": 10,
+  "linkStrength": 1,
+  "linkDistance": 180,
+  "scale": 0.7132754626224344,
+  "close": true
+}

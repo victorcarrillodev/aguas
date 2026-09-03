@@ -1,0 +1,280 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "file",
+      "file": "2 · Las causas/E1 · La calidad del agua.md",
+      "x": 0,
+      "y": -400,
+      "width": 900,
+      "height": 260,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n2",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nMorbilidad de origen hídrico y gasto en salud.",
+      "x": -320,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n4",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nGasto privado en agua embotellada.",
+      "x": 180,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n6",
+      "type": "text",
+      "text": "**LO QUE PROVOCA**\n\nErosión del Derecho Humano al Agua y al Saneamiento (DHAyS): la población del AMG no lo ejerce con calidad, equidad y sostenibilidad.",
+      "x": 680,
+      "y": -840,
+      "width": 460,
+      "height": 220,
+      "color": "#C9C9C9"
+    },
+    {
+      "id": "n8",
+      "type": "file",
+      "file": "3 · Las fichas/E1.1.md",
+      "x": 0,
+      "y": 60,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n10",
+      "type": "file",
+      "file": "3 · Las fichas/E1.2.md",
+      "x": 0,
+      "y": 320,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n12",
+      "type": "file",
+      "file": "3 · Las fichas/E1.2.1.md",
+      "x": 840,
+      "y": 320,
+      "width": 660,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n14",
+      "type": "file",
+      "file": "3 · Las fichas/E1.3.md",
+      "x": 0,
+      "y": 580,
+      "width": 760,
+      "height": 220,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n16",
+      "type": "file",
+      "file": "3 · Las fichas/E1.4.md",
+      "x": 0,
+      "y": 840,
+      "width": 760,
+      "height": 220,
+      "color": "#E8A0BF"
+    },
+    {
+      "id": "n18",
+      "type": "file",
+      "file": "3 · Las fichas/E1.5.md",
+      "x": 0,
+      "y": 1100,
+      "width": 760,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n20",
+      "type": "text",
+      "text": "**DEPENDE DE E7**\n\nLos recursos de operación y mantenimiento llegan a las plantas (Propósito de E7). Si se drenan, la calidad cae.",
+      "x": -980,
+      "y": -140,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n22",
+      "type": "text",
+      "text": "**DEPENDE DE E5**\n\nLa fuente no recibe carga contaminante (Propósito de E5). Bisagra: calidad en origen.",
+      "x": -980,
+      "y": 120,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n24",
+      "type": "text",
+      "text": "**DESDE LA RAÍZ**\n\nSin medición endógena verificable, el incumplimiento no se detecta ni se sanciona.",
+      "x": -980,
+      "y": 380,
+      "width": 840,
+      "height": 220,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n26",
+      "type": "text",
+      "text": "## RAÍZ MAESTRA\n\nSin medición verificable y sin fiscalización real, ninguna de estas causas encuentra corrección ni sanción.",
+      "x": 0,
+      "y": 1440,
+      "width": 1500,
+      "height": 240,
+      "color": "#E8A0BF"
+    },
+    {
+      "id": "n27",
+      "type": "text",
+      "text": "**C4**\nDimensiones",
+      "x": -1260,
+      "y": -840,
+      "width": 220,
+      "height": 180,
+      "color": "#C8B6E2"
+    },
+    {
+      "id": "n28",
+      "type": "text",
+      "text": "**C3**\nFactores",
+      "x": -1260,
+      "y": -620,
+      "width": 220,
+      "height": 180,
+      "color": "#A986C9"
+    },
+    {
+      "id": "n29",
+      "type": "text",
+      "text": "**C2**\nActores",
+      "x": -1260,
+      "y": -400,
+      "width": 220,
+      "height": 180,
+      "color": "#7EA6E0"
+    },
+    {
+      "id": "n30",
+      "type": "text",
+      "text": "**C1**\nMacroprocesos",
+      "x": -1260,
+      "y": -180,
+      "width": 220,
+      "height": 180,
+      "color": "#7FB77E"
+    },
+    {
+      "id": "n31",
+      "type": "text",
+      "text": "**C0**\nCiclo hidrosocial",
+      "x": -1260,
+      "y": 40,
+      "width": 220,
+      "height": 180,
+      "color": "#E8A0BF"
+    }
+  ],
+  "edges": [
+    {
+      "id": "n3",
+      "fromNode": "n1",
+      "fromSide": "top",
+      "toNode": "n2",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n5",
+      "fromNode": "n1",
+      "fromSide": "top",
+      "toNode": "n4",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n7",
+      "fromNode": "n1",
+      "fromSide": "top",
+      "toNode": "n6",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n9",
+      "fromNode": "n8",
+      "fromSide": "top",
+      "toNode": "n1",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n11",
+      "fromNode": "n10",
+      "fromSide": "top",
+      "toNode": "n1",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n13",
+      "fromNode": "n12",
+      "fromSide": "left",
+      "toNode": "n10",
+      "toSide": "right"
+    },
+    {
+      "id": "n15",
+      "fromNode": "n14",
+      "fromSide": "top",
+      "toNode": "n1",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n17",
+      "fromNode": "n16",
+      "fromSide": "top",
+      "toNode": "n1",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n19",
+      "fromNode": "n18",
+      "fromSide": "top",
+      "toNode": "n1",
+      "toSide": "bottom"
+    },
+    {
+      "id": "n21",
+      "fromNode": "n20",
+      "fromSide": "right",
+      "toNode": "n1",
+      "toSide": "left"
+    },
+    {
+      "id": "n23",
+      "fromNode": "n22",
+      "fromSide": "right",
+      "toNode": "n1",
+      "toSide": "left"
+    },
+    {
+      "id": "n25",
+      "fromNode": "n24",
+      "fromSide": "right",
+      "toNode": "n1",
+      "toSide": "left"
+    }
+  ]
+}
