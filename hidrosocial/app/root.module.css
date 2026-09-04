@@ -1,0 +1,40 @@
+/* Layout raíz: header + nav + <main> + footer (cuenca base). */
+
+.contenedor {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.principal {
+  flex: 1;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: var(--esp-5) var(--esp-4) var(--esp-8);
+}
+
+/* Hueco para la barra inferior móvil (<1024px). */
+@media (max-width: 1023px) {
+  .principal {
+    padding-bottom: calc(var(--esp-8) + var(--min-touch));
+  }
+}
+
+.pie {
+  border-top: 1px solid var(--outline-variant);
+  background: var(--surface);
+  color: var(--on-surface-variant);
+  font-size: 0.8125rem;
+}
+
+.pieInterior {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: var(--esp-4);
+  display: flex;
+  gap: var(--esp-3);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -1,6 +1,15 @@
 ---
+id: IND-carga-tarifaria-decil
+tipo: medicion
 titulo: Carga tarifaria por decil
+enunciado: "Carga tarifaria sobre el ingreso, por decil"
+rama: 3
 arbol: E3
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Carga tarifaria por decil

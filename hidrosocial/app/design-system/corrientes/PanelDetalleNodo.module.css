@@ -1,0 +1,71 @@
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+  padding: var(--esp-4) var(--esp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+.chips {
+  display: flex;
+  gap: var(--esp-2);
+  flex-wrap: wrap;
+}
+
+.titulo {
+  margin: 0;
+  font-family: var(--fuente-lectura);
+  font-size: 1.375rem;
+  line-height: 1.25;
+}
+
+.resumen {
+  margin: 0;
+  font-family: var(--fuente-lectura);
+  font-size: 1rem;
+  color: var(--secondary);
+}
+
+.subtitulo {
+  margin: var(--esp-2) 0 0;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--on-surface-variant);
+}
+
+.vacio {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+}
+
+.vecinos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  max-height: 22rem;
+  overflow-y: auto;
+}
+
+.vecino {
+  border-top: 1px solid var(--outline-variant);
+  padding-top: var(--esp-1);
+}
+
+.enlace {
+  display: flex;
+  gap: var(--esp-2);
+  align-items: baseline;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.enlace:hover span:last-child {
+  text-decoration: underline;
+}

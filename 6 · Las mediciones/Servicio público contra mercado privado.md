@@ -1,6 +1,15 @@
 ---
+id: IND-cobertura-publico-privado
+tipo: medicion
 titulo: Servicio público contra mercado privado
+enunciado: "Cobertura del servicio público contra mercado privado"
+rama: 10
 arbol: E10
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Servicio público contra mercado privado

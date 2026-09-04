@@ -1,7 +1,15 @@
 ---
+id: SIAPA
+tipo: actor
 titulo: SIAPA
 nombre: Organismo operador
 curva: Oferta
+grupo: "Operador y áreas internas"
+oferta: true
+demanda: false
+accion: "Provee el servicio público; como consumidor de fuente y erario, actúa también en demanda"
+genera: [E1, E3, E5, E9]
+debe_resolver: [E1, E3, E6]
 ---
 
 # SIAPA · Organismo operador

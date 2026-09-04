@@ -1,6 +1,10 @@
 ---
+id: EF-transferencia-regresiva
+tipo: efecto
 titulo: Transferencia regresiva del costo
+enunciado: "Transferencia regresiva del costo del ciclo hidrosocial hacia quien menos tiene y hacia el activo común (cuenca y erario)."
 alcance: copa maestra
+arboles: [E3, E10, PC]
 ---
 
 # Transferencia regresiva del costo

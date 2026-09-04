@@ -1,0 +1,110 @@
+.encabezado {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--surface-container-lowest);
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.interior {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: var(--esp-2) var(--esp-4);
+  display: flex;
+  align-items: center;
+  gap: var(--esp-4);
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  font-weight: 700;
+  font-size: 1.125rem;
+  text-decoration: none;
+  min-height: var(--min-touch);
+}
+
+.gota {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* En móvil solo el logo: nav píldora y buscador aparecen en ≥1024px. */
+.navWrap,
+.buscador {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .navWrap {
+    display: block;
+  }
+
+  .buscador {
+    display: flex;
+    align-items: center;
+    gap: var(--esp-2);
+    margin-left: auto;
+    background: var(--surface-container);
+    border: 1px solid var(--outline-variant);
+    border-radius: 999px;
+    padding: var(--esp-1) var(--esp-3);
+    min-height: var(--min-touch);
+  }
+
+  .lupa {
+    color: var(--on-surface-variant);
+  }
+
+  .entrada {
+    border: 0;
+    background: transparent;
+    color: var(--on-surface);
+    font-size: 0.9375rem;
+    min-height: 0;
+    width: 12rem;
+  }
+
+  .entrada:focus {
+    outline: none;
+  }
+
+  .buscador:focus-within {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+  }
+}
+
+.nav {
+  list-style: none;
+  margin: 0;
+  padding: var(--esp-1);
+  display: flex;
+  gap: var(--esp-1);
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  border-radius: 999px;
+}
+
+.enlace,
+.activo {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--min-touch);
+  padding: var(--esp-2) var(--esp-4);
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.enlace:hover {
+  background: var(--surface-container-high);
+}
+
+.activo {
+  background: var(--primary);
+  color: var(--on-primary);
+}

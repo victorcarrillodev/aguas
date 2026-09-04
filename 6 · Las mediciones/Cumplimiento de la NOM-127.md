@@ -1,6 +1,15 @@
 ---
+id: IND-cumplimiento-nom127
+tipo: medicion
 titulo: Cumplimiento de la NOM-127
+enunciado: "% de muestras y zonas que cumplen la NOM-127-SSA1-2021"
+rama: 1
 arbol: E1
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Cumplimiento de la NOM-127

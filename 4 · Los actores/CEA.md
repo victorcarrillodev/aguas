@@ -1,7 +1,15 @@
 ---
+id: CEA
+tipo: actor
 titulo: CEA
 nombre: Comisión Estatal del Agua
 curva: Oferta
+grupo: "Gobernanza, recurso y árbitro"
+oferta: true
+demanda: false
+accion: "Gestiona fuentes y agua en bloque"
+genera: []
+debe_resolver: [E6]
 ---
 
 # CEA · Comisión Estatal del Agua

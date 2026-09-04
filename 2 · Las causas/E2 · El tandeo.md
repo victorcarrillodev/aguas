@@ -1,8 +1,31 @@
 ---
+id: E2
+tipo: causa
 titulo: E2 · El tandeo
 aliases: [E2, "Servicio discontinuo (tandeo)"]
-capa: Macroprocesos
-atribucion: SIAPA
+resumen: "Servicio discontinuo (tandeo)"
+rama: 2
+enunciado: "Habitantes del AMG, conectados a la red del SIAPA, reciben un servicio discontinuo de agua."
+capa: C1
+capas_secundarias: [C3]
+macroproceso: DIST
+actores: [SIAPA, DIST]
+factor: F1
+dimension: BIO
+genera: [DIST, PLAN]
+debe_resolver: [DIST, PLAN]
+brecha: ninguna
+naturaleza: Omisión
+ambito: SIAPA
+toca_raiz: true
+depende_de: [E7, E6]
+sostiene_a: [E10]
+contacto: [E6, E3, E9, E1, E10]
+efectos: [EF-almacenamiento-domiciliario, EF-gasto-pipas, EF-inequidad-sin-tinaco]
+mediciones: [IND-horas-suministro, IND-perdidas-fisicas, IND-red-sectorizada]
+magnitud: "Continuidad del servicio (horas de suministro al día)"
+linea_base: null
+estado: en-revision
 ---
 
 # E2 · El tandeo

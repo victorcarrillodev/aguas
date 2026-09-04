@@ -1,6 +1,15 @@
 ---
+id: IND-perdidas-fisicas
+tipo: medicion
 titulo: Pérdidas físicas de la red
+enunciado: "% de pérdidas físicas (agua no contabilizada)"
+rama: 2
 arbol: E2
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Pérdidas físicas de la red

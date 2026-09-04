@@ -1,6 +1,15 @@
 ---
+id: IND-tarifa-cmglp
+tipo: medicion
 titulo: Tarifa contra costo de largo plazo
+enunciado: "Relación tarifa / costo marginal de largo plazo; % de subsidio que llega al decil I–III"
+rama: 3
 arbol: E3
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Tarifa contra costo de largo plazo

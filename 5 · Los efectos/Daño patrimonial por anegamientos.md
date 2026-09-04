@@ -1,6 +1,10 @@
 ---
+id: EF-dano-patrimonial
+tipo: efecto
 titulo: Daño patrimonial por anegamientos
+enunciado: "Daño patrimonial por anegamientos."
 alcance: rama
+arboles: [E4]
 ---
 
 # Daño patrimonial por anegamientos

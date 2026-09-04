@@ -1,6 +1,10 @@
 ---
+id: EF-inequidad-sin-tinaco
+tipo: efecto
 titulo: La inequidad del tandeo
+enunciado: "Inequidad del tandeo: es peor para quien no tiene tinaco ni aljibe."
 alcance: rama
+arboles: [E2]
 ---
 
 # La inequidad del tandeo

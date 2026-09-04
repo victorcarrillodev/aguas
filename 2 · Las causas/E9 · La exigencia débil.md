@@ -1,8 +1,31 @@
 ---
+id: E9
+tipo: causa
 titulo: E9 · La exigencia débil
 aliases: [E9, "Exigencia ciudadana débil"]
-capa: Actores
-atribucion: Ciudadano
+resumen: "Exigencia ciudadana débil"
+rama: 9
+enunciado: "Los habitantes del AMG ejercen limitada presión sobre el servicio, porque su exigencia es débil e intermitente: el secuestro ingenieril mantiene el agua como asunto técnico y no le da comprensión ni organización para reclamar."
+capa: C2
+capas_secundarias: [C4]
+macroproceso: null
+actores: [USUAR, SIAPA]
+factor: F4
+dimension: SOC
+genera: [SIAPA]
+debe_resolver: [USUAR]
+brecha: total
+naturaleza: Omisión
+ambito: Ciudadano
+toca_raiz: true
+depende_de: [E8]
+sostiene_a: []
+contacto: [E10, E2, E7]
+efectos: [EF-sin-presion-monopolio, EF-baja-apropiacion]
+mediciones: [IND-organizaciones-activas, IND-participacion-vinculante, IND-acceso-informacion]
+magnitud: "Participación/organización ciudadana sostenida en agua (proxy)"
+linea_base: null
+estado: en-revision
 ---
 
 # E9 · La exigencia débil

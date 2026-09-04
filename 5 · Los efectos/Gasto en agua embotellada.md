@@ -1,6 +1,10 @@
 ---
+id: EF-gasto-embotellada
+tipo: efecto
 titulo: Gasto en agua embotellada
+enunciado: "Gasto privado en agua embotellada."
 alcance: rama
+arboles: [E1]
 ---
 
 # Gasto en agua embotellada

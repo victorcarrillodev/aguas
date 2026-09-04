@@ -1,7 +1,15 @@
 ---
+id: COMS
+tipo: actor
 titulo: COMS
 nombre: Comunicación Social
 curva: Ambas
+grupo: "Operador y áreas internas"
+oferta: true
+demanda: true
+accion: "Provee servicio y moldea la percepción del usuario"
+genera: []
+debe_resolver: []
 ---
 
 # COMS · Comunicación Social

@@ -1,7 +1,15 @@
 ---
+id: DGRAL
+tipo: actor
 titulo: DGRAL
 nombre: Dirección General
 curva: Oferta
+grupo: "Operador y áreas internas"
+oferta: true
+demanda: false
+accion: "Conduce la oferta del servicio"
+genera: [E7]
+debe_resolver: [E7]
 ---
 
 # DGRAL · Dirección General

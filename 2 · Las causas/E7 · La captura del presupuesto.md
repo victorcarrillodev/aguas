@@ -1,8 +1,31 @@
 ---
+id: E7
+tipo: causa
 titulo: E7 · La captura del presupuesto
 aliases: [E7, "Captura presupuestal del organismo"]
-capa: Factores
-atribucion: SIAPA
+resumen: "Captura presupuestal del organismo"
+rama: 7
+enunciado: "El presupuesto operativo del organismo se drena, al contar con unidades de apoyo a la gestión capturadas: se asignan plazas y contratos por criterio político y se ejerce un modelo de gasto discrecional, especialmente de imagen."
+capa: C3
+capas_secundarias: [C2]
+macroproceso: APOY
+actores: [SIAPA, DGRAL, ADMON, RH, COMS]
+factor: F4
+dimension: INS
+genera: [DGRAL, ADMON, RH]
+debe_resolver: [DGRAL]
+brecha: parcial
+naturaleza: Acción
+ambito: SIAPA
+toca_raiz: true
+depende_de: [E8]
+sostiene_a: [E1, E2]
+contacto: [E9, E10, E3]
+efectos: [EF-menos-recursos-om, EF-erosion-disposicion-pago]
+mediciones: [IND-gasto-comunicacion, IND-nomina-apoyo, IND-adjudicacion-directa]
+magnitud: "Gasto de unidades de apoyo / gasto operativo total (%)"
+linea_base: null
+estado: en-revision
 ---
 
 # E7 · La captura del presupuesto

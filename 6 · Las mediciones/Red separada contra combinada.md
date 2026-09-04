@@ -1,6 +1,15 @@
 ---
+id: IND-red-separada
+tipo: medicion
 titulo: Red separada contra combinada
+enunciado: "% de red separada contra combinada"
+rama: 4
 arbol: E4
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Red separada contra combinada

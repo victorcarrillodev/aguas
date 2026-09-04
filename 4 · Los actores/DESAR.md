@@ -1,7 +1,15 @@
 ---
+id: DESAR
+tipo: actor
 titulo: DESAR
 nombre: Desarrolladores inmobiliarios
 curva: Demanda
+grupo: "Demanda"
+oferta: false
+demanda: true
+accion: "Demandan factibilidades y servicio para nuevos desarrollos"
+genera: [E4]
+debe_resolver: []
 ---
 
 # DESAR · Desarrolladores inmobiliarios

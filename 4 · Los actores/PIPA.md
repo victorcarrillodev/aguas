@@ -1,7 +1,15 @@
 ---
+id: PIPA
+tipo: actor
 titulo: PIPA
 nombre: Pipas privadas
 curva: Oferta privada
+grupo: "Oferta privada / ilícita"
+oferta: true
+demanda: false
+accion: "Oferta sustituta ante la intermitencia"
+genera: []
+debe_resolver: []
 ---
 
 # PIPA · Pipas privadas

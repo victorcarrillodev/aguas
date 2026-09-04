@@ -1,6 +1,10 @@
 ---
+id: EF-drenaje-ingreso-hogar
+tipo: efecto
 titulo: Drenaje del ingreso del hogar
+enunciado: "Drenaje del ingreso disponible del hogar."
 alcance: rama
+arboles: [E10]
 ---
 
 # Drenaje del ingreso del hogar

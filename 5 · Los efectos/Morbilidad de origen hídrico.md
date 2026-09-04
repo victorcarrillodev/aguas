@@ -1,6 +1,10 @@
 ---
+id: EF-morbilidad
+tipo: efecto
 titulo: Morbilidad de origen hídrico
+enunciado: "Morbilidad de origen hídrico y gasto en salud."
 alcance: rama
+arboles: [E1]
 ---
 
 # Morbilidad de origen hídrico

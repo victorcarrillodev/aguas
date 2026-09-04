@@ -1,6 +1,15 @@
 ---
+id: IND-organizaciones-activas
+tipo: medicion
 titulo: Organizaciones ciudadanas activas
+enunciado: "Organizaciones ciudadanas activas en agua"
+rama: 9
 arbol: E9
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Organizaciones ciudadanas activas

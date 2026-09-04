@@ -1,6 +1,15 @@
 ---
+id: IND-gasto-hogar-agua
+tipo: medicion
 titulo: Gasto del hogar en agua
+enunciado: "Gasto del hogar en embotellada más pipa (% del ingreso)"
+rama: 10
 arbol: E10
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Gasto del hogar en agua

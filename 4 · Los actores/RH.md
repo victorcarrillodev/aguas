@@ -1,7 +1,15 @@
 ---
+id: RH
+tipo: actor
 titulo: RH
 nombre: Recursos Humanos
 curva: Oferta
+grupo: "Operador y áreas internas"
+oferta: true
+demanda: false
+accion: "Soporte de personal"
+genera: [E7]
+debe_resolver: []
 ---
 
 # RH · Recursos Humanos

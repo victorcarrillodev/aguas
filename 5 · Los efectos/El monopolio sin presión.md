@@ -1,6 +1,10 @@
 ---
+id: EF-sin-presion-monopolio
+tipo: efecto
 titulo: El monopolio sin presión
+enunciado: "El monopolio no encuentra presión social y persiste el mal desempeño."
 alcance: rama
+arboles: [E9]
 ---
 
 # El monopolio sin presión

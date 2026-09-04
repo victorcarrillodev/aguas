@@ -1,8 +1,31 @@
 ---
+id: E5
+tipo: causa
 titulo: E5 · La carga a la cuenca
 aliases: [E5, "Carga contaminante en la cuenca"]
-capa: Macroprocesos
-atribucion: SIAPA
+resumen: "Carga contaminante en la cuenca"
+rama: 5
+enunciado: "La cuenca-activo y las comunidades ribereñas aguas abajo reciben carga contaminante."
+capa: C1
+capas_secundarias: [C0]
+macroproceso: SANE
+actores: [SIAPA]
+factor: F1
+dimension: AMB
+genera: [SIAPA]
+debe_resolver: [SANE]
+brecha: total
+naturaleza: Omisión
+ambito: SIAPA
+toca_raiz: true
+depende_de: [E8]
+sostiene_a: [E1]
+contacto: [E6, E4, E1]
+efectos: [EF-deterioro-fuente, EF-dano-riberenas, EF-agotamiento-cualitativo]
+mediciones: [IND-caudal-tratado, IND-reuso-efectivo, IND-cumplimiento-descarga]
+magnitud: "% de caudal residual tratado antes de descarga; % de reúso efectivo"
+linea_base: null
+estado: en-revision
 ---
 
 # E5 · La carga a la cuenca

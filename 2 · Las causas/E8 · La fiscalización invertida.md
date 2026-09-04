@@ -1,8 +1,31 @@
 ---
+id: E8
+tipo: causa
 titulo: E8 · La fiscalización invertida
 aliases: [E8, "Fiscalización legislativa invertida"]
-capa: Factores
-atribucion: Legislativo
+resumen: "Fiscalización legislativa invertida"
+rama: 8
+enunciado: "La rendición de cuentas del sistema hídrico del AMG queda inerme porque el contrapeso legislativo, en los hechos, opera para exonerar al Ejecutivo en lugar de fiscalizarlo."
+capa: C3
+capas_secundarias: [C2]
+macroproceso: null
+actores: [CONGRESO, EJEC]
+factor: F4
+dimension: POL
+genera: [CONGRESO]
+debe_resolver: [CONGRESO]
+brecha: ninguna
+naturaleza: Omisión
+ambito: Legislativo
+toca_raiz: true
+depende_de: []
+sostiene_a: [E3, E4, E5, E6, E7, E9]
+contacto: [E3, E6]
+efectos: [EF-sin-correccion-ni-sancion, EF-persistencia-mal-desempeno]
+mediciones: [IND-resultados-linea-base, IND-auditorias-con-sancion, IND-regulador-externo]
+magnitud: "Observaciones legislativas con sanción efectiva (n/año)"
+linea_base: null
+estado: en-revision
 ---
 
 # E8 · La fiscalización invertida

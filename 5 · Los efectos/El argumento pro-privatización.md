@@ -1,6 +1,10 @@
 ---
+id: EF-argumento-privatizacion
+tipo: efecto
 titulo: El argumento pro-privatización
+enunciado: "Fabrica el argumento pro-privatización."
 alcance: hipótesis
+arboles: [E10]
 ---
 
 # El argumento pro-privatización

@@ -1,0 +1,550 @@
+.cuenca {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+
+.hero {
+  border-left: 4px solid var(--primary);
+  padding-left: var(--esp-4);
+}
+
+.antetitulo {
+  margin: 0;
+  font-family: var(--fuente-datos);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.titulo {
+  margin: var(--esp-2) 0 0;
+  font-family: var(--fuente-titular);
+  font-size: var(--texto-titulo);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.entrada {
+  margin: var(--esp-3) 0 0;
+  max-width: 62ch;
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--esp-3);
+}
+
+@media (min-width: 768px) {
+  .kpis {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ── Bloque de raíz ───────────────────────────────────────────────────── */
+
+.raiz {
+  display: flex;
+  gap: var(--esp-4);
+  align-items: flex-start;
+}
+
+.raizIcono {
+  flex: none;
+  font-size: 2rem;
+  color: var(--error);
+}
+
+.raizTitulo {
+  margin: 0;
+  font-family: var(--fuente-titular);
+  font-size: var(--texto-seccion);
+  line-height: 1.2;
+}
+
+.raizTexto {
+  margin: var(--esp-2) 0 0;
+  max-width: 68ch;
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+}
+
+.raizEnlace {
+  display: inline-block;
+  margin-top: var(--esp-3);
+  font-weight: 600;
+  color: var(--primary-container);
+}
+
+/* ── Simulador ────────────────────────────────────────────────────────── */
+
+.h2 {
+  margin: 0;
+  font-family: var(--fuente-titular);
+  font-size: var(--texto-seccion);
+  line-height: 1.2;
+}
+
+.ayuda {
+  margin: var(--esp-2) 0 0;
+  max-width: 68ch;
+  color: var(--on-surface-variant);
+  line-height: 1.55;
+  font-size: 0.92rem;
+}
+
+.simCabecera {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  margin-bottom: var(--esp-4);
+}
+
+@media (min-width: 1024px) {
+  .simCabecera {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.simAcciones {
+  display: flex;
+  gap: var(--esp-2);
+  flex-wrap: wrap;
+  flex: none;
+}
+
+.marcador {
+  background: var(--surface-container);
+  border-radius: var(--radio);
+  padding: var(--esp-4);
+  margin-bottom: var(--esp-4);
+}
+
+.marcadorNumeros {
+  display: flex;
+  align-items: baseline;
+  gap: var(--esp-2);
+  flex-wrap: wrap;
+}
+
+.marcadorGrande {
+  font-family: var(--fuente-datos);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--primary);
+}
+
+.marcadorDe {
+  font-family: var(--fuente-datos);
+  color: var(--on-surface-variant);
+}
+
+.marcadorEtiqueta {
+  font-weight: 600;
+}
+
+.barra {
+  margin-top: var(--esp-3);
+  height: 8px;
+  border-radius: 4px;
+  background: var(--outline-variant);
+  overflow: hidden;
+}
+
+.barraRelleno {
+  display: block;
+  height: 100%;
+  background: var(--secondary);
+  transition: width 220ms ease;
+}
+
+.veredicto {
+  margin: var(--esp-3) 0 0;
+  max-width: 74ch;
+  line-height: 1.55;
+}
+
+.veredictoAlerta {
+  margin: var(--esp-3) 0 0;
+  max-width: 74ch;
+  line-height: 1.55;
+  color: var(--error);
+  font-weight: 600;
+}
+
+/* ── Lienzo SVG ───────────────────────────────────────────────────────── */
+
+.lienzo {
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+  background: var(--surface-container-lowest);
+  background-image: radial-gradient(circle at 1px 1px, var(--outline-variant) 1px, transparent 0);
+  background-size: 22px 22px;
+  padding: var(--esp-3);
+  overflow-x: auto;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  min-width: 640px;
+  height: auto;
+}
+
+.arista {
+  fill: none;
+  stroke: var(--outline);
+  stroke-width: 1.4;
+  opacity: 0.4;
+}
+
+.aristaActiva {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 2.4;
+  opacity: 1;
+}
+
+.nodo {
+  cursor: pointer;
+}
+
+.nodo:focus {
+  outline: none;
+}
+
+.nodo:focus-visible .caja {
+  stroke: var(--primary);
+  stroke-width: 3;
+}
+
+.caja {
+  stroke-width: 1.5;
+  transition: fill 160ms ease, stroke 160ms ease;
+}
+
+.nodo:hover .caja {
+  stroke: var(--primary);
+}
+
+.id {
+  font-family: var(--fuente-datos);
+  font-size: 0.82rem;
+  font-weight: 700;
+  fill: var(--on-surface);
+}
+
+.idMarcado {
+  font-family: var(--fuente-datos);
+  font-size: 0.82rem;
+  font-weight: 700;
+  fill: #ffffff;
+}
+
+.etiqueta {
+  font-family: var(--fuente-ui);
+  font-size: 0.7rem;
+  fill: var(--on-surface-variant);
+}
+
+.etiquetaMarcada {
+  font-family: var(--fuente-ui);
+  font-size: 0.7rem;
+  fill: rgba(255, 255, 255, 0.88);
+}
+
+.raizTag {
+  font-family: var(--fuente-datos);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--error);
+}
+
+.leyenda {
+  margin: var(--esp-3) 0 0;
+  font-size: 0.82rem;
+  color: var(--on-surface-variant);
+  line-height: 1.5;
+}
+
+.puntoSostenible,
+.puntoFragil {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  vertical-align: -1px;
+}
+
+.puntoSostenible {
+  background: var(--secondary);
+}
+
+.puntoFragil {
+  background: var(--error);
+}
+
+.fragiles {
+  margin: var(--esp-4) 0 0;
+  padding-left: var(--esp-4);
+  color: var(--on-surface-variant);
+  line-height: 1.7;
+  font-size: 0.92rem;
+}
+
+/* ── Tabla ────────────────────────────────────────────────────────────── */
+
+.scroll {
+  overflow-x: auto;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  min-width: 720px;
+}
+
+.tabla th,
+.tabla td {
+  text-align: left;
+  padding: var(--esp-3) var(--esp-2);
+  border-bottom: 1px solid var(--outline-variant);
+  vertical-align: middle;
+}
+
+.tabla thead th {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.filaFoco {
+  background: var(--surface-container);
+}
+
+.celdaCausa {
+  font-weight: 600;
+  white-space: nowrap;
+  position: sticky;
+  left: 0;
+  background: var(--surface);
+}
+
+.filaFoco .celdaCausa {
+  background: var(--surface-container);
+}
+
+.badgeRaiz {
+  margin-left: var(--esp-2);
+  font-family: var(--fuente-datos);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--error);
+  border: 1px solid var(--error);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
+.mono {
+  font-family: var(--fuente-datos);
+  font-size: 0.8rem;
+  color: var(--on-surface-variant);
+}
+
+.num {
+  text-align: right;
+  font-family: var(--fuente-datos);
+}
+
+.cuenta {
+  display: inline-block;
+  min-width: 26px;
+  text-align: center;
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: var(--surface-container-high);
+  font-weight: 700;
+}
+
+.cero {
+  display: inline-block;
+  min-width: 26px;
+  text-align: center;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-weight: 700;
+  background: var(--secondary-container);
+  color: var(--secondary);
+}
+
+.nota {
+  margin: var(--esp-3) 0 0;
+  font-size: 0.82rem;
+  color: var(--on-surface-variant);
+  line-height: 1.55;
+}
+
+.enunciado {
+  margin: 0;
+  max-width: 74ch;
+  font-family: var(--fuente-lectura);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.detalle {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--esp-3);
+  margin: var(--esp-4) 0 0;
+}
+
+@media (min-width: 768px) {
+  .detalle {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.detalle dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  font-weight: 700;
+}
+
+.detalle dd {
+  margin: var(--esp-1) 0 0;
+  font-family: var(--fuente-datos);
+  font-size: 0.86rem;
+}
+
+/* ── Incidencia de actores ────────────────────────────────────────────── */
+
+.actores {
+  list-style: none;
+  margin: var(--esp-4) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+.actor {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-1);
+  padding: var(--esp-2) 0;
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+@media (min-width: 768px) {
+  .actor {
+    grid-template-columns: 200px 1fr 190px;
+    align-items: center;
+    gap: var(--esp-3);
+  }
+}
+
+.actorNombre {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.actorNombre strong {
+  font-family: var(--fuente-datos);
+  font-size: 0.86rem;
+}
+
+.actorNombre span {
+  font-size: 0.76rem;
+  color: var(--on-surface-variant);
+}
+
+.balanza {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--esp-2);
+}
+
+.ladoIzq {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--esp-2);
+  flex-direction: row-reverse;
+}
+
+.ladoDer {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+}
+
+.barraGenera,
+.barraResuelve {
+  display: block;
+  height: 12px;
+  border-radius: 3px;
+  min-width: 2px;
+}
+
+.barraGenera {
+  background: var(--error);
+}
+
+.barraResuelve {
+  background: var(--primary-container);
+}
+
+.cifra {
+  font-family: var(--fuente-datos);
+  font-size: 0.78rem;
+  color: var(--on-surface-variant);
+  min-width: 1.2em;
+  text-align: center;
+}
+
+.lectura {
+  font-size: 0.78rem;
+  color: var(--on-surface-variant);
+  font-style: italic;
+}
+
+.piesActores {
+  margin-top: var(--esp-3);
+}
+
+.claveGenera,
+.claveResuelve {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  vertical-align: -1px;
+}
+
+.claveGenera {
+  background: var(--error);
+}
+
+.claveResuelve {
+  background: var(--primary-container);
+}

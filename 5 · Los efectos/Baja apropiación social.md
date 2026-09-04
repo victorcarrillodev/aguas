@@ -1,6 +1,10 @@
 ---
+id: EF-baja-apropiacion
+tipo: efecto
 titulo: Baja apropiación social
+enunciado: "Baja apropiación social de las soluciones públicas."
 alcance: rama
+arboles: [E9]
 ---
 
 # Baja apropiación social

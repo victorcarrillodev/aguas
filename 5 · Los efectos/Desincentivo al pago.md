@@ -1,6 +1,10 @@
 ---
+id: EF-desincentivo-pago
+tipo: efecto
 titulo: Desincentivo al pago
+enunciado: "Desincentivo al pago de quien no ve contraprestación."
 alcance: rama
+arboles: [E3]
 ---
 
 # Desincentivo al pago

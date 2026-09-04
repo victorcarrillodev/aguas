@@ -1,6 +1,15 @@
 ---
+id: IND-volumen-informal
+tipo: medicion
 titulo: Volumen extraído fuera del sistema
+enunciado: "Volumen estimado extraído y revendido fuera del sistema formal"
+rama: 6
 arbol: E6
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Volumen extraído fuera del sistema

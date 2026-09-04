@@ -1,8 +1,31 @@
 ---
+id: E3
+tipo: causa
 titulo: E3 · La tarifa
 aliases: [E3, "Inadecuado modelo tarifario"]
-capa: Macroprocesos
-atribucion: SIAPA
+resumen: "Inadecuado modelo tarifario"
+rama: 3
+enunciado: "Los usuarios del SIAPA soportan un modelo tarifario ajeno a los principios de equidad, racionalidad, asequibilidad y transparencia, incapaz de solventar un servicio de calidad en el presente y el largo plazo, que afecta especialmente a los más desprotegidos."
+capa: C1
+capas_secundarias: [C4]
+macroproceso: TARI
+actores: [SIAPA, USUAR]
+factor: F2
+dimension: ECO
+genera: [SIAPA]
+debe_resolver: [SIAPA, CONGRESO]
+brecha: parcial
+naturaleza: Acción
+ambito: SIAPA
+toca_raiz: true
+depende_de: [E8]
+sostiene_a: []
+contacto: [E8, E2, E7, E6]
+efectos: [EF-transferencia-regresiva, EF-descapitalizacion, EF-desincentivo-pago]
+mediciones: [IND-carga-tarifaria-decil, IND-cobertura-micromedicion, IND-tarifa-cmglp]
+magnitud: "Carga tarifaria sobre el ingreso, hogares decil I–III (%)"
+linea_base: null
+estado: en-revision
 ---
 
 # E3 · La tarifa

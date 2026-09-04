@@ -1,6 +1,15 @@
 ---
+id: IND-descargas-vigiladas
+tipo: medicion
 titulo: Descargas industriales vigiladas
+enunciado: "Descargas industriales vigiladas; factibilidades con dictamen pluvial"
+rama: 4
 arbol: E4
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Descargas industriales vigiladas

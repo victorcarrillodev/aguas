@@ -1,6 +1,15 @@
 ---
+id: IND-red-sectorizada
+tipo: medicion
 titulo: Sectorización y reposición de red
+enunciado: "% de red sectorizada; tasa de reposición contra tasa de deterioro"
+rama: 2
 arbol: E2
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Sectorización y reposición de red

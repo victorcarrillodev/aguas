@@ -1,0 +1,228 @@
+.cuenca {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+}
+
+.titulo {
+  margin: 0;
+  font-family: var(--fuente-titular);
+  font-size: var(--texto-titulo);
+}
+
+.subtitulo {
+  margin: 0;
+  color: var(--on-surface-variant);
+  font-size: 0.9375rem;
+}
+
+.subtitulo code {
+  font-family: var(--fuente-datos);
+  font-size: 0.8125rem;
+}
+
+.error {
+  margin: 0;
+  padding: var(--esp-3) var(--esp-4);
+  background: var(--error-container);
+  border: 1px solid var(--error);
+  border-radius: var(--radio);
+  color: var(--error);
+  font-size: 0.9375rem;
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-4);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .rejilla {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .actionBar {
+    grid-column: 1 / -1;
+  }
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+  min-width: 0;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+}
+
+.etiqueta {
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.entrada {
+  font-family: var(--fuente-ui);
+  font-size: 0.9375rem;
+  padding: var(--esp-2) var(--esp-3);
+  border: 1px solid var(--outline);
+  border-radius: var(--radio);
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  width: 100%;
+}
+
+.grupo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.etiquetaGrupo {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  padding: 0;
+}
+
+.chips,
+.pills {
+  display: flex;
+  gap: var(--esp-1);
+  flex-wrap: wrap;
+}
+
+.chip,
+.chipActivo,
+.pill,
+.pillActiva {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+  min-height: var(--min-touch);
+  padding: var(--esp-1) var(--esp-3);
+  border-radius: 999px;
+  border: 1px solid var(--outline-variant);
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chipActivo,
+.pillActiva {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.punto {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+}
+
+/* Preview estilo terminal (columna derecha en ≥1024px). */
+.preview {
+  min-width: 0;
+}
+
+.terminal {
+  position: sticky;
+  top: 5rem;
+  border-radius: var(--radio);
+  overflow: hidden;
+  border: 1px solid var(--on-surface);
+}
+
+.terminalBar {
+  background: var(--primary-container);
+  color: var(--on-primary);
+  font-family: var(--fuente-datos);
+  font-size: 0.75rem;
+  padding: var(--esp-2) var(--esp-3);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.terminalCuerpo {
+  margin: 0;
+  background: #0b1c30;
+  color: #d7e3f5;
+  font-family: var(--fuente-datos);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  padding: var(--esp-4);
+  max-height: 40rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.previewMovil {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .terminal {
+    display: none;
+  }
+
+  .previewMovil {
+    display: block;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radio);
+    background: var(--surface-container-lowest);
+  }
+
+  .previewMovil summary {
+    min-height: var(--min-touch);
+    display: flex;
+    align-items: center;
+    padding: var(--esp-2) var(--esp-4);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .previewMovil .terminalCuerpo {
+    max-height: 24rem;
+    border-radius: 0 0 var(--radio) var(--radio);
+  }
+}
+
+/* Action bar sticky con anillo + 3 acciones. */
+.actionBar {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+  padding: var(--esp-3) var(--esp-4);
+  padding-bottom: calc(var(--esp-3) + env(safe-area-inset-bottom));
+}
+
+@media (max-width: 1023px) {
+  .actionBar {
+    bottom: var(--min-touch);
+  }
+}
+
+.botones {
+  display: flex;
+  gap: var(--esp-2);
+  flex-wrap: wrap;
+  margin-left: auto;
+}

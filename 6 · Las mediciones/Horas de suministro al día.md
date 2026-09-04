@@ -1,6 +1,15 @@
 ---
+id: IND-horas-suministro
+tipo: medicion
 titulo: Horas de suministro al día
+enunciado: "Horas de suministro al día por zona"
+rama: 2
 arbol: E2
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Horas de suministro al día

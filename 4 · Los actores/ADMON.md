@@ -1,7 +1,15 @@
 ---
+id: ADMON
+tipo: actor
 titulo: ADMON
 nombre: Administración
 curva: Oferta
+grupo: "Operador y áreas internas"
+oferta: true
+demanda: false
+accion: "Soporte administrativo del servicio"
+genera: [E7]
+debe_resolver: []
 ---
 
 # ADMON · Administración

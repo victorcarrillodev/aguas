@@ -1,0 +1,17 @@
+.cuenca {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+}
+
+.titulo {
+  margin: 0;
+  font-family: var(--fuente-lectura);
+  font-size: 1.75rem;
+}
+
+.subtitulo {
+  margin: var(--esp-1) 0 0;
+  color: var(--on-surface-variant);
+  font-size: 0.9375rem;
+}

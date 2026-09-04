@@ -1,6 +1,15 @@
 ---
+id: IND-participacion-vinculante
+tipo: medicion
 titulo: Participación vinculante
+enunciado: "Mecanismos de participación vinculantes"
+rama: 9
 arbol: E9
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Participación vinculante

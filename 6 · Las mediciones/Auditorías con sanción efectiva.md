@@ -1,6 +1,15 @@
 ---
+id: IND-auditorias-con-sancion
+tipo: medicion
 titulo: Auditorías con sanción efectiva
+enunciado: "Auditorías con seguimiento y sanción efectiva"
+rama: 8
 arbol: E8
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Auditorías con sanción efectiva

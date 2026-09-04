@@ -1,0 +1,59 @@
+.marco {
+  position: relative;
+  width: 100%;
+  background: var(--surface-container);
+  /* Grid de puntos estilo Obsidian */
+  background-image: radial-gradient(circle, var(--outline-variant) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+  overflow: hidden;
+}
+
+.marco:fullscreen {
+  border-radius: 0;
+}
+
+.lienzo {
+  width: 100%;
+  height: 32rem;
+}
+
+.marco:fullscreen .lienzo {
+  height: 100vh;
+}
+
+@media (max-width: 48rem) {
+  .lienzo {
+    height: 24rem;
+  }
+}
+
+.toolbar {
+  position: absolute;
+  right: var(--esp-3);
+  bottom: var(--esp-3);
+  display: flex;
+  gap: var(--esp-1);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: 999px;
+  padding: var(--esp-1);
+}
+
+.toolbar button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--min-touch);
+  height: var(--min-touch);
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--on-surface);
+  cursor: pointer;
+}
+
+.toolbar button:hover {
+  background: var(--surface-container-high);
+}

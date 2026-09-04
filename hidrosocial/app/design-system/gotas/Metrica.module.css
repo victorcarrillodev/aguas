@@ -1,0 +1,37 @@
+.metrica {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-top: 4px solid var(--primary);
+  border-radius: var(--radio);
+  padding: var(--esp-4);
+}
+
+.cabecera {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+}
+
+.icono {
+  color: var(--on-surface-variant);
+}
+
+.valor {
+  font-family: var(--fuente-datos);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.etiqueta {
+  margin-top: var(--esp-1);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+}
+
+.sub {
+  margin-top: var(--esp-1);
+  font-size: 0.75rem;
+  color: var(--on-surface-variant);
+}

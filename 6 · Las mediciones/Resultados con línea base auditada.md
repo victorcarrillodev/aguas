@@ -1,6 +1,15 @@
 ---
+id: IND-resultados-linea-base
+tipo: medicion
 titulo: Resultados con línea base auditada
+enunciado: "Indicadores de resultado publicados con línea base auditada"
+rama: 8
 arbol: E8
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Resultados con línea base auditada

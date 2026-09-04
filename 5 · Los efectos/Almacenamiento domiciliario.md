@@ -1,6 +1,10 @@
 ---
+id: EF-almacenamiento-domiciliario
+tipo: efecto
 titulo: Almacenamiento domiciliario
+enunciado: "Almacenamiento domiciliario que degrada la calidad del agua ya entregada."
 alcance: rama
+arboles: [E2]
 ---
 
 # Almacenamiento domiciliario

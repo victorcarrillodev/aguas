@@ -1,7 +1,15 @@
 ---
+id: CONGRESO
+tipo: actor
 titulo: CONGRESO
 nombre: Poder Legislativo
 curva: Árbitro (ausente)
+grupo: "Gobernanza, recurso y árbitro"
+oferta: false
+demanda: false
+accion: "Debería regular y fiscalizar; enmarca el eje, no está en ninguna curva"
+genera: [E8]
+debe_resolver: [E3, E8, E10]
 ---
 
 # CONGRESO · Poder Legislativo

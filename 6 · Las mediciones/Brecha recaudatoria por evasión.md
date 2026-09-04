@@ -1,6 +1,15 @@
 ---
+id: IND-brecha-recaudatoria
+tipo: medicion
 titulo: Brecha recaudatoria por evasión
+enunciado: "Brecha recaudatoria por evasión"
+rama: 6
 arbol: E6
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Brecha recaudatoria por evasión

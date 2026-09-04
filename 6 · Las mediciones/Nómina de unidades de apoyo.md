@@ -1,6 +1,15 @@
 ---
+id: IND-nomina-apoyo
+tipo: medicion
 titulo: Nómina de unidades de apoyo
+enunciado: "Nómina de unidades de apoyo / presupuesto operativo (%)"
+rama: 7
 arbol: E7
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Nómina de unidades de apoyo

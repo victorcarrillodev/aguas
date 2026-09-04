@@ -1,6 +1,15 @@
 ---
+id: IND-reuso-efectivo
+tipo: medicion
 titulo: Reúso efectivo
+enunciado: "% de reúso efectivo"
+rama: 5
 arbol: E5
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Reúso efectivo

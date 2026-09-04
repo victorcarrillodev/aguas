@@ -1,6 +1,10 @@
 ---
+id: EF-persistencia-mal-desempeno
+tipo: efecto
 titulo: Persistencia del mal desempeño
+enunciado: "Persistencia estructural del mal desempeño."
 alcance: raíz
+arboles: [E8]
 ---
 
 # Persistencia del mal desempeño

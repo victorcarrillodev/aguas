@@ -1,8 +1,31 @@
 ---
+id: E10
+tipo: causa
 titulo: E10 · El gasto privado forzado
 aliases: [E10, "Gasto privado forzado (embotellada/pipa)"]
-capa: Factores
-atribucion: Estatal
+resumen: "Gasto privado forzado (embotellada/pipa)"
+rama: 10
+enunciado: "Los hogares del AMG erogan un gasto privado creciente en agua —doble facturación por embotellada, triple por pipa— para suplir un servicio público deteriorado."
+capa: C3
+capas_secundarias: [C2]
+macroproceso: null
+actores: [EJEC, EMBOT, DESAR, USUAR]
+factor: F4
+dimension: POL
+genera: [EJEC, EMBOT]
+debe_resolver: [EJEC, CONGRESO]
+brecha: parcial
+naturaleza: Mixta
+ambito: Estatal
+toca_raiz: true
+depende_de: [E1, E2]
+sostiene_a: []
+contacto: [E1, E2, E9, E7]
+efectos: [EF-transferencia-regresiva, EF-drenaje-ingreso-hogar, EF-argumento-privatizacion]
+mediciones: [IND-gasto-hogar-agua, IND-cobertura-publico-privado, IND-hogares-doble-triple]
+magnitud: "Cobertura del servicio público vs. mercado privado (%)"
+linea_base: null
+estado: en-revision
 ---
 
 # E10 · El gasto privado forzado

@@ -1,6 +1,10 @@
 ---
+id: EF-carga-cuenca
+tipo: efecto
 titulo: Carga contaminante a la cuenca
+enunciado: "Carga contaminante a la cuenca por desborde del drenaje combinado."
 alcance: rama
+arboles: [E4]
 ---
 
 # Carga contaminante a la cuenca

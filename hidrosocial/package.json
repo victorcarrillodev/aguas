@@ -1,0 +1,42 @@
+{
+  "name": "hidrosocial",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Lector aumentado del vault hidrosanitario del AMG: dashboard, captura de evidencia y explorador del grafo.",
+  "type": "module",
+  "scripts": {
+    "dev": "remix vite:dev",
+    "build": "remix vite:build",
+    "start": "remix-serve ./build/server/index.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check ."
+  },
+  "dependencies": {
+    "@fontsource/jetbrains-mono": "^5.1.0",
+    "@fontsource/plus-jakarta-sans": "^5.3.0",
+    "@fontsource/source-serif-4": "^5.3.0",
+    "@remix-run/node": "^2.16.0",
+    "@remix-run/react": "^2.16.0",
+    "@remix-run/serve": "^2.16.0",
+    "graphology": "^0.26.0",
+    "graphology-communities-louvain": "^2.0.2",
+    "graphology-layout-forceatlas2": "^0.10.1",
+    "isbot": "^4.4.0",
+    "material-symbols": "^0.47.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sigma": "^2.4.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.0",
+    "@remix-run/dev": "^2.16.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.6.0",
+    "vite": "^5.4.0",
+    "vite-tsconfig-paths": "^5.1.0"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  }
+}

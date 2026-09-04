@@ -1,6 +1,15 @@
 ---
+id: IND-aprovechamientos-medicion
+tipo: medicion
 titulo: Aprovechamientos con medición
+enunciado: "% de aprovechamientos con medición volumétrica; sanciones efectivas"
+rama: 6
 arbol: E6
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Aprovechamientos con medición

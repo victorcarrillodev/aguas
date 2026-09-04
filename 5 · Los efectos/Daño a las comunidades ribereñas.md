@@ -1,6 +1,10 @@
 ---
+id: EF-dano-riberenas
+tipo: efecto
 titulo: Daño a las comunidades ribereñas
+enunciado: "Daño a las comunidades ribereñas aguas abajo."
 alcance: rama
+arboles: [E5]
 ---
 
 # Daño a las comunidades ribereñas

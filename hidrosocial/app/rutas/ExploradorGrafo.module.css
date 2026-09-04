@@ -1,0 +1,276 @@
+.explorador {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+}
+
+.barra {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+  padding: var(--esp-3);
+}
+
+.buscador {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  border-radius: 999px;
+  padding: var(--esp-1) var(--esp-3);
+  min-height: var(--min-touch);
+}
+
+.buscador:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.lupa {
+  color: var(--on-surface-variant);
+}
+
+.entrada {
+  border: 0;
+  background: transparent;
+  color: var(--on-surface);
+  font-size: 0.9375rem;
+  min-height: 0;
+  width: 100%;
+}
+
+.entrada:focus {
+  outline: none;
+}
+
+.pills {
+  display: flex;
+  gap: var(--esp-1);
+  overflow-x: auto;
+  padding-bottom: var(--esp-1);
+}
+
+.pillsGrupo {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.leyenda {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--on-surface-variant);
+  padding: 0;
+  margin-bottom: var(--esp-1);
+}
+
+.pill,
+.pillActiva {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+  min-height: var(--min-touch);
+  padding: var(--esp-1) var(--esp-3);
+  border-radius: 999px;
+  border: 1px solid var(--outline-variant);
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.pillActiva {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.punto {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+}
+
+.cuerpo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-3);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .cuerpo {
+    grid-template-columns: 1fr 20rem;
+  }
+}
+
+.lienzo {
+  min-width: 0;
+}
+
+.inspector {
+  position: relative;
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+  padding: var(--esp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+/* Bottom-sheet móvil (<1024px): fijo, 45vh, con botón cerrar. */
+@media (max-width: 1023px) {
+  .inspector {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    max-height: 45vh;
+    overflow-y: auto;
+    border-radius: var(--radio) var(--radio) 0 0;
+    border-bottom: 0;
+    padding-bottom: calc(var(--esp-4) + env(safe-area-inset-bottom));
+    box-shadow: 0 -0.5rem 2rem rgba(11, 28, 48, 0.18);
+  }
+}
+
+.chips {
+  display: flex;
+  gap: var(--esp-1);
+  flex-wrap: wrap;
+}
+
+.tituloNodo {
+  margin: 0;
+  font-family: var(--fuente-titular);
+  font-size: var(--texto-seccion);
+  line-height: 1.2;
+}
+
+.resumen {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--on-surface-variant);
+}
+
+.metricas {
+  margin: 0;
+  font-family: var(--fuente-datos);
+  font-size: 0.75rem;
+  color: var(--on-surface-variant);
+}
+
+.subtitulo {
+  margin: var(--esp-2) 0 0;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--on-surface-variant);
+}
+
+.vecinos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+}
+
+.vecino {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  width: 100%;
+  min-height: var(--min-touch);
+  padding: var(--esp-1) var(--esp-2);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+  background: transparent;
+  color: var(--on-surface);
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.vecino:hover {
+  background: var(--surface-container);
+}
+
+.leer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--min-touch);
+  padding: var(--esp-2) var(--esp-4);
+  border-radius: var(--radio);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  margin-top: var(--esp-2);
+}
+
+.ayuda {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+}
+
+.cerrar {
+  position: absolute;
+  top: var(--esp-2);
+  right: var(--esp-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--min-touch);
+  height: var(--min-touch);
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+}
+
+.cerrar:hover {
+  background: var(--surface-container-high);
+}
+
+.status {
+  display: block;
+  margin: 0;
+  font-family: var(--fuente-datos);
+  font-size: 0.75rem;
+  color: var(--on-surface-variant);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+  padding: var(--esp-2) var(--esp-3);
+}
+
+/* Nombre de la capa junto al código: se oculta en pantallas estrechas para
+   que la fila de pills no crezca de más. */
+.nombreCapa {
+  display: none;
+  color: var(--on-surface-variant);
+  font-weight: 400;
+}
+
+@media (min-width: 1024px) {
+  .nombreCapa {
+    display: inline;
+  }
+}

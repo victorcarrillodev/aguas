@@ -1,6 +1,10 @@
 ---
+id: EF-acuifero-se-agota
+tipo: efecto
 titulo: El acuífero se agota
+enunciado: "El acuífero se agota: la extracción supera la recarga."
 alcance: copa maestra
+arboles: [E6, PC]
 ---
 
 # El acuífero se agota

@@ -1,7 +1,15 @@
 ---
+id: EMBOT
+tipo: actor
 titulo: EMBOT
 nombre: Embotelladoras
 curva: Oferta privada
+grupo: "Oferta privada / ilícita"
+oferta: true
+demanda: false
+accion: "Oferta sustituta de agua para beber"
+genera: [E6, E10]
+debe_resolver: []
 ---
 
 # EMBOT · Embotelladoras

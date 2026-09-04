@@ -1,7 +1,15 @@
 ---
+id: USUAR
+tipo: actor
 titulo: USUAR
 nombre: Usuarios / habitantes
 curva: Demanda
+grupo: "Demanda"
+oferta: false
+demanda: true
+accion: "Demandan agua-derecho; el mismo sujeto puede demandar agua-renta (doble demanda)"
+genera: []
+debe_resolver: [E9]
 ---
 
 # USUAR · Usuarios / habitantes

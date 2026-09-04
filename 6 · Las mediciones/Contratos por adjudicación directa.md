@@ -1,6 +1,15 @@
 ---
+id: IND-adjudicacion-directa
+tipo: medicion
 titulo: Contratos por adjudicación directa
+enunciado: "Contratos por adjudicación directa / total (%)"
+rama: 7
 arbol: E7
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Contratos por adjudicación directa

@@ -1,6 +1,15 @@
 ---
+id: IND-caudal-tratado
+tipo: medicion
 titulo: Caudal tratado antes de descarga
+enunciado: "% de caudal residual tratado antes de la descarga"
+rama: 5
 arbol: E5
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Caudal tratado antes de descarga

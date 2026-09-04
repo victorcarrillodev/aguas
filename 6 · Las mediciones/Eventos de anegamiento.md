@@ -1,6 +1,15 @@
 ---
+id: IND-eventos-anegamiento
+tipo: medicion
 titulo: Eventos de anegamiento
+enunciado: "Eventos y superficie de anegamiento"
+rama: 4
 arbol: E4
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Eventos de anegamiento

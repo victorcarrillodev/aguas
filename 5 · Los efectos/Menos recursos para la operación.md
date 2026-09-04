@@ -1,6 +1,10 @@
 ---
+id: EF-menos-recursos-om
+tipo: efecto
 titulo: Menos recursos para la operación
+enunciado: "Menos recursos para operación, mantenimiento y renovación."
 alcance: rama
+arboles: [E7]
 ---
 
 # Menos recursos para la operación

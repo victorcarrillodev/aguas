@@ -1,6 +1,15 @@
 ---
+id: IND-regulador-externo
+tipo: medicion
 titulo: Regulador externo con sanción
+enunciado: "Existencia de un regulador externo con facultad sancionatoria"
+rama: 8
 arbol: E8
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Regulador externo con sanción

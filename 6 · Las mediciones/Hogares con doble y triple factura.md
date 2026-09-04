@@ -1,6 +1,15 @@
 ---
+id: IND-hogares-doble-triple
+tipo: medicion
 titulo: Hogares con doble y triple factura
+enunciado: "Hogares con doble y triple facturación"
+rama: 10
 arbol: E10
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Hogares con doble y triple factura

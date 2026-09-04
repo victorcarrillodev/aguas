@@ -1,0 +1,12 @@
+.tarjeta {
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+  padding: var(--esp-4) var(--esp-5);
+}
+
+.titulo {
+  margin: 0 0 var(--esp-3);
+  font-size: 1rem;
+  font-weight: 700;
+}

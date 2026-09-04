@@ -1,7 +1,15 @@
 ---
+id: MUNI
+tipo: actor
 titulo: MUNI
 nombre: Municipios (Art. 115)
 curva: Ambas
+grupo: "Gobernanza, recurso y árbitro"
+oferta: true
+demanda: true
+accion: "Uso de suelo y drenaje (oferta) y representa al habitante (demanda)"
+genera: []
+debe_resolver: [E4]
 ---
 
 # MUNI · Municipios (Art. 115)

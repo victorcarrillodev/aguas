@@ -1,6 +1,15 @@
 ---
+id: IND-acceso-informacion
+tipo: medicion
 titulo: Acceso a información de desempeño
+enunciado: "Acceso público a información de desempeño"
+rama: 9
 arbol: E9
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Acceso a información de desempeño

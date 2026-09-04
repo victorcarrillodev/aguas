@@ -1,7 +1,15 @@
 ---
+id: CRIMEN
+tipo: actor
 titulo: CRIMEN
 nombre: Mercado negro / huachicoleo
 curva: Oferta ilícita
+grupo: "Oferta privada / ilícita"
+oferta: true
+demanda: false
+accion: "Oferta ilícita; enmarca el eje por abajo"
+genera: [E6]
+debe_resolver: []
 ---
 
 # CRIMEN · Mercado negro / huachicoleo

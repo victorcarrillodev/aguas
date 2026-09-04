@@ -1,7 +1,15 @@
 ---
+id: EJEC
+tipo: actor
 titulo: EJEC
 nombre: Ejecutivo estatal
 curva: Árbitro
+grupo: "Gobernanza, recurso y árbitro"
+oferta: true
+demanda: false
+accion: "Controla al operador; debería arbitrar y no lo hace"
+genera: [E10]
+debe_resolver: [E10]
 ---
 
 # EJEC · Ejecutivo estatal

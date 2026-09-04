@@ -1,7 +1,15 @@
 ---
+id: SANE
+tipo: actor
 titulo: SANE
 nombre: Saneamiento
 curva: Oferta
+grupo: "Operador y áreas internas"
+oferta: true
+demanda: false
+accion: "Trata y devuelve el agua a la cuenca"
+genera: []
+debe_resolver: [E4, E5]
 ---
 
 # SANE · Saneamiento

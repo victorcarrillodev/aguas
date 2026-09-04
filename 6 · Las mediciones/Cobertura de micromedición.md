@@ -1,6 +1,15 @@
 ---
+id: IND-cobertura-micromedicion
+tipo: medicion
 titulo: Cobertura de micromedición
+enunciado: "Cobertura de micromedición"
+rama: 3
 arbol: E3
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Cobertura de micromedición

@@ -1,8 +1,31 @@
 ---
+id: E6
+tipo: causa
 titulo: E6 · El mercado negro
 aliases: [E6, "Mercado negro del agua"]
-capa: Factores
-atribucion: Mixto
+resumen: "Mercado negro del agua"
+rama: 6
+enunciado: "Las fuentes de abasto se sobreexplotan y las finanzas del organismo se descapitalizan por el mercado negro que opera fuera del sistema formal."
+capa: C3
+capas_secundarias: [C1]
+macroproceso: SANE
+actores: [CRIMEN, INDUS, EMBOT, CEA]
+factor: F6
+dimension: ECO
+genera: [CRIMEN, EMBOT]
+debe_resolver: [CEA, SIAPA]
+brecha: total
+naturaleza: Acción
+ambito: Mixto
+toca_raiz: true
+depende_de: [E8]
+sostiene_a: [E2]
+contacto: [E3, E5, E8, E1, E2]
+efectos: [EF-acuifero-se-agota, EF-descapitalizacion, EF-competencia-desleal]
+mediciones: [IND-volumen-informal, IND-brecha-recaudatoria, IND-aprovechamientos-medicion]
+magnitud: "Volumen extraído y revendido fuera del sistema formal (estimación)"
+linea_base: null
+estado: en-revision
 ---
 
 # E6 · El mercado negro

@@ -1,6 +1,15 @@
 ---
+id: IND-cloro-residual
+tipo: medicion
 titulo: Continuidad de cloro residual
+enunciado: "Continuidad de cloro residual en red"
+rama: 1
 arbol: E1
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Continuidad de cloro residual

@@ -1,0 +1,28 @@
+.cuenca {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+}
+
+.volver {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.volver:hover {
+  text-decoration: underline;
+}
+
+.columnas {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: var(--esp-4);
+  align-items: start;
+}
+
+@media (max-width: 48rem) {
+  .columnas {
+    grid-template-columns: 1fr;
+  }
+}

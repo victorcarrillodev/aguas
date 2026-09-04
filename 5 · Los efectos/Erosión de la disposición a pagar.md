@@ -1,6 +1,10 @@
 ---
+id: EF-erosion-disposicion-pago
+tipo: efecto
 titulo: Erosión de la disposición a pagar
+enunciado: "Erosión de la disposición a pagar del usuario."
 alcance: rama
+arboles: [E7]
 ---
 
 # Erosión de la disposición a pagar

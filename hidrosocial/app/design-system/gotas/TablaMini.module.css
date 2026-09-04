@@ -1,0 +1,36 @@
+.contenedor {
+  overflow-x: auto;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.tabla th {
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--on-surface-variant);
+  padding: var(--esp-2) var(--esp-3);
+  border-bottom: 2px solid var(--outline);
+}
+
+.tabla td {
+  padding: var(--esp-2) var(--esp-3);
+  border-bottom: 1px solid var(--outline-variant);
+  vertical-align: top;
+}
+
+.tabla tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Scroll horizontal en móvil (primera columna anclada visualmente). */
+@media (max-width: 767px) {
+  .tabla {
+    min-width: 34rem;
+  }
+}

@@ -1,8 +1,31 @@
 ---
+id: E4
+tipo: causa
 titulo: E4 · Las inundaciones
 aliases: [E4, "Inundaciones y contaminación de agua de lluvia"]
-capa: Macroprocesos
-atribucion: Mixto
+resumen: "Inundaciones y contaminación de agua de lluvia"
+rama: 4
+enunciado: "El territorio metropolitano y su población padecen anegamientos y contaminación cruzada, porque el sistema de recolección no desaloja suficientemente el agua de lluvia y la mezcla con aguas negras al hacerlo."
+capa: C1
+capas_secundarias: [C4]
+macroproceso: RECO
+actores: [SIAPA, MUNI, INDUS]
+factor: F3
+dimension: TER
+genera: [INDUS, DESAR]
+debe_resolver: [SANE, MUNI]
+brecha: total
+naturaleza: Mixta
+ambito: Mixto
+toca_raiz: true
+depende_de: [E8]
+sostiene_a: []
+contacto: [E5]
+efectos: [EF-carga-cuenca, EF-riesgo-sanitario, EF-dano-patrimonial]
+mediciones: [IND-eventos-anegamiento, IND-red-separada, IND-descargas-vigiladas]
+magnitud: "Eventos/superficie de anegamiento; % de mezcla pluvial-sanitaria"
+linea_base: null
+estado: en-revision
 ---
 
 # E4 · Las inundaciones

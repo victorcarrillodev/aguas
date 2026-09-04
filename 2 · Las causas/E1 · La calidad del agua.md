@@ -1,8 +1,31 @@
 ---
+id: E1
+tipo: causa
 titulo: E1 · La calidad del agua
 aliases: [E1, "Incumplimiento de calidad (NOM-127)"]
-capa: Macroprocesos
-atribucion: SIAPA
+resumen: "Incumplimiento de calidad (NOM-127)"
+rama: 1
+enunciado: "Habitantes del AMG, conectados a la red hidráulica del SIAPA, reciben agua sin cumplimiento de la NOM-127-SSA1-2021."
+capa: C1
+capas_secundarias: [C4]
+macroproceso: ABAS
+actores: [SIAPA, PLAN]
+factor: F1
+dimension: BIO
+genera: [SIAPA, PLAN]
+debe_resolver: [SIAPA, PLAN]
+brecha: ninguna
+naturaleza: Omisión
+ambito: SIAPA
+toca_raiz: true
+depende_de: [E7, E5]
+sostiene_a: [E10]
+contacto: [E2, E5, E6, E10]
+efectos: [EF-morbilidad, EF-gasto-embotellada, EF-dhays]
+mediciones: [IND-cumplimiento-nom127, IND-cobertura-monitoreo-calidad, IND-cloro-residual]
+magnitud: "% de zonas que cumplen los parámetros de la NOM-127-SSA1-2021"
+linea_base: null
+estado: en-revision
 ---
 
 # E1 · La calidad del agua

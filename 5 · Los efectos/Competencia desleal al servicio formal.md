@@ -1,6 +1,10 @@
 ---
+id: EF-competencia-desleal
+tipo: efecto
 titulo: Competencia desleal al servicio formal
+enunciado: "Competencia desleal al servicio formal por parte del circuito informal."
 alcance: rama
+arboles: [E6]
 ---
 
 # Competencia desleal al servicio formal

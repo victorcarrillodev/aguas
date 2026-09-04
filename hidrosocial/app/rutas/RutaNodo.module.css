@@ -1,0 +1,88 @@
+.articulo {
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+  padding: var(--esp-5) var(--esp-6);
+  max-width: 46rem;
+}
+
+.volver {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.volver:hover {
+  text-decoration: underline;
+}
+
+.chips {
+  margin-top: var(--esp-3);
+  display: flex;
+  gap: var(--esp-2);
+}
+
+.titulo {
+  font-family: var(--fuente-lectura);
+  font-size: 2rem;
+  line-height: 1.15;
+  margin: var(--esp-2) 0 var(--esp-4);
+}
+
+.cuerpo {
+  font-family: var(--fuente-lectura);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+.cuerpo h2,
+.cuerpo h3,
+.cuerpo h4 {
+  font-family: var(--fuente-ui);
+  line-height: 1.3;
+  margin: var(--esp-5) 0 var(--esp-2);
+}
+
+.cuerpo blockquote {
+  margin: var(--esp-3) 0;
+  padding: var(--esp-2) var(--esp-4);
+  border-left: 4px solid var(--outline);
+  background: var(--surface-container);
+  border-radius: 0 var(--radio) var(--radio) 0;
+}
+
+.cuerpo blockquote p {
+  margin: var(--esp-1) 0;
+}
+
+.cuerpo table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  margin: var(--esp-3) 0;
+}
+
+.cuerpo th,
+.cuerpo td {
+  border: 1px solid var(--outline);
+  padding: var(--esp-2);
+  text-align: left;
+  vertical-align: top;
+}
+
+.cuerpo th {
+  background: var(--surface-container-high);
+  font-family: var(--fuente-ui);
+}
+
+@media (max-width: 767px) {
+  .articulo {
+    padding: var(--esp-4);
+  }
+
+  .cuerpo table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}

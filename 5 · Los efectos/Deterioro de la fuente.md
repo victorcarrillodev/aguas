@@ -1,6 +1,10 @@
 ---
+id: EF-deterioro-fuente
+tipo: efecto
 titulo: Deterioro de la fuente
+enunciado: "Deterioro de la calidad de la fuente de abastecimiento."
 alcance: rama
+arboles: [E5]
 ---
 
 # Deterioro de la fuente

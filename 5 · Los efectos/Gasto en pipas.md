@@ -1,6 +1,10 @@
 ---
+id: EF-gasto-pipas
+tipo: efecto
 titulo: Gasto en pipas
+enunciado: "Gasto en pipas para suplir la intermitencia."
 alcance: rama
+arboles: [E2]
 ---
 
 # Gasto en pipas

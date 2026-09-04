@@ -1,0 +1,41 @@
+.barra {
+  display: flex;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: var(--surface-container-lowest);
+  border-top: 1px solid var(--outline-variant);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.enlace,
+.activo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.125rem;
+  min-height: var(--min-touch);
+  padding: var(--esp-2);
+  text-decoration: none;
+  color: var(--on-surface-variant);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.activo {
+  color: var(--primary);
+}
+
+.etiqueta {
+  line-height: 1;
+}
+
+@media (min-width: 1024px) {
+  .barra {
+    display: none;
+  }
+}

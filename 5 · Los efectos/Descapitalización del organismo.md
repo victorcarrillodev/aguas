@@ -1,6 +1,10 @@
 ---
+id: EF-descapitalizacion
+tipo: efecto
 titulo: Descapitalización del organismo
+enunciado: "Descapitalización financiera del organismo."
 alcance: rama
+arboles: [E3, E6]
 ---
 
 # Descapitalización del organismo

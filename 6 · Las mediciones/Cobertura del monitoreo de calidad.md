@@ -1,6 +1,15 @@
 ---
+id: IND-cobertura-monitoreo-calidad
+tipo: medicion
 titulo: Cobertura del monitoreo de calidad
+enunciado: "Cobertura territorial del monitoreo de calidad"
+rama: 1
 arbol: E1
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Cobertura del monitoreo de calidad

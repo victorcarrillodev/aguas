@@ -1,6 +1,15 @@
 ---
+id: IND-cumplimiento-descarga
+tipo: medicion
 titulo: Cumplimiento de norma de descarga
+enunciado: "Cumplimiento de la norma de descarga; carga removida"
+rama: 5
 arbol: E5
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Cumplimiento de norma de descarga

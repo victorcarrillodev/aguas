@@ -1,6 +1,10 @@
 ---
+id: EF-dhays
+tipo: efecto
 titulo: Erosión del derecho al agua
+enunciado: "Erosión del Derecho Humano al Agua y al Saneamiento (DHAyS): la población del AMG no lo ejerce con calidad, equidad y sostenibilidad."
 alcance: copa maestra
+arboles: [E1, PC]
 ---
 
 # Erosión del derecho al agua

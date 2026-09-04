@@ -1,0 +1,107 @@
+/* Design tokens hidrosocial v2: chrome según mockups (superficie clara azulada,
+   primario azul marino, secundario verde azulado), colores de capas C0-C4
+   CANÓNICOS del vault (NO tocar), fuentes Plus Jakarta Sans UI /
+   Source Serif 4 titulares / JetBrains Mono datos, tipografía fluida y
+   breakpoints mobile-first (480/768/1024 literales en los .module.css). */
+
+:root {
+  /* Capas del modelo (canónicas del vault — NO tocar) */
+  --capa-c0: #e8a0bf; /* Ciclo hidrosocial */
+  --capa-c1: #7fb77e; /* Macroprocesos */
+  --capa-c2: #7ea6e0; /* Actores */
+  --capa-c3: #a986c9; /* Factores */
+  --capa-c4: #c8b6e2; /* Dimensiones */
+
+  /* Colores por tipo de nodo (canónicos — NO tocar) */
+  --tipo-causa: #7fb77e;
+  --tipo-ficha: #a986c9;
+  --tipo-actor: #7ea6e0;
+  --tipo-efecto: #c9c9c9;
+  --tipo-medicion: #d4a373;
+  --tipo-problema: #111827;
+  --tipo-evidencia: #0ea5e9;
+  --tipo-metodo: #9ca3af;
+  --tipo-indice: #9ca3af;
+
+  /* Chrome v2 (mockups) */
+  --surface: #f8f9ff;
+  --on-surface: #0b1c30;
+  --on-surface-variant: #565e71;
+  --outline: #727780;
+  --outline-variant: #dde1ec;
+  --primary: #00355f;
+  --on-primary: #ffffff;
+  --primary-container: #0f4c81;
+  --secondary: #006a61;
+  --secondary-container: #86f2e4;
+  --tertiary: #3f0099;
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+  --surface-container-lowest: #ffffff;
+  --surface-container: #eef1f9;
+  --surface-container-high: #e6eaf4;
+  --accent: #006a61;
+
+  /* Fuentes */
+  --fuente-ui: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --fuente-titular: "Source Serif 4", Georgia, serif;
+  --fuente-lectura: "Source Serif 4", Georgia, serif;
+  --fuente-datos: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Tipografía fluida */
+  --texto-titulo: clamp(1.6rem, 2.2vw + 1rem, 2.4rem);
+  --texto-seccion: clamp(1.1rem, 1vw + 0.9rem, 1.5rem);
+
+  /* Touch */
+  --min-touch: 44px;
+
+  /* Espaciado */
+  --esp-1: 0.25rem;
+  --esp-2: 0.5rem;
+  --esp-3: 0.75rem;
+  --esp-4: 1rem;
+  --esp-5: 1.5rem;
+  --esp-6: 2rem;
+  --esp-7: 3rem;
+  --esp-8: 4rem;
+
+  --radio: 0.75rem;
+
+  /* Breakpoints (referencia: var() NO funciona en media queries,
+     usar literales 480px/768px/1024px en los .module.css) */
+  --bp-m: 480px;
+  --bp-t: 768px;
+  --bp-d: 1024px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente-ui);
+  color: var(--on-surface);
+  background: var(--surface);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  min-height: var(--min-touch);
+}
+
+.material-symbols-outlined {
+  font-size: 1.25rem;
+  line-height: 1;
+  vertical-align: middle;
+  user-select: none;
+}

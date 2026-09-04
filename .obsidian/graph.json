@@ -8,80 +8,59 @@
   "collapse-color-groups": true,
   "colorGroups": [
     {
-      "query": "path:\"20-Nodos\"",
+      "query": "path:\"1 · El problema\"",
+      "color": {
+        "a": 1,
+        "rgb": 15245503
+      }
+    },
+    {
+      "query": "path:\"2 · Las causas\"",
       "color": {
         "a": 1,
         "rgb": 14722136
       }
     },
     {
-      "query": "path:\"30-Arboles\"",
-      "color": {
-        "a": 1,
-        "rgb": 5217702
-      }
-    },
-    {
-      "query": "path:\"40-Catalogos/Actores\"",
-      "color": {
-        "a": 1,
-        "rgb": 8300256
-      }
-    },
-    {
-      "query": "path:\"40-Catalogos/Macroprocesos\"",
+      "query": "path:\"3 · Las fichas\"",
       "color": {
         "a": 1,
         "rgb": 8370046
       }
     },
     {
-      "query": "path:\"40-Catalogos/Factores\"",
+      "query": "path:\"4 · Los actores\"",
       "color": {
         "a": 1,
-        "rgb": 11110089
+        "rgb": 8300256
       }
     },
     {
-      "query": "path:\"40-Catalogos/Dimensiones\"",
-      "color": {
-        "a": 1,
-        "rgb": 13154018
-      }
-    },
-    {
-      "query": "path:\"40-Catalogos/Capas\"",
-      "color": {
-        "a": 1,
-        "rgb": 15245503
-      }
-    },
-    {
-      "query": "path:\"50-Efectos\"",
+      "query": "path:\"5 · Los efectos\"",
       "color": {
         "a": 1,
         "rgb": 13224393
       }
     },
     {
-      "query": "path:\"60-Indicadores\"",
+      "query": "path:\"6 · Las mediciones\"",
       "color": {
         "a": 1,
         "rgb": 12035801
       }
     },
     {
-      "query": "path:\"70-Evidencia\"",
+      "query": "path:\"7 · El método\"",
       "color": {
         "a": 1,
-        "rgb": 14271594
+        "rgb": 11110089
       }
     },
     {
-      "query": "path:\"10-Metodo\"",
+      "query": "path:\"_Trabajo interno\"",
       "color": {
         "a": 1,
-        "rgb": 15245503
+        "rgb": 14271594
       }
     }
   ],
@@ -94,7 +73,7 @@
   "centerStrength": 0.518713248970312,
   "repelStrength": 10,
   "linkStrength": 1,
-  "linkDistance": 180,
-  "scale": 0.5087618855792526,
+  "linkDistance": 200,
+  "scale": 0.18462326225857892,
   "close": true
 }

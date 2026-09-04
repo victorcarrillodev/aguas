@@ -1,7 +1,15 @@
 ---
+id: DIST
+tipo: actor
 titulo: DIST
 nombre: Distribución
 curva: Oferta
+grupo: "Operador y áreas internas"
+oferta: true
+demanda: false
+accion: "Entrega el agua hasta la toma"
+genera: [E2]
+debe_resolver: [E2]
 ---
 
 # DIST · Distribución

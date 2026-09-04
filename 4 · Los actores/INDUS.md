@@ -1,7 +1,15 @@
 ---
+id: INDUS
+tipo: actor
 titulo: INDUS
 nombre: Industrias
 curva: Ambas
+grupo: "Demanda"
+oferta: true
+demanda: true
+accion: "Demandan agua y ofertan carga contaminante al descargar"
+genera: [E4]
+debe_resolver: []
 ---
 
 # INDUS · Industrias

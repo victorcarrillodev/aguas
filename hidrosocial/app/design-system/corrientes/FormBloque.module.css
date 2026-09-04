@@ -1,0 +1,40 @@
+.bloque {
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+  background: var(--surface);
+  padding: var(--esp-4) var(--esp-5);
+  margin: 0;
+}
+
+.titulo {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0 var(--esp-2);
+}
+
+.numero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: 0.875rem;
+}
+
+.descripcion {
+  margin: 0 0 var(--esp-3);
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+}
+
+.campos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+}

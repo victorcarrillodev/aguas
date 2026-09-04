@@ -1,6 +1,15 @@
 ---
+id: IND-gasto-comunicacion
+tipo: medicion
 titulo: Gasto en comunicación social
+enunciado: "Gasto de comunicación social / gasto operativo total (%)"
+rama: 7
 arbol: E7
+unidad: null
+linea_base: null
+anio: null
+fuente: null
+estado: sin-dato
 ---
 
 # Gasto en comunicación social

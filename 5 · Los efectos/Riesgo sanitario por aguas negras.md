@@ -1,6 +1,10 @@
 ---
+id: EF-riesgo-sanitario
+tipo: efecto
 titulo: Riesgo sanitario por aguas negras
+enunciado: "Riesgo sanitario por contacto de la población con aguas negras."
 alcance: rama
+arboles: [E4]
 ---
 
 # Riesgo sanitario por aguas negras

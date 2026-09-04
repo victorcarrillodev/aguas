@@ -1,7 +1,15 @@
 ---
+id: CONAGUA
+tipo: actor
 titulo: CONAGUA
 nombre: Comisión Nacional del Agua (federal)
 curva: Árbitro
+grupo: "Gobernanza, recurso y árbitro"
+oferta: true
+demanda: false
+accion: "Concesiona el recurso y norma (ámbito federal)"
+genera: []
+debe_resolver: []
 ---
 
 # CONAGUA · Comisión Nacional del Agua (federal)

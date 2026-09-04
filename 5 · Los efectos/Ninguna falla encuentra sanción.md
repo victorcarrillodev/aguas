@@ -1,6 +1,10 @@
 ---
+id: EF-sin-correccion-ni-sancion
+tipo: efecto
 titulo: Ninguna falla encuentra sanción
+enunciado: "Ninguna falla de E1 a E7 encuentra corrección ni sanción."
 alcance: raíz
+arboles: [E8]
 ---
 
 # Ninguna falla encuentra sanción
