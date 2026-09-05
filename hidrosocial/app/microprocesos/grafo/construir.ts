@@ -26,11 +26,10 @@ export function construirGrafoRender(g: VaultGraph, filtro?: FiltroGrafo): Grafo
   const vistas = new Set<string>();
   for (const a of g.aristas) {
     if (!dentro.has(a.origen) || !dentro.has(a.destino)) continue;
-    const clave = `${a.origen}|${a.destino}`;
-    const inversa = `${a.destino}|${a.origen}`;
-    if (vistas.has(clave) || vistas.has(inversa)) continue;
+    const clave = `${a.origen}|${a.destino}|${a.tipo}`;
+    if (vistas.has(clave)) continue;
     vistas.add(clave);
-    aristas.push({ origen: a.origen, destino: a.destino });
+    aristas.push({ origen: a.origen, destino: a.destino, tipo: a.tipo, etiqueta: a.etiqueta });
     grado.set(a.origen, (grado.get(a.origen) ?? 0) + 1);
     grado.set(a.destino, (grado.get(a.destino) ?? 0) + 1);
   }

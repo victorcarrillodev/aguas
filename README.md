@@ -42,4 +42,4 @@ Si lo abres como bóveda de [Obsidian](https://obsidian.md) —clonando el repos
 
 Todo el diagnóstico está **en revisión**. Ninguna afirmación ha recibido validación formal del Consejo: es material de trabajo abierto a discusión y corrección.
 
-Los treinta indicadores no tienen línea base pública. Eso no es un pendiente de captura, es un hallazgo: sobre un sistema que no se mide, el dato no existe. La ausencia del dato *es* el dato, y es la mitad del argumento de la raíz maestra.
+Los treinta indicadores no tienen una línea base incorporada al diagnóstico original. La búsqueda y captura deben documentarse antes de concluir que un dato no existe, no es público o está reservado. La plataforma distingue estos estados y conserva evidencia y decisiones en expedientes revisables.

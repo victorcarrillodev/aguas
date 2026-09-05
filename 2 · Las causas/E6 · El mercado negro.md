@@ -114,7 +114,7 @@ También lo produce [E3 · La tarifa](./E3%20%C2%B7%20La%20tarifa.md).
 - **[Brecha recaudatoria por evasión](../6%20%C2%B7%20Las%20mediciones/Brecha%20recaudatoria%20por%20evasi%C3%B3n.md)** — Brecha recaudatoria por evasión
 - **[Aprovechamientos con medición](../6%20%C2%B7%20Las%20mediciones/Aprovechamientos%20con%20medici%C3%B3n.md)** — % de aprovechamientos con medición volumétrica; sanciones efectivas
 
-Ninguna de estas mediciones tiene hoy una línea base pública. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
+Estas mediciones no tienen una línea base incorporada al diagnóstico original. Su disponibilidad pública requiere una búsqueda documentada. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
 
 ---
 

@@ -47,10 +47,7 @@ export function incidenciaActores(g: VaultGraph, red: RedSistema): IncidenciaAct
 }
 
 function lecturaDe(genera: number, resuelve: number): string {
-  if (genera > 0 && resuelve === 0) return 'daña sin obligación de reparar';
-  if (resuelve > 0 && genera === 0) return 'repara sin haber causado';
-  if (genera === resuelve) return 'juez y parte';
-  return genera > resuelve ? 'daña más de lo que repara' : 'repara más de lo que daña';
+  return `Generación atribuida en ${genera}; responsabilidad asignada en ${resuelve}.`;
 }
 
 /** Actores del catálogo que hoy no aparecen ni como causa ni como responsables. */

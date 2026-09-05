@@ -1,13 +1,23 @@
 import { json } from '@remix-run/node';
-import type { LoaderFunctionArgs } from '@remix-run/node';
+import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import type { ReactNode } from 'react';
 
+import { MesaNodo } from '~/design-system/cauces/MesaNodo';
 import { Chip } from '~/design-system/gotas/Chip';
 import { colorDeNodo } from '~/lib/colores';
 import { decodeNodo, encodeNodo, unirPosix } from '~/lib/rutas';
 import { getVaultGraph, getVaultPath } from '~/microprocesos/cache/index';
+import { guardarRegistro } from '~/microprocesos/captura/registro.server';
+import {
+  estadoDato,
+  estadoRevision,
+  origenDe,
+  registrosDe,
+  relacionesDe,
+} from '~/microprocesos/revision/index';
 import { leerNota } from '~/microprocesos/vault-core/index';
+import type { VaultNode } from '~/microprocesos/vault-core/tipos';
 import type { CapaId, VaultNodeType } from '~/microprocesos/vault-core/tipos';
 import styles from './RutaNodo.module.css';
 
@@ -25,6 +35,21 @@ interface Datos {
   cuerpo: string;
   enlaces: EnlaceResuelto[];
   frontmatter: Record<string, string | undefined>;
+  nodo: VaultNode;
+  registros: VaultNode[];
+  estado: string;
+  dato: string;
+  origen: string;
+  relaciones: ReturnType<typeof relacionesDe>;
+}
+
+export async function action({ request, params }: ActionFunctionArgs) {
+  try {
+    await guardarRegistro(await request.formData(), decodeNodo(params.slug ?? ''));
+    return json({ ok: true });
+  } catch (e) {
+    return json({ error: e instanceof Error ? e.message : 'No se pudo guardar.' }, { status: 400 });
+  }
 }
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -54,6 +79,12 @@ export async function loader({ params }: LoaderFunctionArgs) {
     cuerpo: nota.cuerpo,
     enlaces,
     frontmatter: nota.frontmatter,
+    nodo: nota.nodo,
+    registros: registrosDe(g, relPath),
+    estado: estadoRevision(nota.nodo, registrosDe(g, relPath)),
+    dato: estadoDato(nota.nodo, registrosDe(g, relPath)),
+    origen: origenDe(nota.nodo),
+    relaciones: relacionesDe(g, nota.nodo),
   });
 }
 
@@ -245,6 +276,15 @@ export default function RutaNodo() {
         <Chip color={colorDeNodo(d.tipo, d.capa)}>{d.capa ? `${d.tipo} · ${d.capa}` : d.tipo}</Chip>
       </div>
       <h1 className={styles.titulo}>{d.titulo}</h1>
+      <MesaNodo
+        nodo={d.nodo}
+        registros={d.registros}
+        estado={d.estado}
+        dato={d.dato}
+        origen={d.origen}
+        relaciones={d.relaciones}
+      />
+      <h2>Texto conservado del diagnóstico</h2>
       <div className={styles.cuerpo}>{renderBloques(d.cuerpo, d.enlaces, d.dir)}</div>
     </article>
   );

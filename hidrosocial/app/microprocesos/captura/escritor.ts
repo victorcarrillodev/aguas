@@ -28,17 +28,23 @@ export async function guardarNota(b: Borrador): Promise<VaultNode> {
 
   const causa = [...g.nodos.values()].find((n) => n.tipo === 'causa' && n.arbol === b.arbol);
   if (!causa) throw new Error(`No hay causa para el árbol ${b.arbol}.`);
+  const objetivo = g.nodos.get(b.nodoId || b.fichaId || b.medicionId || causa.id);
+  if (!objetivo || objetivo.frontmatter.registro || (objetivo.arbol && objetivo.arbol !== b.arbol))
+    throw new Error('La afirmación elegida no corresponde al árbol.');
+  b.nodoId = objetivo.id;
 
   let ficha: { relPath: string; titulo: string } | undefined;
   if (b.fichaId) {
     const n = g.nodos.get(b.fichaId);
-    if (!n || n.tipo !== 'ficha') throw new Error('La ficha elegida no existe.');
+    if (!n || n.tipo !== 'ficha' || n.arbol !== b.arbol)
+      throw new Error('La ficha elegida no corresponde al árbol.');
     ficha = { relPath: n.relPath, titulo: n.titulo };
   }
   let medicion: { relPath: string; titulo: string } | undefined;
   if (b.medicionId) {
     const n = g.nodos.get(b.medicionId);
-    if (!n || n.tipo !== 'medicion') throw new Error('La medición elegida no existe.');
+    if (!n || n.tipo !== 'medicion' || n.arbol !== b.arbol)
+      throw new Error('La medición elegida no corresponde al árbol.');
     medicion = { relPath: n.relPath, titulo: n.titulo };
   }
 
@@ -46,7 +52,7 @@ export async function guardarNota(b: Borrador): Promise<VaultNode> {
     causa: { relPath: causa.relPath, titulo: causa.titulo },
     ficha,
     medicion,
-  });
+  }).replace('---\n', `---\ncreado: ${JSON.stringify(new Date().toISOString())}\n`);
 
   const base = slugificar(b.titulo) || 'evidencia';
   const dirAbs = join(vaultPath, DIR_EVIDENCIA);

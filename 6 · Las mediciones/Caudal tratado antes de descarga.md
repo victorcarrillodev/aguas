@@ -20,10 +20,10 @@ estado: sin-dato
 
 ## Línea base
 
-**No disponible.** El dato no existe públicamente o está reservado.
+**No disponible en este diagnóstico.** La búsqueda y la captura están pendientes de documentar. Este estado no demuestra inexistencia ni reserva del dato.
 
 > **La ausencia también es información**
-> Que no se pueda medir el desempeño no es una falla del diagnóstico: es lo que el diagnóstico afirma. → [La raíz maestra](../1%20%C2%B7%20El%20problema/La%20ra%C3%ADz%20maestra.md)
+> Para interpretar la ausencia de información, hay que registrar las fuentes consultadas, las fechas y, si aplica, la respuesta que acredita reserva o inexistencia. → [La raíz maestra](../1%20%C2%B7%20El%20problema/La%20ra%C3%ADz%20maestra.md)
 
 ## Por qué no es una causa
 

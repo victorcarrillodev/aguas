@@ -54,7 +54,7 @@ export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar }: Pr
         import('sigma'),
       ]);
       if (cancelado || !contenedor.current) return;
-      const graph = new Graph();
+      const graph = new Graph({ multi: true, type: 'directed' });
       for (const n of nodos) {
         if (!graph.hasNode(n.id)) {
           graph.addNode(n.id, { x: n.x, y: n.y, size: n.size, label: n.titulo, color: n.color });
@@ -63,7 +63,21 @@ export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar }: Pr
       aristas.forEach((a, i) => {
         if (graph.hasNode(a.origen) && graph.hasNode(a.destino)) {
           try {
-            graph.addEdge(a.origen, a.destino, { id: `e${i}`, size: 1 });
+            graph.addEdge(a.origen, a.destino, {
+              id: `e${i}`,
+              size: a.tipo === 'causa-propuesta' ? 2 : 1,
+              label: a.etiqueta || a.tipo,
+              color:
+                a.tipo === 'evidencia'
+                  ? '#447b56'
+                  : a.tipo === 'causa-propuesta'
+                    ? '#8d669f'
+                    : '#a7b3bb',
+              type:
+                a.tipo === 'causa-propuesta' || a.tipo === 'supuesto' || a.tipo === 'evidencia'
+                  ? 'arrow'
+                  : 'line',
+            });
           } catch {
             // Arista duplicada: se ignora.
           }

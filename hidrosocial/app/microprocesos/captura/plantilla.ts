@@ -34,17 +34,29 @@ export function renderPlantilla(b: Borrador, ctx: ContextoPlantilla): string {
     ? `\n\n**Hacia abajo** — alimenta la captura de ${linkMedicion}.`
     : '';
 
-  const municipio = b.municipio ? `\nmunicipio: ${b.municipio}` : '';
+  const municipio = b.municipio ? `\nmunicipio: ${JSON.stringify(b.municipio)}` : '';
+  const trazabilidad = Object.entries({
+    nodo_id: b.nodoId || '',
+    afirmacion: b.afirmacion || '',
+    relacion: b.relacion || 'no-concluyente',
+    referencia: b.referencia || '',
+    responsable: b.responsable || '',
+    alcance: b.alcance || '',
+    estado_documental: 'pendiente',
+  })
+    .map(([k, v]) => `${k}: ${JSON.stringify(v)}`)
+    .join('\n');
 
   return `---
-titulo: ${b.titulo}
+titulo: ${JSON.stringify(b.titulo)}
 arbol: ${b.arbol}
 tipo-evidencia: ${b.tipoEvidencia}
 capa: ${b.capa}
 lente: ${lentes}
 mide: ${ctx.medicion?.titulo ?? ''}
 fecha: ${b.fecha}
-fuente: ${b.fuente}${municipio}
+fuente: ${JSON.stringify(b.fuente)}${municipio}
+${trazabilidad}
 ---
 
 # ${b.titulo}
@@ -59,12 +71,18 @@ ${b.observacion}
 
 ## La cadena
 
-**Hacia arriba** — apoya a ${linkCausa}.${haciaAbajo}
+**Afirmación examinada:** ${b.afirmacion || 'Por precisar'}
+
+**Relación declarada:** ${b.relacion || 'no-concluyente'}. La revisión documental está pendiente.${haciaAbajo}
+
+**Alcance:** ${b.alcance || 'Por documentar'}
+
+**Responsable:** ${b.responsable || 'Por registrar'}
 
 ## Fuentes
 
 | Tipo | Referencia | Fecha |
 |---|---|---|
-| ${b.tipoEvidencia} | ${b.fuente} | ${b.fecha} |
+| ${b.tipoEvidencia} | ${(b.referencia || b.fuente).replaceAll('|', '/').replace(/[\r\n]/g, ' ')} | ${b.fecha} |
 `;
 }

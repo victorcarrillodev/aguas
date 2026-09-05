@@ -1,0 +1,118 @@
+.mesa {
+  margin: 2rem 0;
+  display: grid;
+  gap: 1.25rem;
+}
+.hero {
+  background: #142f38;
+  color: #f0f5ed;
+  border-radius: 20px;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+}
+.hero p {
+  max-width: 75ch;
+  line-height: 1.7;
+}
+.hero a {
+  color: #c3edc9;
+}
+.estado {
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 1rem;
+}
+.acciones a,
+.acciones button,
+.form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: .7rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #b1c5bc;
+  background: #edf5e8;
+  color: #173e32;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+.bloque {
+  border: 1px solid var(--outline-variant);
+  border-radius: 14px;
+  padding: 1.25rem;
+  background: var(--surface-container-lowest);
+  overflow-wrap: anywhere;
+}
+.bloque summary {
+  cursor: pointer;
+  font-weight: 700;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+.bloque p,
+.bloque li {
+  line-height: 1.65;
+}
+.form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.form label {
+  display: grid;
+  gap: .45rem;
+  font-size: .9rem;
+}
+.form input,
+.form select,
+.form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: .75rem;
+  border-radius: 8px;
+  border: 1px solid var(--outline);
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: inherit;
+}
+.form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.dos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.lista {
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+.meta {
+  font-size: .85rem;
+  color: var(--on-surface-variant);
+}
+.error {
+  color: #a42624;
+}
+.cita {
+  white-space: pre-wrap;
+  border-left: 3px solid #739b80;
+  padding-left: 1rem;
+}
+@media (max-width: 640px) {
+  .dos {
+    grid-template-columns: 1fr;
+  }
+}

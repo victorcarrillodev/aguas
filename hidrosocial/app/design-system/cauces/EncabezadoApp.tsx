@@ -6,6 +6,7 @@ import styles from './EncabezadoApp.module.css';
 const ENLACES = [
   { to: '/', etiqueta: 'Panel', fin: true },
   { to: '/sistema', etiqueta: 'Sistema', fin: false },
+  { to: '/revision', etiqueta: 'Investigar', fin: false },
   { to: '/captura', etiqueta: 'Captura', fin: false },
   { to: '/grafo', etiqueta: 'Grafo', fin: false },
 ];

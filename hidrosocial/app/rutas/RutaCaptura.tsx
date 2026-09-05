@@ -1,5 +1,5 @@
 import { json, redirect } from '@remix-run/node';
-import type { ActionFunctionArgs } from '@remix-run/node';
+import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { Form, useActionData, useLoaderData } from '@remix-run/react';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -11,10 +11,11 @@ import { CampoTexto } from '~/design-system/gotas/CampoTexto';
 import { colorDeCapa } from '~/lib/colores';
 import { contextoPreview, renderPlantilla, validarBorradorParcial } from '~/lib/preview-captura';
 import type { BorradorParcial } from '~/lib/preview-captura';
-import { encodeNodo, slugificar } from '~/lib/rutas';
+import { decodeNodo, encodeNodo, slugificar } from '~/lib/rutas';
 import { CAPAS, LENTES, TIPOS_EVIDENCIA } from '~/lib/taxonomia';
 import { getVaultGraph } from '~/microprocesos/cache/index';
 import { guardarNota, validarBorrador } from '~/microprocesos/captura/index';
+import { RELACIONES } from '~/microprocesos/revision/index';
 import type { ArbolId, CapaId } from '~/microprocesos/vault-core/tipos';
 import styles from './RutaCaptura.module.css';
 
@@ -29,11 +30,12 @@ interface Datos {
   fichas: Opcion[];
   mediciones: Opcion[];
   error?: string;
+  inicial?: { nodoId: string; afirmacion: string; arbol: string; relacion: string };
 }
 
 const CLAVE_BORRADOR = 'hidrosocial-borrador';
 
-export async function loader() {
+export async function loader({ request }: LoaderFunctionArgs) {
   const g = await getVaultGraph();
   const arboles: Opcion[] = [...g.nodos.values()]
     .filter((n) => n.tipo === 'causa')
@@ -47,7 +49,21 @@ export async function loader() {
     .filter((n) => n.tipo === 'medicion')
     .map((n) => ({ valor: n.relPath, etiqueta: n.titulo, arbol: n.arbol }))
     .sort((a, b) => a.etiqueta.localeCompare(b.etiqueta, 'es', { numeric: true }));
-  return json<Datos>({ arboles, fichas, mediciones });
+  const params = new URL(request.url).searchParams;
+  let inicial: Datos['inicial'];
+  try {
+    const n = g.nodos.get(decodeNodo(params.get('nodo') || ''));
+    if (n && !n.frontmatter.registro)
+      inicial = {
+        nodoId: n.id,
+        afirmacion: n.frontmatter.enunciado || n.frontmatter.afirmacion || n.resumen,
+        arbol: n.arbol || '',
+        relacion: params.get('relacion') === 'contradice' ? 'contradice' : 'no-concluyente',
+      };
+  } catch {
+    /* Entrada libre sin una afirmación preseleccionada. */
+  }
+  return json<Datos>({ arboles, fichas, mediciones, inicial });
 }
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -74,6 +90,12 @@ interface EstadoForm {
   fuente: string;
   fecha: string;
   municipio: string;
+  nodoId: string;
+  afirmacion: string;
+  relacion: string;
+  referencia: string;
+  responsable: string;
+  alcance: string;
 }
 
 const VACIO: EstadoForm = {
@@ -88,6 +110,12 @@ const VACIO: EstadoForm = {
   fuente: '',
   fecha: '',
   municipio: '',
+  nodoId: '',
+  afirmacion: '',
+  relacion: 'no-concluyente',
+  referencia: '',
+  responsable: '',
+  alcance: '',
 };
 
 function ahoraLocal(): string {
@@ -138,13 +166,17 @@ function Anillo({ valor }: { valor: number }) {
 
 // Cuenca: captura v2 (3 bloques + preview .md en vivo + anillo + action bar).
 export default function RutaCaptura() {
-  const { arboles, fichas, mediciones } = useLoaderData<Datos>();
+  const { arboles, fichas, mediciones, inicial } = useLoaderData<Datos>();
   const accion = useActionData<{ error?: string } | undefined>();
   const [form, setForm] = useState<EstadoForm>(VACIO);
   const [guardado, setGuardado] = useState(false);
 
   // Restaura borrador + fecha por defecto (solo cliente, tras hidratar).
   useEffect(() => {
+    if (inicial) {
+      setForm({ ...VACIO, ...inicial, fecha: ahoraLocal() });
+      return;
+    }
     try {
       const raw = window.localStorage.getItem(CLAVE_BORRADOR);
       if (raw) {
@@ -156,7 +188,7 @@ export default function RutaCaptura() {
       // Sin borrador guardado.
     }
     setForm((f) => ({ ...f, fecha: ahoraLocal() }));
-  }, []);
+  }, [inicial]);
 
   const set = <K extends keyof EstadoForm>(k: K, v: EstadoForm[K]) => {
     setGuardado(false);
@@ -182,6 +214,12 @@ export default function RutaCaptura() {
       fuente: form.fuente,
       fecha: form.fecha,
       municipio: form.municipio,
+      nodoId: form.nodoId,
+      afirmacion: form.afirmacion,
+      relacion: form.relacion,
+      referencia: form.referencia,
+      responsable: form.responsable,
+      alcance: form.alcance,
     }),
     [form],
   );
@@ -222,8 +260,8 @@ export default function RutaCaptura() {
     <div className={styles.cuenca}>
       <h1 className={styles.titulo}>Estación de captura</h1>
       <p className={styles.subtitulo}>
-        El cuestionario guarda una nota `.md` válida en <code>9 · Evidencia de campo/</code> con
-        frontmatter y enlaces markdown URL-encoded, navegable en el grafo de Obsidian.
+        Registra una observación y cómo se relaciona con una afirmación. Puede apoyarla,
+        contradecirla o limitarla. Su revisión documental queda pendiente.
       </p>
       {accion?.error ? (
         <p className={styles.error} role="alert">
@@ -251,11 +289,29 @@ export default function RutaCaptura() {
               placeholder="Qué viste, dónde, en qué condiciones…"
             />
             <input type="hidden" name="enunciado" value={enunciado} />
+            <input type="hidden" name="nodoId" value={form.nodoId} />
+            <AreaTexto
+              etiqueta="Afirmación específica que se examina"
+              nombre="afirmacion"
+              requerido
+              valor={form.afirmacion}
+              alCambiar={(v) => set('afirmacion', v)}
+            />
+            <CampoSelect
+              etiqueta="Qué aporta a la afirmación"
+              nombre="relacion"
+              valor={form.relacion}
+              alCambiar={(v) => set('relacion', v)}
+              opciones={RELACIONES.map((v) => ({
+                valor: v,
+                etiqueta: v === 'no-concluyente' ? 'No permite concluir todavía' : v,
+              }))}
+            />
           </FormBloque>
 
           <FormBloque
             numero={2}
-            titulo="Conexión ontológica"
+            titulo="Qué parte del diagnóstico examina"
             descripcion="Árbol, ficha y medición relacionados; capa, lentes y tipo de evidencia."
           >
             <CampoSelect
@@ -267,6 +323,7 @@ export default function RutaCaptura() {
                 set('arbol', v);
                 set('fichaId', '');
                 set('medicionId', '');
+                set('nodoId', '');
               }}
               opciones={[
                 { valor: '', etiqueta: 'Elige árbol…' },
@@ -277,7 +334,10 @@ export default function RutaCaptura() {
               etiqueta="Ficha observada"
               nombre="fichaId"
               valor={form.fichaId}
-              alCambiar={(v) => set('fichaId', v)}
+              alCambiar={(v) => {
+                set('fichaId', v);
+                set('nodoId', v);
+              }}
               opciones={[
                 { valor: '', etiqueta: '— Sin asignar —' },
                 ...fichasFiltradas.map((f) => ({ valor: f.valor, etiqueta: f.etiqueta })),
@@ -316,7 +376,9 @@ export default function RutaCaptura() {
             </fieldset>
             <input type="hidden" name="capa" value={form.capa} />
             <fieldset className={styles.grupo}>
-              <legend className={styles.etiquetaGrupo}>Lentes (multi-select)</legend>
+              <legend className={styles.etiquetaGrupo}>
+                Dimensiones de análisis (elige una o varias)
+              </legend>
               <div className={styles.chips}>
                 {(LENTES as readonly string[]).map((l) => (
                   <button
@@ -353,12 +415,32 @@ export default function RutaCaptura() {
             descripcion="Quién reporta y cuándo."
           >
             <CampoTexto
-              etiqueta="Informante"
+              etiqueta="Fuente o informante"
               nombre="fuente"
               requerido
               valor={form.fuente}
               alCambiar={(v) => set('fuente', v)}
               placeholder="Nombre, medio o documento"
+            />
+            <CampoTexto
+              etiqueta="Referencia, folio, enlace o identificación de entrevista"
+              nombre="referencia"
+              requerido
+              valor={form.referencia}
+              alCambiar={(v) => set('referencia', v)}
+            />
+            <CampoTexto
+              etiqueta="Persona responsable del registro"
+              nombre="responsable"
+              requerido
+              valor={form.responsable}
+              alCambiar={(v) => set('responsable', v)}
+            />
+            <AreaTexto
+              etiqueta="Alcance y límites: colonia, población, periodo y condiciones"
+              nombre="alcance"
+              valor={form.alcance}
+              alCambiar={(v) => set('alcance', v)}
             />
             <label className={styles.campo}>
               <span className={styles.etiqueta}>
@@ -386,14 +468,12 @@ export default function RutaCaptura() {
         <aside className={styles.preview} aria-label="Vista previa de la nota">
           <div className={styles.terminal}>
             <div className={styles.terminalBar}>
-              <span>
-                NUEVA NOTA · 9 · Evidencia de campo/{slugificar(form.titulo) || 'evidencia'}.md
-              </span>
+              <span>VISTA PREVIA DEL REGISTRO</span>
             </div>
             <pre className={styles.terminalCuerpo}>{md}</pre>
           </div>
           <details className={styles.previewMovil}>
-            <summary>Ver nota .md</summary>
+            <summary>Ver registro</summary>
             <pre className={styles.terminalCuerpo}>{md}</pre>
           </details>
         </aside>
@@ -412,7 +492,7 @@ export default function RutaCaptura() {
               variante={completa ? 'primario' : 'secundario'}
               disabled={!completa}
             >
-              Enviar al vault
+              Guardar evidencia
             </Boton>
           </div>
         </div>

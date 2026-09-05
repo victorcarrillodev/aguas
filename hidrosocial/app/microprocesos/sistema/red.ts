@@ -142,6 +142,13 @@ export function construirRed(g: VaultGraph): RedSistema {
     contacto.set(arbol, listaArboles(nodo.frontmatter.contacto));
   }
 
+  // Derivar el inverso evita que dos listas editables den conteos contradictorios.
+  for (const arbol of causas.keys()) sostieneA.set(arbol, []);
+  for (const [origen, destinos] of dependeDe) {
+    for (const destino of destinos)
+      sostieneA.set(destino, [...(sostieneA.get(destino) ?? []), origen]);
+  }
+
   // Relaciones deduplicadas. El contacto es simétrico: se guarda una sola vez.
   const relaciones: RelacionSistema[] = [];
   const clave = new Set<string>();

@@ -33,7 +33,7 @@ estado: en-revision
 > **El problema**
 > Habitantes del AMG, conectados a la red del SIAPA, reciben un servicio discontinuo de agua.
 
-El tandeo no es una avería: es la forma en que el sistema administra un déficit que no reconoce en público. Este árbol explica de dónde sale ese déficit —la mitad del agua se pierde antes de llegar— y por qué el reparto de lo que queda no tiene calendario ni criterio.
+El tandeo no es una avería: es la forma en que el sistema administra un déficit que no reconoce en público. Este árbol explica de dónde sale ese déficit —el documento propone un rango de pérdidas de 36.8–50 %, pendiente de contrastar— y por qué el reparto de lo que queda no tiene calendario ni criterio.
 
 ---
 
@@ -112,7 +112,7 @@ Estos son **efectos**. Viajan hacia arriba y alimentan otros árboles. No se int
 - **[Pérdidas físicas de la red](../6%20%C2%B7%20Las%20mediciones/P%C3%A9rdidas%20f%C3%ADsicas%20de%20la%20red.md)** — % de pérdidas físicas (agua no contabilizada)
 - **[Sectorización y reposición de red](../6%20%C2%B7%20Las%20mediciones/Sectorizaci%C3%B3n%20y%20reposici%C3%B3n%20de%20red.md)** — % de red sectorizada; tasa de reposición contra tasa de deterioro
 
-Ninguna de estas mediciones tiene hoy una línea base pública. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
+Estas mediciones no tienen una línea base incorporada al diagnóstico original. Su disponibilidad pública requiere una búsqueda documentada. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
 
 ---
 

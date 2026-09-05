@@ -107,7 +107,7 @@ Estos son **efectos**. Viajan hacia arriba y alimentan otros árboles. No se int
 - **[Participación vinculante](../6%20%C2%B7%20Las%20mediciones/Participaci%C3%B3n%20vinculante.md)** — Mecanismos de participación vinculantes
 - **[Acceso a información de desempeño](../6%20%C2%B7%20Las%20mediciones/Acceso%20a%20informaci%C3%B3n%20de%20desempe%C3%B1o.md)** — Acceso público a información de desempeño
 
-Ninguna de estas mediciones tiene hoy una línea base pública. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
+Estas mediciones no tienen una línea base incorporada al diagnóstico original. Su disponibilidad pública requiere una búsqueda documentada. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
 
 ---
 

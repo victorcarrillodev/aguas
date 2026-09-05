@@ -35,6 +35,12 @@ export function parseFrontmatter(texto: string): FrontmatterParseado {
         .map((s) => s.trim().replace(/^["']|["']$/g, ''))
         .filter(Boolean)
         .join(', ');
+    } else if (valor.startsWith('"') && valor.endsWith('"')) {
+      try {
+        valor = JSON.parse(valor) as string;
+      } catch {
+        valor = valor.slice(1, -1);
+      }
     } else {
       valor = valor.replace(/^["']|["']$/g, '');
     }

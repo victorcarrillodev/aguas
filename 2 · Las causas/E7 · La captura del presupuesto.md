@@ -111,7 +111,7 @@ Estos son **efectos**. Viajan hacia arriba y alimentan otros árboles. No se int
 - **[Nómina de unidades de apoyo](../6%20%C2%B7%20Las%20mediciones/N%C3%B3mina%20de%20unidades%20de%20apoyo.md)** — Nómina de unidades de apoyo / presupuesto operativo (%)
 - **[Contratos por adjudicación directa](../6%20%C2%B7%20Las%20mediciones/Contratos%20por%20adjudicaci%C3%B3n%20directa.md)** — Contratos por adjudicación directa / total (%)
 
-Ninguna de estas mediciones tiene hoy una línea base pública. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
+Estas mediciones no tienen una línea base incorporada al diagnóstico original. Su disponibilidad pública requiere una búsqueda documentada. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
 
 ---
 

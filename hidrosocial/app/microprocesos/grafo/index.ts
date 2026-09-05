@@ -18,6 +18,8 @@ export interface NodoRender {
 export interface AristaRender {
   origen: string;
   destino: string;
+  tipo?: string;
+  etiqueta?: string;
 }
 
 export interface GrafoRender {

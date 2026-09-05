@@ -87,7 +87,7 @@ export function ExploradorGrafo(d: DatosExplorador) {
   }, [d.grafo]);
 
   const sel = seleccionado ? porId.get(seleccionado) : undefined;
-  const vecinosSel = (seleccionado ? (adyacencia.get(seleccionado) ?? []) : [])
+  const vecinosSel = [...new Set(seleccionado ? (adyacencia.get(seleccionado) ?? []) : [])]
     .map((id) => porId.get(id))
     .filter((n): n is NonNullable<typeof n> => Boolean(n))
     .sort((a, b) => a.titulo.localeCompare(b.titulo, 'es'));
@@ -198,6 +198,27 @@ export function ExploradorGrafo(d: DatosExplorador) {
               <h2 className={styles.tituloNodo}>{sel.titulo}</h2>
               {d.resumenes[sel.id] ? <p className={styles.resumen}>{d.resumenes[sel.id]}</p> : null}
               <p className={styles.metricas}>{vecinosSel.length} vecinos conectados</p>
+              <details>
+                <summary>Qué significa cada conexión</summary>
+                <p>
+                  El tamaño representa conexiones, no gravedad. Una referencia entre notas no
+                  demuestra causalidad.
+                </p>
+                <ul>
+                  {d.grafo.aristas
+                    .filter((a) => a.origen === sel.id || a.destino === sel.id)
+                    .map((a) => (
+                      <li key={`${a.origen}-${a.destino}-${a.tipo}`}>
+                        <strong>{a.tipo || 'enlace'}</strong>: {porId.get(a.origen)?.titulo} →{' '}
+                        {porId.get(a.destino)?.titulo}.{' '}
+                        {a.etiqueta ||
+                          (a.tipo === 'jerarquia'
+                            ? 'Agrupación por árbol; no indica una causa directa.'
+                            : 'Referencia documental; consultar el contenido.')}
+                      </li>
+                    ))}
+                </ul>
+              </details>
               <h3 className={styles.subtitulo}>Vecinos ({vecinosSel.length})</h3>
               {vecinosSel.length === 0 ? (
                 <p className={styles.ayuda}>Sin vecinos en el grafo.</p>

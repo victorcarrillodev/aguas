@@ -16,7 +16,15 @@ export type VaultNodeType =
 export interface VaultEdge {
   origen: string; // id del nodo (relPath)
   destino: string; // id del nodo
-  tipo: 'enlace' | 'canvas' | 'jerarquia';
+  tipo:
+    | 'enlace'
+    | 'canvas'
+    | 'jerarquia'
+    | 'causa-propuesta'
+    | 'supuesto'
+    | 'bisagra'
+    | 'evidencia'
+    | 'revision';
   etiqueta?: string;
 }
 

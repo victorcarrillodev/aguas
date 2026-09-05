@@ -10,7 +10,7 @@ import type { RedSistema, ResultadoSimulacion } from './tipos';
  * la corrección se deshará — que es exactamente lo que afirma el diagnóstico.
  */
 export function simular(red: RedSistema, seleccion: Iterable<ArbolId>): ResultadoSimulacion {
-  const resueltos = [...new Set(seleccion)].sort(ordenArbol);
+  const resueltos = [...new Set(seleccion)].filter((id) => red.porArbol.has(id)).sort(ordenArbol);
   const conjunto = new Set(resueltos);
 
   const sostenibles: ArbolId[] = [];
@@ -42,21 +42,21 @@ function veredictoDe(
   fragiles: { arbol: ArbolId; falta: ArbolId[] }[],
 ): string {
   if (resueltos.length === 0) {
-    return 'Elige las causas que quieres resolver. El sistema calculará cuáles de esas correcciones se sostienen y cuáles se desharán.';
+    return 'Selecciona causas para explorar los supuestos registrados en el diagnóstico.';
   }
   if (sostenibles.length === 0) {
     const faltantes = new Set<ArbolId>();
     for (const f of fragiles) for (const x of f.falta) faltantes.add(x);
     const lista = [...faltantes].sort(ordenArbol).join(', ');
-    return `Ninguna de las ${resueltos.length} correcciones se sostiene. Todas dependen de algo que sigue sin resolverse: ${lista}.`;
+    return `Las ${resueltos.length} causas seleccionadas tienen supuestos fuera de la selección: ${lista}. Revisa la evidencia de estas relaciones.`;
   }
   if (sostenibles.length === red.arboles.length) {
-    return 'El sistema completo queda corregido de forma sostenible. Nótese el orden que hizo falta: la raíz primero.';
+    return 'La selección incluye todos los supuestos registrados. Esto no demuestra efectividad ni sostenibilidad y no establece un orden de intervención.';
   }
   if (fragiles.length === 0) {
-    return `Las ${sostenibles.length} correcciones se sostienen: cada una tiene resuelto todo aquello de lo que depende.`;
+    return `Las ${sostenibles.length} causas incluyen sus supuestos registrados. Su efectividad requiere contrastarse con evidencia.`;
   }
-  return `${sostenibles.length} de ${resueltos.length} correcciones se sostienen. Las otras ${fragiles.length} se desharán mientras no se resuelva lo que las condiciona.`;
+  return `${sostenibles.length} de ${resueltos.length} causas incluyen sus supuestos; ${fragiles.length} dejan condiciones fuera de la selección. No es una predicción de resultados.`;
 }
 
 /**

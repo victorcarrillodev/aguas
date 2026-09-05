@@ -182,6 +182,46 @@ export async function parseVault(vaultPath: string): Promise<VaultGraph> {
     }
   }
 
+  // Relaciones semánticas explícitas; la jerarquía anterior conserva la agrupación por árbol.
+  const porCodigo = new Map(
+    [...nodos.values()].filter((n) => n.frontmatter.id).map((n) => [n.frontmatter.id, n.id]),
+  );
+  for (const n of nodos.values()) {
+    const padre = porCodigo.get(n.frontmatter.padre);
+    if (padre)
+      agregar({
+        origen: n.id,
+        destino: padre,
+        tipo: 'causa-propuesta',
+        etiqueta: n.frontmatter.produce || 'Mecanismo por documentar',
+      });
+    for (const [clave, tipo] of [
+      ['depende_de', 'supuesto'],
+      ['bisagra_hacia', 'bisagra'],
+    ] as const) {
+      for (const codigo of (n.frontmatter[clave] || '').split(',').map((v) => v.trim())) {
+        const destino = porCodigo.get(codigo);
+        if (destino)
+          agregar({
+            origen: n.id,
+            destino,
+            tipo,
+            etiqueta:
+              tipo === 'supuesto'
+                ? 'Declara un supuesto externo; en revisión'
+                : 'Contacto entre árboles; dirección causal pendiente',
+          });
+      }
+    }
+    const destino = n.frontmatter.nodo_id;
+    if (destino && nodos.has(destino))
+      agregar({
+        origen: n.id,
+        destino,
+        tipo: n.frontmatter.registro ? 'revision' : 'evidencia',
+        etiqueta: n.frontmatter.registro || n.frontmatter.relacion || 'Relación pendiente',
+      });
+  }
   return { nodos, aristas, escaneadoEn: Date.now() };
 }
 

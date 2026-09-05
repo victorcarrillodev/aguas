@@ -1,16 +1,20 @@
 # Hidrosocial
 
-Lector aumentado del vault de Obsidian con el diagnóstico hidrosanitario del AMG
-(160 notas `.md`, 11 `.canvas`). Cuatro vistas: **dashboard**, **sistema**,
-**estación de captura** y **explorador del grafo**.
+Lector aumentado del vault de Obsidian con el diagnóstico hidrosanitario del AMG.
+Cinco vistas: **panel**, **sistema**, **mesa de investigación**, **estación de captura**
+y **explorador del grafo**.
 
-La vista **sistema** (`/sistema`) es la que explica el diagnóstico en lugar de solo
-contarlo: deriva del frontmatter la red de dependencias entre las diez causas
-estructurales, identifica la raíz —la única causa de la que dependen otras y que no
-depende de ninguna— y permite **simular correcciones**. La regla del simulador es la
-tesis del diagnóstico hecha código: una causa resuelta solo se sostiene si también está
-resuelto todo aquello de lo que depende. Marcar las nueve causas dejando la raíz sin
-resolver da cero correcciones sostenibles.
+La mesa de investigación (`/revision`) trata el diagnóstico como documento de trabajo:
+cada causa, ficha e indicador abre un expediente que conserva el texto original, muestra
+su correspondencia con el Excel, admite evidencia favorable, contradictoria, matizada o
+no concluyente y registra propuestas y decisiones como entradas separadas. La pregunta
+«¿Y si estamos equivocados?» propone contrapruebas sin presentarlas como hallazgos.
+
+La vista **sistema** (`/sistema`) deriva del frontmatter la red de dependencias entre las
+diez causas estructurales. Su explorador muestra cuáles supuestos quedan dentro o fuera
+de una selección. No predice resultados, sostenibilidad ni un orden de intervención. E8
+aparece como base de esa red; la raíz maestra del planteamiento completo conserva sus dos
+componentes: medición verificable y fiscalización.
 
 ## Mapeo Gota / Corriente / Cauce / Cuenca
 
@@ -50,7 +54,7 @@ bun run build && bun run start   # producción local
 docker compose up --build        # vault montado en /vault, puerto 3000
 ```
 
-Rutas: `/` dashboard · `/sistema` · `/captura` · `/grafo` · `/grafo/:nodeId` ·
+Rutas: `/` panel · `/sistema` · `/revision` · `/captura` · `/grafo` · `/grafo/:nodeId` ·
 `/nodo/:slug` · `/healthcheck`.
 
 ## Microprocesos

@@ -112,7 +112,7 @@ Estos son **efectos**. Viajan hacia arriba y alimentan otros árboles. No se int
 - **[Reúso efectivo](../6%20%C2%B7%20Las%20mediciones/Re%C3%BAso%20efectivo.md)** — % de reúso efectivo
 - **[Cumplimiento de norma de descarga](../6%20%C2%B7%20Las%20mediciones/Cumplimiento%20de%20norma%20de%20descarga.md)** — Cumplimiento de la norma de descarga; carga removida
 
-Ninguna de estas mediciones tiene hoy una línea base pública. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
+Estas mediciones no tienen una línea base incorporada al diagnóstico original. Su disponibilidad pública requiere una búsqueda documentada. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
 
 ---
 

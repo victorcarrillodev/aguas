@@ -108,7 +108,7 @@ Estos son **efectos**. Viajan hacia arriba y alimentan otros árboles. No se int
 - **[Auditorías con sanción efectiva](../6%20%C2%B7%20Las%20mediciones/Auditor%C3%ADas%20con%20sanci%C3%B3n%20efectiva.md)** — Auditorías con seguimiento y sanción efectiva
 - **[Regulador externo con sanción](../6%20%C2%B7%20Las%20mediciones/Regulador%20externo%20con%20sanci%C3%B3n.md)** — Existencia de un regulador externo con facultad sancionatoria
 
-Ninguna de estas mediciones tiene hoy una línea base pública. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
+Estas mediciones no tienen una línea base incorporada al diagnóstico original. Su disponibilidad pública requiere una búsqueda documentada. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
 
 ---
 

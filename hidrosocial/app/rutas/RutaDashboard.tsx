@@ -10,7 +10,7 @@ import { Tarjeta } from '~/design-system/gotas/Tarjeta';
 import { colorDeCapa } from '~/lib/colores';
 import { encodeNodo } from '~/lib/rutas';
 import { getVaultGraph } from '~/microprocesos/cache/index';
-import { calcularMetricas, criticidadDe } from '~/microprocesos/dashboard/index';
+import { calcularMetricas } from '~/microprocesos/dashboard/index';
 import type { MetricasDashboard } from '~/microprocesos/dashboard/index';
 import styles from './RutaDashboard.module.css';
 
@@ -21,12 +21,6 @@ export async function loader() {
 }
 
 const CAPAS = ['C0', 'C1', 'C2', 'C3', 'C4'] as const;
-
-function colorCriticidad(c: 'alta' | 'media' | 'baja'): string {
-  if (c === 'alta') return 'var(--error)';
-  if (c === 'media') return 'var(--primary)';
-  return 'var(--outline)';
-}
 
 // Cuenca: dashboard v2 (hero + 6 KPI tiles + causas filtrables + evidencias + brecha).
 export default function RutaDashboard() {
@@ -53,11 +47,12 @@ export default function RutaDashboard() {
           <h1 className={styles.titulo}>Diagnóstico hidrosanitario del AMG</h1>
           <p className={styles.subtitulo}>
             {m.totalNotas} notas del vault · {m.evidencias.length} evidencias de campo ·{' '}
-            {m.porTipo.causa} causas raíz
+            {m.porTipo.causa} causas estructurales · documento en revisión
           </p>
         </div>
         <div className={styles.acciones}>
           <Boton to="/sistema">Ver el sistema</Boton>
+          <Boton to="/revision">Investigar y contrastar</Boton>
           <Boton to="/captura" variante="secundario">
             Nueva evidencia
           </Boton>
@@ -71,7 +66,7 @@ export default function RutaDashboard() {
         items={[
           {
             valor: m.porTipo.causa,
-            etiqueta: 'Causas raíz',
+            etiqueta: 'Causas estructurales',
             acento: colorDeCapa('C1'),
             icono: 'account_tree',
           },
@@ -105,7 +100,14 @@ export default function RutaDashboard() {
       />
 
       <div className={styles.columnas}>
-        <Tarjeta titulo="Causas raíz">
+        <Tarjeta titulo="Causas estructurales en revisión">
+          <p>
+            El modelo propone un servicio deficiente, inequitativo e insostenible para habitantes
+            del AMG, cuenca y erario.{' '}
+            <Link to="/revision">
+              Comprende el problema, examina su evidencia y registra una revisión.
+            </Link>
+          </p>
           <div className={styles.filtros}>
             <input
               type="search"
@@ -144,13 +146,11 @@ export default function RutaDashboard() {
             </fieldset>
           </div>
           <TablaMini
-            columnas={['Causa', 'Capa', 'Peso en el sistema', 'Fichas']}
+            columnas={['Causa', 'Capa', 'Referencias como supuesto', 'Fichas']}
             filas={causas.map((c) => {
-              const crit = criticidadDe(c.sostieneA);
               return [
                 <Link key={c.id} to={`/nodo/${encodeNodo(c.id)}`}>
                   {c.titulo}
-                  {c.esRaiz ? <span className={styles.raiz}> raíz</span> : null}
                 </Link>,
                 <Chip key={`${c.id}-c`} color={colorDeCapa(c.capa)}>
                   {c.capa}
@@ -158,13 +158,12 @@ export default function RutaDashboard() {
                 <span
                   key={`${c.id}-crit`}
                   className={styles.criticidad}
-                  style={{ color: colorCriticidad(crit) }}
                   title={`${c.sostieneA} causas dependen de ésta; ella depende de ${c.dependeDe}`}
                 >
-                  ● {crit}
+                  {c.sostieneA} referencias
                   <span className={styles.criticidadSub}>
                     {c.sostieneA === 0
-                      ? 'nadie depende de ella'
+                      ? 'sin referencias registradas'
                       : `${c.sostieneA} depende${c.sostieneA === 1 ? '' : 'n'} de ella`}
                   </span>
                 </span>,
@@ -211,7 +210,8 @@ export default function RutaDashboard() {
               <div className={styles.relleno} style={{ width: `${brechaPct}%` }} />
             </div>
             <p className={styles.vacio}>
-              <Link to="/captura">Capturar evidencia</Link> para cerrar la brecha.
+              <Link to="/revision">Documentar la búsqueda y el dato</Link>. Una casilla pendiente no
+              demuestra inexistencia de información ni se completa solo al agregar evidencia.
             </p>
           </Tarjeta>
         </div>

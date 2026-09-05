@@ -113,7 +113,7 @@ También lo produce [el problema central](../1%20%C2%B7%20El%20problema/El%20pro
 - **[Cobertura del monitoreo de calidad](../6%20%C2%B7%20Las%20mediciones/Cobertura%20del%20monitoreo%20de%20calidad.md)** — Cobertura territorial del monitoreo de calidad
 - **[Continuidad de cloro residual](../6%20%C2%B7%20Las%20mediciones/Continuidad%20de%20cloro%20residual.md)** — Continuidad de cloro residual en red
 
-Ninguna de estas mediciones tiene hoy una línea base pública. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
+Estas mediciones no tienen una línea base incorporada al diagnóstico original. Su disponibilidad pública requiere una búsqueda documentada. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
 
 ---
 

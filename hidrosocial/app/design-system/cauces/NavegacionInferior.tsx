@@ -5,6 +5,7 @@ import styles from './NavegacionInferior.module.css';
 const ENLACES = [
   { to: '/', etiqueta: 'Panel', icono: 'dashboard', fin: true },
   { to: '/sistema', etiqueta: 'Sistema', icono: 'account_tree', fin: false },
+  { to: '/revision', etiqueta: 'Investigar', icono: 'science', fin: false },
   { to: '/captura', etiqueta: 'Captura', icono: 'add_circle', fin: false },
   { to: '/grafo', etiqueta: 'Grafo', icono: 'hub', fin: false },
 ];

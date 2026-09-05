@@ -111,7 +111,7 @@ También lo produce [E6 · El mercado negro](./E6%20%C2%B7%20El%20mercado%20negr
 - **[Cobertura de micromedición](../6%20%C2%B7%20Las%20mediciones/Cobertura%20de%20micromedici%C3%B3n.md)** — Cobertura de micromedición
 - **[Tarifa contra costo de largo plazo](../6%20%C2%B7%20Las%20mediciones/Tarifa%20contra%20costo%20de%20largo%20plazo.md)** — Relación tarifa / costo marginal de largo plazo; % de subsidio que llega al decil I–III
 
-Ninguna de estas mediciones tiene hoy una línea base pública. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
+Estas mediciones no tienen una línea base incorporada al diagnóstico original. Su disponibilidad pública requiere una búsqueda documentada. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
 
 ---
 

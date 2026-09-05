@@ -18,6 +18,7 @@ export default defineConfig({
         return defineRoutes((route) => {
           route('/', 'rutas/RutaDashboard.tsx', { index: true });
           route('/sistema', 'rutas/RutaSistema.tsx');
+          route('/revision', 'rutas/RutaRevision.tsx');
           route('/captura', 'rutas/RutaCaptura.tsx');
           route('/grafo', 'rutas/RutaGrafo.tsx');
           route('/grafo/:nodeId', 'rutas/RutaGrafoNodo.tsx');

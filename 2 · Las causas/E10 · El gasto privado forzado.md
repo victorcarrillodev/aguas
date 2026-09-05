@@ -113,7 +113,7 @@ También lo produce [E3 · La tarifa](./E3%20%C2%B7%20La%20tarifa.md), [el probl
 - **[Servicio público contra mercado privado](../6%20%C2%B7%20Las%20mediciones/Servicio%20p%C3%BAblico%20contra%20mercado%20privado.md)** — Cobertura del servicio público contra mercado privado
 - **[Hogares con doble y triple factura](../6%20%C2%B7%20Las%20mediciones/Hogares%20con%20doble%20y%20triple%20factura.md)** — Hogares con doble y triple facturación
 
-Ninguna de estas mediciones tiene hoy una línea base pública. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
+Estas mediciones no tienen una línea base incorporada al diagnóstico original. Su disponibilidad pública requiere una búsqueda documentada. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
 
 ---
 

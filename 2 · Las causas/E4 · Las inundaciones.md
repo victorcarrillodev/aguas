@@ -109,7 +109,7 @@ Estos son **efectos**. Viajan hacia arriba y alimentan otros árboles. No se int
 - **[Red separada contra combinada](../6%20%C2%B7%20Las%20mediciones/Red%20separada%20contra%20combinada.md)** — % de red separada contra combinada
 - **[Descargas industriales vigiladas](../6%20%C2%B7%20Las%20mediciones/Descargas%20industriales%20vigiladas.md)** — Descargas industriales vigiladas; factibilidades con dictamen pluvial
 
-Ninguna de estas mediciones tiene hoy una línea base pública. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
+Estas mediciones no tienen una línea base incorporada al diagnóstico original. Su disponibilidad pública requiere una búsqueda documentada. → [Las mediciones](../6%20%C2%B7%20Las%20mediciones/Las%20mediciones.md)
 
 ---
 

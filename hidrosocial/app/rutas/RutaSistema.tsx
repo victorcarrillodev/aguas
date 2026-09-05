@@ -138,11 +138,11 @@ export default function RutaSistema() {
     <div className={styles.cuenca}>
       <header className={styles.hero}>
         <p className={styles.antetitulo}>Lógica del modelo</p>
-        <h1 className={styles.titulo}>Por qué el sistema no se corrige solo</h1>
+        <h1 className={styles.titulo}>Qué supone cada explicación</h1>
         <p className={styles.entrada}>
           Las diez causas estructurales no son independientes: cada una declara de qué otras
-          depende. Todo lo que sigue se calcula con esas relaciones tal como están escritas en el
-          vault — nada está puesto a mano.
+          depende. Las relaciones son propuestas del diagnóstico en revisión. Este explorador
+          comprueba su inclusión en una selección; no predice resultados ni sostenibilidad.
         </p>
       </header>
 
@@ -169,7 +169,7 @@ export default function RutaSistema() {
         />
         <Metrica
           valor={raiz ? raiz.arbol : '—'}
-          etiqueta="Única raíz del sistema"
+          etiqueta="Sin supuestos externos registrados"
           acento="var(--error)"
           icono="warning"
           sub={raiz ? `${raiz.sostieneA.length} árboles dependen de ella` : undefined}
@@ -187,12 +187,13 @@ export default function RutaSistema() {
                 {raiz.arbol} · {raiz.resumen}
               </h2>
               <p className={styles.raizTexto}>
-                Es el único árbol que <strong>no depende de ningún otro</strong>, y{' '}
+                Este árbol no tiene supuestos externos registrados en esta red. Otros{' '}
                 <strong>
                   {raiz.sostieneA.length} de {datos.arboles.length}
                 </strong>{' '}
-                lo declaran como supuesto. Todo el sistema se apoya en él y él no se apoya en nada:
-                ésa es la firma estructural de una raíz.
+                lo declaran como supuesto. Esto describe el modelo actual, no prueba independencia
+                causal. La raíz maestra propuesta tiene dos componentes: medición verificable y
+                fiscalización. E8 desarrolla el segundo.
               </p>
               <Link to={`/nodo/${raiz.slug}`} className={styles.raizEnlace}>
                 Leer la causa completa
@@ -206,18 +207,18 @@ export default function RutaSistema() {
       <Tarjeta>
         <div className={styles.simCabecera}>
           <div>
-            <h2 className={styles.h2}>Simulador de correcciones</h2>
+            <h2 className={styles.h2}>Explorador de supuestos</h2>
             <p className={styles.ayuda}>
-              Marca las causas que quieres dar por resueltas. Una corrección solo{' '}
-              <strong>se sostiene</strong> si también está resuelto todo aquello de lo que depende.
+              Selecciona causas para ver qué condiciones del modelo quedan incluidas y cuáles quedan
+              fuera. Examina su evidencia antes de formular una intervención.
             </p>
           </div>
           <div className={styles.simAcciones}>
             <Boton variante="secundario" onClick={() => setResueltos(todosMenosRaiz)}>
-              Todo menos la raíz
+              Todas salvo E8
             </Boton>
             <Boton variante="secundario" onClick={() => setResueltos(ordenRaiz)}>
-              Empezar por la raíz
+              Supuestos de E10
             </Boton>
             <Boton variante="secundario" onClick={() => setResueltos([])}>
               Limpiar
@@ -229,7 +230,7 @@ export default function RutaSistema() {
           <div className={styles.marcadorNumeros}>
             <span className={styles.marcadorGrande}>{sim.sostenibles.length}</span>
             <span className={styles.marcadorDe}>de {datos.arboles.length}</span>
-            <span className={styles.marcadorEtiqueta}>correcciones sostenibles</span>
+            <span className={styles.marcadorEtiqueta}>causas con sus supuestos incluidos</span>
           </div>
           <div
             className={styles.barra}
@@ -238,7 +239,7 @@ export default function RutaSistema() {
             aria-valuenow={sim.cobertura}
             aria-valuemin={0}
             aria-valuemax={100}
-            aria-label="Cobertura sostenible"
+            aria-label="Causas con supuestos incluidos en la selección"
           >
             <span className={styles.barraRelleno} style={{ width: `${sim.cobertura}%` }} />
           </div>
@@ -339,7 +340,7 @@ export default function RutaSistema() {
                   </text>
                   {a.esRaiz ? (
                     <text x={CAJA_W - 14} y="25" className={styles.raizTag} textAnchor="end">
-                      raíz
+                      base
                     </text>
                   ) : null}
                   <text
@@ -355,9 +356,9 @@ export default function RutaSistema() {
           </svg>
           <p className={styles.leyenda}>
             Las flechas apuntan hacia abajo, de cada causa al supuesto del que depende. Clic para
-            marcar como resuelta: <span className={styles.puntoSostenible} aria-hidden="true" /> se
-            sostiene · <span className={styles.puntoFragil} aria-hidden="true" /> se deshará. La
-            franja de color es la capa dominante.
+            incluir: <span className={styles.puntoSostenible} aria-hidden="true" /> supuestos
+            incluidos · <span className={styles.puntoFragil} aria-hidden="true" /> supuestos fuera.
+            La franja de color es la capa dominante.
           </p>
         </div>
 
@@ -365,7 +366,7 @@ export default function RutaSistema() {
           <ul className={styles.fragiles}>
             {sim.fragiles.map((f) => (
               <li key={f.arbol}>
-                <strong>{f.arbol}</strong> se deshará: falta resolver {f.falta.join(', ')}.
+                <strong>{f.arbol}</strong> deja fuera los supuestos {f.falta.join(', ')}.
               </li>
             ))}
           </ul>
@@ -381,9 +382,9 @@ export default function RutaSistema() {
                 <th scope="col">Causa</th>
                 <th scope="col">Capa</th>
                 <th scope="col">Depende de</th>
-                <th scope="col">Sostiene a</th>
+                <th scope="col">Es supuesto de</th>
                 <th scope="col" className={styles.num}>
-                  Requiere antes
+                  Supuestos transitivos
                 </th>
                 <th scope="col">Brecha ● ≠ ◆</th>
                 <th scope="col" className={styles.num}>
@@ -405,7 +406,7 @@ export default function RutaSistema() {
                       <Link to={`/nodo/${a.slug}`}>
                         {a.arbol} · {a.resumen}
                       </Link>
-                      {a.esRaiz ? <span className={styles.badgeRaiz}>raíz</span> : null}
+                      {a.esRaiz ? <span className={styles.badgeRaiz}>base de esta red</span> : null}
                     </th>
                     <td>
                       <Chip color={colorDeCapa(a.capa)}>{a.capa}</Chip>
@@ -429,8 +430,8 @@ export default function RutaSistema() {
           </table>
         </div>
         <p className={styles.nota}>
-          <strong>Requiere antes</strong> es el número de causas que hay que resolver para que la
-          corrección de esa causa se sostenga. Un 0 significa que no depende de nadie.
+          <strong>Supuestos transitivos</strong> incluye las dependencias de otras dependencias. Un
+          0 significa que no se registraron supuestos externos; no demuestra independencia.
         </p>
       </Tarjeta>
 
@@ -447,7 +448,7 @@ export default function RutaSistema() {
               <dd>{enfocado.naturaleza}</dd>
             </div>
             <div>
-              <dt>La causa</dt>
+              <dt>Generación atribuida</dt>
               <dd>{enfocado.genera.join(', ') || '—'}</dd>
             </div>
             <div>

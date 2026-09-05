@@ -17,6 +17,12 @@ export interface BorradorParcial {
   fuente?: string;
   fecha?: string;
   municipio?: string;
+  nodoId?: string;
+  afirmacion?: string;
+  relacion?: string;
+  referencia?: string;
+  responsable?: string;
+  alcance?: string;
 }
 
 export interface OpcionContexto {
@@ -32,6 +38,10 @@ const REQUERIDOS: (keyof BorradorParcial)[] = [
   'tipoEvidencia',
   'fecha',
   'fuente',
+  'afirmacion',
+  'referencia',
+  'responsable',
+  'lentes',
 ];
 
 function hoy(): string {
@@ -61,7 +71,7 @@ export function validarBorradorParcial(p: BorradorParcial): {
     titulo: p.titulo?.trim() || 'Sin título',
     enunciado: enunciadoDe(observacion),
     observacion: observacion || '…',
-    arbol: /^E(1[0-9]|[1-9])$/.test((p.arbol ?? '').toUpperCase())
+    arbol: /^E(10|[1-9])$/.test((p.arbol ?? '').toUpperCase())
       ? (p.arbol as Borrador['arbol'])
       : 'E1',
     capa: /^C[0-4]$/.test((p.capa ?? '').toUpperCase()) ? (p.capa as Borrador['capa']) : 'C0',
@@ -70,6 +80,12 @@ export function validarBorradorParcial(p: BorradorParcial): {
     tipoEvidencia: p.tipoEvidencia?.trim().toLowerCase() || 'observacion',
     fuente: p.fuente?.trim() || '…',
     fecha: p.fecha?.slice(0, 10) || hoy(),
+    nodoId: p.nodoId,
+    afirmacion: p.afirmacion,
+    relacion: p.relacion || 'no-concluyente',
+    referencia: p.referencia,
+    responsable: p.responsable,
+    alcance: p.alcance,
   };
   if (p.fichaId) borrador.fichaId = p.fichaId;
   if (p.medicionId) borrador.medicionId = p.medicionId;

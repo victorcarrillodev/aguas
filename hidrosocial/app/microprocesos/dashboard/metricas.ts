@@ -1,3 +1,4 @@
+import { esEvidencia, estadoDato, registrosDe } from '../revision/index';
 import { construirRed } from '../sistema/index';
 import type { ArbolId, CapaId, VaultGraph, VaultNode, VaultNodeType } from '../vault-core/tipos';
 import type { EvidenciaReciente, MetricasDashboard } from './index';
@@ -58,7 +59,7 @@ export function calcularMetricas(g: VaultGraph): MetricasDashboard {
 
   let medicionesSinLineaBase = 0;
   for (const n of g.nodos.values()) {
-    if (n.tipo === 'medicion' && n.lineaBaseDisponible === false) {
+    if (n.tipo === 'medicion' && estadoDato(n, registrosDe(g, n.id)) !== 'incorporado') {
       medicionesSinLineaBase += 1;
     }
   }
@@ -96,7 +97,7 @@ export function calcularMetricas(g: VaultGraph): MetricasDashboard {
     .sort((a, b) => b.sostieneA - a.sostieneA || a.titulo.localeCompare(b.titulo, 'es'));
 
   const evidencias: EvidenciaReciente[] = [...g.nodos.values()]
-    .filter((n) => n.tipo === 'evidencia')
+    .filter(esEvidencia)
     .map((n) => ({ relPath: n.relPath, titulo: n.titulo, fecha: extraerFecha(n) }))
     .sort((a, b) => b.fecha.localeCompare(a.fecha) || b.relPath.localeCompare(a.relPath));
 

@@ -1,5 +1,6 @@
 import { ARBOLES, CAPAS, LENTES, TIPOS_EVIDENCIA } from '~/lib/taxonomia';
 import type { ArbolId, CapaId } from '~/microprocesos/vault-core/tipos';
+import { RELACIONES } from '../revision/index';
 
 export interface Borrador {
   titulo: string; // requerido, no vacío
@@ -16,6 +17,12 @@ export interface Borrador {
   fuente: string; // requerido (informante)
   fecha: string; // ISO yyyy-mm-dd
   municipio?: string;
+  nodoId?: string;
+  afirmacion?: string;
+  relacion?: string;
+  referencia?: string;
+  responsable?: string;
+  alcance?: string;
 }
 
 function campo(fd: FormData, nombre: string): string {
@@ -47,6 +54,9 @@ export function validarBorrador(fd: FormData): Borrador {
   const fuente = campo(fd, 'fuente');
   const fecha = normalizarFecha(campo(fd, 'fecha'));
   const municipio = campo(fd, 'municipio');
+  const relacion = campo(fd, 'relacion') || 'no-concluyente';
+  if (!(RELACIONES as readonly string[]).includes(relacion))
+    throw new Error('Relación con la afirmación inválida.');
 
   if (!titulo) throw new Error('Falta el título de la evidencia.');
   if (!enunciado) throw new Error('Falta el enunciado (una frase).');
@@ -69,6 +79,9 @@ export function validarBorrador(fd: FormData): Borrador {
   if (!fecha) {
     throw new Error('Fecha inválida: usa el formato aaaa-mm-dd.');
   }
+  const fechaReal = new Date(`${fecha}T12:00:00Z`);
+  if (!Number.isFinite(fechaReal.getTime()) || fechaReal.toISOString().slice(0, 10) !== fecha)
+    throw new Error('La fecha no existe en el calendario.');
 
   const b: Borrador = {
     titulo,
@@ -81,7 +94,15 @@ export function validarBorrador(fd: FormData): Borrador {
     tipoEvidencia,
     fuente,
     fecha,
+    nodoId: campo(fd, 'nodoId'),
+    afirmacion: campo(fd, 'afirmacion'),
+    relacion,
+    referencia: campo(fd, 'referencia'),
+    responsable: campo(fd, 'responsable'),
+    alcance: campo(fd, 'alcance'),
   };
+  if (!b.afirmacion || !b.referencia || !b.responsable)
+    throw new Error('Completa la afirmación, la referencia y la persona responsable.');
   if (fichaId) b.fichaId = fichaId;
   if (medicionId) b.medicionId = medicionId;
   if (municipio) b.municipio = municipio;
