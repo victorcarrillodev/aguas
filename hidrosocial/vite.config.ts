@@ -6,7 +6,8 @@ export default defineConfig({
   base: '/calidad/',
   plugins: [
     remix({
-      basename: '/calidad',
+      // Debe coincidir literalmente con `base` en el servidor de desarrollo.
+      basename: '/calidad/',
       future: {
         v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
