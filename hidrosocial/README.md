@@ -16,6 +16,12 @@ de una selección. No predice resultados, sostenibilidad ni un orden de interven
 aparece como base de esa red; la raíz maestra del planteamiento completo conserva sus dos
 componentes: medición verificable y fiscalización.
 
+El grafo incluye una **radiografía del cuello de botella**. Al seleccionar una afirmación,
+aísla su corredor explicativo hasta tres relaciones y destaca los puntos muy conectados que
+todavía no tienen evidencia específica. Es una brújula para decidir qué investigar después:
+la puntuación expresa rendimiento documental potencial, no verdad, gravedad ni prioridad
+política.
+
 ## Mapeo Gota / Corriente / Cauce / Cuenca
 
 El design system (`app/design-system/`) renombra atomic design con tema hidrosocial:

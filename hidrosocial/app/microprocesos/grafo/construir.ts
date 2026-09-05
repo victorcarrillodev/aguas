@@ -22,6 +22,8 @@ export function construirGrafoRender(g: VaultGraph, filtro?: FiltroGrafo): Grafo
   const dentro = new Set(nodos.map((n) => n.id));
 
   const grado = new Map<string, number>();
+  const evidenciaPorNodo = new Map<string, number>();
+  const gradoExplicativo = new Map<string, number>();
   const aristas: AristaRender[] = [];
   const vistas = new Set<string>();
   for (const a of g.aristas) {
@@ -32,6 +34,13 @@ export function construirGrafoRender(g: VaultGraph, filtro?: FiltroGrafo): Grafo
     aristas.push({ origen: a.origen, destino: a.destino, tipo: a.tipo, etiqueta: a.etiqueta });
     grado.set(a.origen, (grado.get(a.origen) ?? 0) + 1);
     grado.set(a.destino, (grado.get(a.destino) ?? 0) + 1);
+    if (a.tipo === 'evidencia') {
+      evidenciaPorNodo.set(a.destino, (evidenciaPorNodo.get(a.destino) ?? 0) + 1);
+    }
+    if (['causa-propuesta', 'supuesto', 'bisagra'].includes(a.tipo)) {
+      gradoExplicativo.set(a.origen, (gradoExplicativo.get(a.origen) ?? 0) + 1);
+      gradoExplicativo.set(a.destino, (gradoExplicativo.get(a.destino) ?? 0) + 1);
+    }
   }
 
   const posiciones = calcularLayout(
@@ -40,6 +49,11 @@ export function construirGrafoRender(g: VaultGraph, filtro?: FiltroGrafo): Grafo
   );
   const salida: NodoRender[] = nodos.map((n) => {
     const p = posiciones.get(n.id) ?? { x: 0, y: 0 };
+    const evidencias = evidenciaPorNodo.get(n.id) ?? 0;
+    const explicativas = gradoExplicativo.get(n.id) ?? 0;
+    const requiereEvidencia = ['causa', 'ficha', 'medicion', 'problema'].includes(n.tipo);
+    const datoPendiente = n.tipo === 'medicion' && n.lineaBaseDisponible === false;
+    const cuello = requiereEvidencia && evidencias === 0 ? explicativas + (datoPendiente ? 2 : 1) : 0;
     return {
       id: n.id,
       slug: encodeNodo(n.id),
@@ -50,6 +64,13 @@ export function construirGrafoRender(g: VaultGraph, filtro?: FiltroGrafo): Grafo
       x: p.x,
       y: p.y,
       size: 4 + 2 * Math.log(1 + (grado.get(n.id) ?? 0)),
+      evidencias,
+      cuello,
+      motivoCuello: cuello
+        ? datoPendiente
+          ? 'Indicador sin línea base incorporada y conectado a la explicación.'
+          : 'Afirmación conectada al razonamiento sin evidencia específica vinculada.'
+        : undefined,
     };
   });
   return { nodos: salida, aristas };

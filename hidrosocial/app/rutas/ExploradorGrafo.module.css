@@ -14,6 +14,49 @@
   padding: var(--esp-3);
 }
 
+.modos {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  flex-wrap: wrap;
+  padding: var(--esp-2);
+  border-radius: var(--radio);
+  background: #edf4e8;
+  color: #173e32;
+}
+
+.modos button {
+  border: 1px solid #88a897;
+  border-radius: 999px;
+  padding: var(--esp-2) var(--esp-4);
+  background: white;
+  color: #173e32;
+  cursor: pointer;
+}
+
+.modoActivo {
+  background: #173e32 !important;
+  color: white !important;
+}
+
+.cuello {
+  padding: var(--esp-3);
+  border-left: 4px solid var(--error);
+  border-radius: var(--radio);
+  background: var(--error-container);
+}
+
+.cuello strong,
+.cuello p {
+  display: block;
+  margin: 0 0 var(--esp-1);
+}
+
+.leyendaCuello {
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
 .buscador {
   display: flex;
   align-items: center;

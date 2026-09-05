@@ -13,6 +13,11 @@ export interface NodoRender {
   x: number;
   y: number;
   size: number;
+  /** Evidencias enlazadas a esta afirmación concreta. */
+  evidencias: number;
+  /** Prioriza afirmaciones muy conectadas que siguen sin evidencia. */
+  cuello: number;
+  motivoCuello?: string;
 }
 
 export interface AristaRender {

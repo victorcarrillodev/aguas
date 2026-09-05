@@ -57,7 +57,7 @@ export default function RutaGrafo() {
         <h1 className={styles.titulo}>Explorador del grafo</h1>
         <p className={styles.subtitulo}>
           {datos.grafo.nodos.length} nodos · {datos.grafo.aristas.length} relaciones · clic en un
-          nodo para inspeccionarlo
+          nodo para inspeccionarlo · activa la radiografía para encontrar el cuello de botella
         </p>
       </div>
       <ExploradorGrafo {...datos} />

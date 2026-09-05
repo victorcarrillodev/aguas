@@ -11,6 +11,7 @@ interface Props {
   foco?: string;
   /** Clic en un nodo → selección en el inspector (no navega). */
   onSeleccionar?: (id: string | null) => void;
+  radiografia?: boolean;
 }
 
 interface ControlSigma {
@@ -25,7 +26,7 @@ interface ControlSigma {
  * oculta el resto (`hidden`), nodos arrastrables y toolbar flotante
  * (zoom/reset/pantalla completa).
  */
-export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar }: Props) {
+export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar, radiografia = false }: Props) {
   const marco = useRef<HTMLDivElement>(null);
   const contenedor = useRef<HTMLDivElement>(null);
   const control = useRef<ControlSigma | null>(null);
@@ -57,7 +58,14 @@ export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar }: Pr
       const graph = new Graph({ multi: true, type: 'directed' });
       for (const n of nodos) {
         if (!graph.hasNode(n.id)) {
-          graph.addNode(n.id, { x: n.x, y: n.y, size: n.size, label: n.titulo, color: n.color });
+          graph.addNode(n.id, {
+            x: n.x,
+            y: n.y,
+            size: radiografia && n.cuello ? n.size + Math.min(7, n.cuello) : n.size,
+            label: n.titulo,
+            color: radiografia && n.cuello ? '#ba1a1a' : n.color,
+            forceLabel: radiografia && n.cuello >= 3,
+          });
         }
       }
       aristas.forEach((a, i) => {
@@ -183,7 +191,7 @@ export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar }: Pr
       graphRef.current = null;
       renderer?.kill();
     };
-  }, [nodos, aristas]);
+  }, [nodos, aristas, radiografia]);
 
   // Cambios de foco: reutiliza la instancia viva (sin reconstruir sigma).
   // Solo actualiza el resaltado, refresca y anima la cámara al nodo foco.

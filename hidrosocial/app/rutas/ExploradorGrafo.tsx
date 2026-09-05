@@ -53,21 +53,42 @@ export function ExploradorGrafo(d: DatosExplorador) {
   const [tipo, setTipo] = useState<VaultNodeType | null>(d.tipoInicial ?? null);
   const [capa, setCapa] = useState<CapaId | null>(d.capaInicial ?? null);
   const [seleccionado, setSeleccionado] = useState<string | null>(d.focoInicial ?? null);
+  const [radiografia, setRadiografia] = useState(false);
 
   const porId = useMemo(() => new Map(d.grafo.nodos.map((n) => [n.id, n])), [d.grafo]);
+
+  const corredor = useMemo(() => {
+    if (!radiografia || !seleccionado) return null;
+    const tipos = new Set(['causa-propuesta', 'supuesto', 'bisagra', 'evidencia', 'revision']);
+    const vistos = new Set([seleccionado]);
+    let frontera = [seleccionado];
+    for (let profundidad = 0; profundidad < 3; profundidad++) {
+      const siguiente: string[] = [];
+      for (const actual of frontera) {
+        for (const a of d.grafo.aristas) {
+          if (!tipos.has(a.tipo ?? '')) continue;
+          const otro = a.origen === actual ? a.destino : a.destino === actual ? a.origen : null;
+          if (otro && !vistos.has(otro)) { vistos.add(otro); siguiente.push(otro); }
+        }
+      }
+      frontera = siguiente;
+    }
+    return vistos;
+  }, [d.grafo.aristas, radiografia, seleccionado]);
 
   const filtrados = useMemo(() => {
     const terms = normalizar(q.trim()).split(/\s+/).filter(Boolean);
     return d.grafo.nodos.filter((n) => {
       if (tipo && n.tipo !== tipo) return false;
       if (capa && n.capa !== capa) return false;
+      if (corredor && !corredor.has(n.id)) return false;
       if (terms.length > 0) {
         const hay = normalizar(`${n.titulo} ${n.tipo} ${n.capa ?? ''} ${n.id}`);
         if (!terms.every((t) => hay.includes(t))) return false;
       }
       return true;
     });
-  }, [d.grafo, tipo, capa, q]);
+  }, [d.grafo, tipo, capa, q, corredor]);
 
   const dentro = useMemo(() => new Set(filtrados.map((n) => n.id)), [filtrados]);
   const aristasVisibles = useMemo(
@@ -95,6 +116,22 @@ export function ExploradorGrafo(d: DatosExplorador) {
   return (
     <div className={styles.explorador}>
       <div className={styles.barra}>
+        <div className={styles.modos}>
+          <button
+            type="button"
+            className={radiografia ? styles.modoActivo : undefined}
+            onClick={() => setRadiografia((actual) => !actual)}
+          >
+            Radiografía del cuello de botella
+          </button>
+          <span className={styles.leyendaCuello}>
+            {radiografia
+              ? seleccionado
+                ? 'Muestra el corredor explicativo a tres pasos. En rojo: afirmaciones muy conectadas sin evidencia específica.'
+                : 'Selecciona una afirmación para aislar su corredor explicativo.'
+              : 'Aísla la cadena que impide sostener una conclusión y señala qué evidencia puede destrabarla.'}
+          </span>
+        </div>
         <div className={styles.buscador}>
           <span className={`material-symbols-outlined ${styles.lupa}`} aria-hidden="true">
             search
@@ -172,6 +209,7 @@ export function ExploradorGrafo(d: DatosExplorador) {
             aristas={aristasVisibles}
             foco={seleccionado ?? undefined}
             onSeleccionar={setSeleccionado}
+            radiografia={radiografia}
           />
         </div>
 
@@ -198,6 +236,13 @@ export function ExploradorGrafo(d: DatosExplorador) {
               <h2 className={styles.tituloNodo}>{sel.titulo}</h2>
               {d.resumenes[sel.id] ? <p className={styles.resumen}>{d.resumenes[sel.id]}</p> : null}
               <p className={styles.metricas}>{vecinosSel.length} vecinos conectados</p>
+              {radiografia && sel.cuello > 0 ? (
+                <div className={styles.cuello}>
+                  <strong>Cuello de botella documental · nivel {sel.cuello}</strong>
+                  <p>{sel.motivoCuello}</p>
+                  <Link to={`/captura?nodo=${encodeNodo(sel.id)}`}>Aportar la evidencia que falta</Link>
+                </div>
+              ) : null}
               <details>
                 <summary>Qué significa cada conexión</summary>
                 <p>
@@ -256,7 +301,8 @@ export function ExploradorGrafo(d: DatosExplorador) {
       </div>
 
       <output className={styles.status}>
-        {filtrados.length} nodos · {aristasVisibles.length} aristas · densidad{' '}
+        {filtrados.length} nodos · {aristasVisibles.length} relaciones
+        {radiografia ? ' · radiografía activa' : ''} · densidad{' '}
         {d.densidad.toFixed(3)} · modularidad {d.modularidad.toFixed(2)}
       </output>
     </div>

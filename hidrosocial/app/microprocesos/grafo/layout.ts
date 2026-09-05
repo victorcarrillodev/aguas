@@ -25,20 +25,28 @@ export function calcularLayout(
 ): Map<string, Posicion> {
   if (ids.length === 0) return new Map();
   try {
-    const graph = new Graph();
+    // El diagnóstico puede declarar varias relaciones entre el mismo par
+    // (jerarquía, supuesto, bisagra, evidencia). El layout debe conservarlas.
+    const graph = new Graph({ multi: true, type: 'undirected' });
     const base = circular(ids);
     for (const id of ids) {
       const p = base.get(id) as Posicion;
       graph.addNode(id, { x: p.x, y: p.y });
     }
-    for (const a of aristas) {
+    aristas.forEach((a, i) => {
       if (a.origen !== a.destino && graph.hasNode(a.origen) && graph.hasNode(a.destino)) {
-        graph.addEdge(a.origen, a.destino);
+        graph.addUndirectedEdgeWithKey(`layout-${i}`, a.origen, a.destino);
       }
-    }
+    });
     forceAtlas2.assign(graph, {
       iterations: 150,
-      settings: { ...forceAtlas2.inferSettings(graph), barnesHutOptimize: graph.order > 500 },
+      settings: {
+        ...forceAtlas2.inferSettings(graph),
+        barnesHutOptimize: graph.order > 180,
+        gravity: 0.08,
+        slowDown: 2,
+        scalingRatio: 12,
+      },
     });
     const mapa = new Map<string, Posicion>();
     for (const id of ids) {
