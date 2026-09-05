@@ -32,7 +32,7 @@ export function EncabezadoApp() {
     <header className={styles.encabezado}>
       <div className={styles.interior}>
         <Link to="/" className={styles.marca}>
-          <img src="/favicon.svg" alt="" className={styles.gota} aria-hidden="true" />
+          <img src="/calidad/favicon.svg" alt="" className={styles.gota} aria-hidden="true" />
           <span>Hidrosocial</span>
         </Link>
         <Form

@@ -16,7 +16,7 @@ import '@fontsource/jetbrains-mono/400.css';
 import 'material-symbols/outlined.css';
 
 export const links: LinksFunction = () => [
-  { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+  { rel: 'icon', href: '/calidad/favicon.svg', type: 'image/svg+xml' },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {

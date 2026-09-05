@@ -1,8 +1,10 @@
 services:
-  hidrosocial:
+  calidad:
     build: .
+    container_name: calidad-web
+    restart: unless-stopped
     ports:
-      - '3000:3000'
+      - '3005:3000'
     environment:
       VAULT_PATH: /vault
       PORT: '3000'
@@ -11,7 +13,7 @@ services:
       # la app solo escribe en "9 · Evidencia de campo/".
       - ../:/vault:rw
     healthcheck:
-      test: ['CMD', 'bun', '-e', "fetch('http://localhost:3000/healthcheck').then((r) => { if (!r.ok) process.exit(1) })"]
+      test: ['CMD', 'bun', '-e', "fetch('http://localhost:3000/calidad/healthcheck').then((r) => { if (!r.ok) process.exit(1) })"]
       interval: 30s
       timeout: 5s
       retries: 3
