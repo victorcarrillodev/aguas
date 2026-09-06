@@ -79,3 +79,9 @@ Historial de decisiones: `ARQUITECTURA.md` (v1) → `ARQUITECTURA-v2.md` →
   únicamente en `9 · Evidencia de campo/`.
 - Los enlaces generados son markdown relativos **URL-encoded** (0 wikilinks).
 - Comunicación entre microprocesos solo vía su `index.ts`.
+
+## Aportaciones y planes de contraste
+
+La captura separa observación, método, interpretación, alcance y límites, conserva el enunciado examinado y permite asociar la aportación a un plan de contraste. Cada expediente distingue recepción de aceptación documental y exporta sus notas completas y revisiones.
+
+Consulta [la revisión del método y sus límites](REVISION-METODO.md) y [la guía para investigadores](../7%20%C2%B7%20El%20m%C3%A9todo/C%C3%B3mo%20aportar%20y%20revisar%20evidencia.md). La autoría es declarada: esta versión no incorpora cuentas, permisos de revisión ni carga automática de documentos externos.

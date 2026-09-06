@@ -7,10 +7,11 @@ import { MesaNodo } from '~/design-system/cauces/MesaNodo';
 import { Chip } from '~/design-system/gotas/Chip';
 import { colorDeNodo } from '~/lib/colores';
 import { decodeNodo, encodeNodo, unirPosix } from '~/lib/rutas';
-import { getVaultGraph, getVaultPath } from '~/microprocesos/cache/index';
+import { exportarExpediente, getVaultGraph, getVaultPath } from '~/microprocesos/cache/index';
 import { guardarRegistro } from '~/microprocesos/captura/registro.server';
 import {
   estadoDato,
+  estadoDocumental,
   estadoRevision,
   origenDe,
   registrosDe,
@@ -41,6 +42,10 @@ interface Datos {
   dato: string;
   origen: string;
   relaciones: ReturnType<typeof relacionesDe>;
+  exportacion: string;
+  documentales: Record<string, string>;
+  recibido: boolean;
+  objetivo?: { id: string; titulo: string };
 }
 
 export async function action({ request, params }: ActionFunctionArgs) {
@@ -52,13 +57,15 @@ export async function action({ request, params }: ActionFunctionArgs) {
   }
 }
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ params, request }: LoaderFunctionArgs) {
   let relPath: string;
   try {
     relPath = decodeNodo(params.slug ?? '');
   } catch {
     throw new Response('Nota inválida', { status: 404 });
   }
+  const g = await getVaultGraph();
+  if (!g.nodos.has(relPath)) throw new Response('Nota no encontrada', { status: 404 });
   const vaultPath = getVaultPath();
   let nota: Awaited<ReturnType<typeof leerNota>>;
   try {
@@ -66,7 +73,13 @@ export async function loader({ params }: LoaderFunctionArgs) {
   } catch {
     throw new Response('Nota no encontrada', { status: 404 });
   }
-  const g = await getVaultGraph();
+  const directos = registrosDe(g, relPath);
+  const aportacionesDelPlan = nota.frontmatter.registro === 'contraste'
+    ? registrosDe(g, nota.frontmatter.nodo_id || '')
+      .filter((r) => !r.frontmatter.registro && r.frontmatter.plan_id === relPath)
+    : [];
+  const registros = [...new Map([...directos, ...aportacionesDelPlan].map((r) => [r.id, r])).values()];
+  const objetivo = g.nodos.get(nota.frontmatter.nodo_id || '');
   const enlaces: EnlaceResuelto[] = nota.links.map((rel) => ({
     relPath: rel,
     titulo: g.nodos.get(rel)?.titulo ?? rel.split('/').pop()?.replace(/\.md$/, '') ?? rel,
@@ -80,11 +93,18 @@ export async function loader({ params }: LoaderFunctionArgs) {
     enlaces,
     frontmatter: nota.frontmatter,
     nodo: nota.nodo,
-    registros: registrosDe(g, relPath),
+    registros,
     estado: estadoRevision(nota.nodo, registrosDe(g, relPath)),
     dato: estadoDato(nota.nodo, registrosDe(g, relPath)),
     origen: origenDe(nota.nodo),
     relaciones: relacionesDe(g, nota.nodo),
+    exportacion: await exportarExpediente(g, relPath, vaultPath),
+    documentales: Object.fromEntries(registros
+      .filter((r) => r.tipo === 'evidencia' && !r.frontmatter.registro)
+      .map((r) => [r.id, estadoDocumental(g, r)])),
+    recibido: new URL(request.url).searchParams.get('recibido') === '1' &&
+      nota.nodo.tipo === 'evidencia' && !nota.frontmatter.registro,
+    objetivo: objetivo ? { id: objetivo.id, titulo: objetivo.titulo } : undefined,
   });
 }
 
@@ -276,15 +296,29 @@ export default function RutaNodo() {
         <Chip color={colorDeNodo(d.tipo, d.capa)}>{d.capa ? `${d.tipo} · ${d.capa}` : d.tipo}</Chip>
       </div>
       <h1 className={styles.titulo}>{d.titulo}</h1>
+      {d.recibido ? (
+        <section role="status" aria-label="Aportación recibida">
+          <h2>Aportación recibida</h2>
+          <p>El registro está guardado. Conserva este enlace para compartirlo o consultar su revisión.</p>
+          <p>Referencia del registro: <code>{d.nodo.id}</code></p>
+          <p>Recepción: {d.frontmatter.creado || 'Fecha no registrada'}. Consulta la revisión documental actual en el expediente.</p>
+          {d.objetivo ? (
+            <Link to={`/nodo/${encodeNodo(d.objetivo.id)}`}>Ver expediente: {d.objetivo.titulo}</Link>
+          ) : null}
+        </section>
+      ) : null}
       <MesaNodo
+        key={d.nodo.id}
         nodo={d.nodo}
         registros={d.registros}
         estado={d.estado}
         dato={d.dato}
         origen={d.origen}
         relaciones={d.relaciones}
+        exportacion={d.exportacion}
+        documentales={d.documentales}
       />
-      <h2>Texto conservado del diagnóstico</h2>
+      <h2>{d.tipo === 'evidencia' ? 'Texto completo del registro' : 'Texto conservado del diagnóstico'}</h2>
       <div className={styles.cuerpo}>{renderBloques(d.cuerpo, d.enlaces, d.dir)}</div>
     </article>
   );

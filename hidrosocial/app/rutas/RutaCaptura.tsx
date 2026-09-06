@@ -1,6 +1,6 @@
 import { json, redirect } from '@remix-run/node';
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
-import { Form, useActionData, useLoaderData } from '@remix-run/react';
+import { Form, useActionData, useLoaderData, useNavigation } from '@remix-run/react';
 import { useEffect, useMemo, useState } from 'react';
 
 import { FormBloque } from '~/design-system/corrientes/FormBloque';
@@ -23,14 +23,24 @@ interface Opcion {
   valor: string;
   etiqueta: string;
   arbol?: ArbolId;
+  relPath?: string;
+  enunciado?: string;
 }
 
 interface Datos {
   arboles: Opcion[];
+  objetivos: Opcion[];
   fichas: Opcion[];
   mediciones: Opcion[];
   error?: string;
-  inicial?: { nodoId: string; afirmacion: string; arbol: string; relacion: string };
+  inicial?: {
+    nodoId: string;
+    afirmacion: string;
+    textoOriginal: string;
+    arbol: string;
+    relacion: string;
+    planId: string;
+  };
 }
 
 const CLAVE_BORRADOR = 'hidrosocial-borrador';
@@ -39,8 +49,22 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const g = await getVaultGraph();
   const arboles: Opcion[] = [...g.nodos.values()]
     .filter((n) => n.tipo === 'causa')
-    .map((n) => ({ valor: n.arbol as string, etiqueta: `${n.arbol} · ${n.titulo}` }))
+    .map((n) => ({
+      valor: n.arbol as string,
+      etiqueta: `${n.arbol} · ${n.titulo}`,
+      relPath: n.relPath,
+    }))
     .sort((a, b) => a.valor.localeCompare(b.valor, 'es', { numeric: true }));
+  const objetivos: Opcion[] = [...g.nodos.values()]
+    .filter((n) => ['causa', 'ficha', 'medicion'].includes(n.tipo) && !n.frontmatter.registro)
+    .map((n) => ({
+      valor: n.id,
+      etiqueta: `${n.tipo} · ${n.titulo}`,
+      arbol: n.arbol,
+      relPath: n.relPath,
+      enunciado: n.frontmatter.enunciado || n.frontmatter.afirmacion || n.resumen,
+    }))
+    .sort((a, b) => a.etiqueta.localeCompare(b.etiqueta, 'es', { numeric: true }));
   const fichas: Opcion[] = [...g.nodos.values()]
     .filter((n) => n.tipo === 'ficha')
     .map((n) => ({ valor: n.relPath, etiqueta: n.titulo, arbol: n.arbol }))
@@ -54,16 +78,29 @@ export async function loader({ request }: LoaderFunctionArgs) {
   try {
     const n = g.nodos.get(decodeNodo(params.get('nodo') || ''));
     if (n && !n.frontmatter.registro)
-      inicial = {
+      {
+        let planId = '';
+        try {
+          const plan = g.nodos.get(decodeNodo(params.get('plan') || ''));
+          if (plan?.frontmatter.registro === 'contraste' && plan.frontmatter.nodo_id === n.id)
+            planId = plan.id;
+        } catch {
+          // El plan es opcional.
+        }
+        const textoOriginal = n.frontmatter.enunciado || n.frontmatter.afirmacion || n.resumen;
+        inicial = {
         nodoId: n.id,
-        afirmacion: n.frontmatter.enunciado || n.frontmatter.afirmacion || n.resumen,
+        afirmacion: textoOriginal,
+        textoOriginal,
         arbol: n.arbol || '',
         relacion: params.get('relacion') === 'contradice' ? 'contradice' : 'no-concluyente',
+        planId,
       };
+      }
   } catch {
     /* Entrada libre sin una afirmación preseleccionada. */
   }
-  return json<Datos>({ arboles, fichas, mediciones, inicial });
+  return json<Datos>({ arboles, objetivos, fichas, mediciones, inicial });
 }
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -71,7 +108,9 @@ export async function action({ request }: ActionFunctionArgs) {
   try {
     const borrador = validarBorrador(fd);
     const nodo = await guardarNota(borrador);
-    return redirect(`/nodo/${encodeNodo(nodo.id)}`);
+    const url = new URL(request.url);
+    const base = url.pathname.replace(/\/captura\/?$/, '');
+    return redirect(`${base}/nodo/${encodeNodo(nodo.id)}?recibido=1`);
   } catch (e) {
     const mensaje = e instanceof Error ? e.message : 'No se pudo guardar la evidencia.';
     return json({ error: mensaje }, { status: 400 });
@@ -96,6 +135,12 @@ interface EstadoForm {
   referencia: string;
   responsable: string;
   alcance: string;
+  metodo: string;
+  interpretacion: string;
+  limitaciones: string;
+  alternativa: string;
+  planId: string;
+  textoOriginal: string;
 }
 
 const VACIO: EstadoForm = {
@@ -104,7 +149,7 @@ const VACIO: EstadoForm = {
   arbol: '',
   fichaId: '',
   medicionId: '',
-  capa: 'C0',
+  capa: '',
   lentes: [],
   tipoEvidencia: 'observacion',
   fuente: '',
@@ -116,6 +161,12 @@ const VACIO: EstadoForm = {
   referencia: '',
   responsable: '',
   alcance: '',
+  metodo: '',
+  interpretacion: '',
+  limitaciones: '',
+  alternativa: '',
+  planId: '',
+  textoOriginal: '',
 };
 
 function ahoraLocal(): string {
@@ -164,12 +215,14 @@ function Anillo({ valor }: { valor: number }) {
   );
 }
 
-// Cuenca: captura v2 (3 bloques + preview .md en vivo + anillo + action bar).
+// Cuenca: captura trazable + preview .md en vivo + anillo de campos completos.
 export default function RutaCaptura() {
-  const { arboles, fichas, mediciones, inicial } = useLoaderData<Datos>();
+  const { arboles, objetivos, fichas, mediciones, inicial } = useLoaderData<Datos>();
   const accion = useActionData<{ error?: string } | undefined>();
+  const navegacion = useNavigation();
   const [form, setForm] = useState<EstadoForm>(VACIO);
   const [guardado, setGuardado] = useState(false);
+  const [mensajeLocal, setMensajeLocal] = useState('');
 
   // Restaura borrador + fecha por defecto (solo cliente, tras hidratar).
   useEffect(() => {
@@ -188,7 +241,7 @@ export default function RutaCaptura() {
       // Sin borrador guardado.
     }
     setForm((f) => ({ ...f, fecha: ahoraLocal() }));
-  }, [inicial]);
+  }, [inicial?.nodoId, inicial?.planId]);
 
   const set = <K extends keyof EstadoForm>(k: K, v: EstadoForm[K]) => {
     setGuardado(false);
@@ -220,6 +273,12 @@ export default function RutaCaptura() {
       referencia: form.referencia,
       responsable: form.responsable,
       alcance: form.alcance,
+      metodo: form.metodo,
+      interpretacion: form.interpretacion,
+      limitaciones: form.limitaciones,
+      alternativa: form.alternativa,
+      planId: form.planId || undefined,
+      textoOriginal: form.textoOriginal,
     }),
     [form],
   );
@@ -233,17 +292,25 @@ export default function RutaCaptura() {
   const medicionesFiltradas = form.arbol
     ? mediciones.filter((f) => f.arbol === form.arbol)
     : mediciones;
+  const objetivosFiltrados = form.arbol
+    ? objetivos.filter((o) => o.arbol === form.arbol)
+    : [];
 
   const guardarBorrador = () => {
     try {
       window.localStorage.setItem(CLAVE_BORRADOR, JSON.stringify(form));
       setGuardado(true);
+      setMensajeLocal('Borrador guardado en este navegador. Todavía no se ha enviado.');
     } catch {
-      // Almacenamiento no disponible.
+      setMensajeLocal('Este navegador no permitió guardar el borrador. Puedes descargar una copia cuando esté completa.');
     }
   };
 
   const descargar = () => {
+    if (!completa) {
+      setMensajeLocal('Completa los campos requeridos antes de descargar la aportación.');
+      return;
+    }
     const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -251,26 +318,92 @@ export default function RutaCaptura() {
     a.download = `${slugificar(form.titulo) || 'evidencia'}.md`;
     a.click();
     URL.revokeObjectURL(url);
+    setMensajeLocal('Aportación descargada. El archivo no se ha enviado al servidor.');
   };
 
   const enunciado = borrador.enunciado === '…' ? '' : borrador.enunciado;
   const completa = completitud >= 100;
+  const enviando = navegacion.state === 'submitting';
 
   return (
     <div className={styles.cuenca}>
       <h1 className={styles.titulo}>Estación de captura</h1>
       <p className={styles.subtitulo}>
-        Registra una observación y cómo se relaciona con una afirmación. Puede apoyarla,
-        contradecirla o limitarla. Su revisión documental queda pendiente.
+        Registra por separado lo observado, cómo se obtuvo y por qué afecta una afirmación. Puede
+        apoyarla, contradecirla, matizarla o no permitir una conclusión. La revisión documental
+        queda pendiente.
       </p>
       {accion?.error ? (
         <p className={styles.error} role="alert">
           {accion.error}
         </p>
       ) : null}
+      {mensajeLocal ? <p role="status">{mensajeLocal}</p> : null}
       <Form method="post" className={styles.rejilla}>
         <div className={styles.formulario}>
-          <FormBloque numero={1} titulo="Hallazgo" descripcion="Título y texto de observación.">
+          <FormBloque
+            numero={1}
+            titulo="Afirmación que se examina"
+            descripcion="Elige el objeto explícitamente. Las fichas y mediciones auxiliares no lo cambian."
+          >
+            <CampoSelect
+              etiqueta="Árbol"
+              nombre="arbol"
+              requerido
+              valor={form.arbol}
+              alCambiar={(v) =>
+                setForm((actual) => ({
+                  ...actual,
+                  arbol: v,
+                  nodoId: '',
+                  afirmacion: '',
+                  textoOriginal: '',
+                  fichaId: '',
+                  medicionId: '',
+                  planId: '',
+                }))
+              }
+              opciones={[
+                { valor: '', etiqueta: 'Elige árbol…' },
+                ...arboles.map((a) => ({ valor: a.valor, etiqueta: a.etiqueta })),
+              ]}
+            />
+            <CampoSelect
+              etiqueta="Afirmación o indicador del diagnóstico"
+              nombre="nodoId"
+              requerido
+              valor={form.nodoId}
+              alCambiar={(v) => {
+                const objetivo = objetivos.find((o) => o.valor === v);
+                setForm((actual) => ({
+                  ...actual,
+                  nodoId: v,
+                  afirmacion: objetivo?.enunciado || '',
+                  textoOriginal: objetivo?.enunciado || '',
+                  planId: '',
+                }));
+              }}
+              opciones={[
+                { valor: '', etiqueta: form.arbol ? 'Elige una afirmación…' : 'Primero elige un árbol' },
+                ...objetivosFiltrados.map((o) => ({ valor: o.valor, etiqueta: o.etiqueta })),
+              ]}
+            />
+            {form.textoOriginal ? (
+              <p><strong>Enunciado conservado:</strong> {form.textoOriginal}</p>
+            ) : null}
+            <input type="hidden" name="planId" value={form.planId} />
+            {form.planId ? <p>Esta aportación quedará vinculada al plan de contraste seleccionado.</p> : null}
+            <AreaTexto
+              etiqueta="Aspecto específico que esta aportación examina"
+              nombre="afirmacion"
+              requerido
+              valor={form.afirmacion}
+              alCambiar={(v) => set('afirmacion', v)}
+              descripcion="Puedes acotar el enunciado sin sustituir el texto original."
+            />
+          </FormBloque>
+
+          <FormBloque numero={2} titulo="Observación y método" descripcion="Separa el resultado del procedimiento.">
             <CampoTexto
               etiqueta="Título"
               nombre="titulo"
@@ -289,14 +422,17 @@ export default function RutaCaptura() {
               placeholder="Qué viste, dónde, en qué condiciones…"
             />
             <input type="hidden" name="enunciado" value={enunciado} />
-            <input type="hidden" name="nodoId" value={form.nodoId} />
             <AreaTexto
-              etiqueta="Afirmación específica que se examina"
-              nombre="afirmacion"
+              etiqueta="Cómo se obtuvo o analizó la información"
+              nombre="metodo"
               requerido
-              valor={form.afirmacion}
-              alCambiar={(v) => set('afirmacion', v)}
+              valor={form.metodo}
+              alCambiar={(v) => set('metodo', v)}
+              placeholder="Instrumento, selección de casos, consulta o pasos de análisis…"
             />
+          </FormBloque>
+
+          <FormBloque numero={3} titulo="Interpretación y límites" descripcion="Explica el salto entre observación y conclusión.">
             <CampoSelect
               etiqueta="Qué aporta a la afirmación"
               nombre="relacion"
@@ -307,37 +443,46 @@ export default function RutaCaptura() {
                 etiqueta: v === 'no-concluyente' ? 'No permite concluir todavía' : v,
               }))}
             />
+            <AreaTexto
+              etiqueta="Por qué la observación tiene esa relación"
+              nombre="interpretacion"
+              requerido
+              valor={form.interpretacion}
+              alCambiar={(v) => set('interpretacion', v)}
+            />
+            <AreaTexto
+              etiqueta="Alcance: territorio, población, periodo y condiciones"
+              nombre="alcance"
+              requerido
+              valor={form.alcance}
+              alCambiar={(v) => set('alcance', v)}
+            />
+            <AreaTexto
+              etiqueta="Limitaciones, incertidumbres y posibles sesgos"
+              nombre="limitaciones"
+              requerido
+              valor={form.limitaciones}
+              alCambiar={(v) => set('limitaciones', v)}
+            />
+            <AreaTexto
+              etiqueta="Explicación alternativa (opcional)"
+              nombre="alternativa"
+              valor={form.alternativa}
+              alCambiar={(v) => set('alternativa', v)}
+              descripcion="Otro proceso que podría producir la misma observación."
+            />
           </FormBloque>
 
           <FormBloque
-            numero={2}
-            titulo="Qué parte del diagnóstico examina"
-            descripcion="Árbol, ficha y medición relacionados; capa, lentes y tipo de evidencia."
+            numero={4}
+            titulo="Clasificación y procedencia"
+            descripcion="Contexto analítico, fuente y responsable."
           >
             <CampoSelect
-              etiqueta="Árbol"
-              nombre="arbol"
-              requerido
-              valor={form.arbol}
-              alCambiar={(v) => {
-                set('arbol', v);
-                set('fichaId', '');
-                set('medicionId', '');
-                set('nodoId', '');
-              }}
-              opciones={[
-                { valor: '', etiqueta: 'Elige árbol…' },
-                ...arboles.map((a) => ({ valor: a.valor, etiqueta: a.etiqueta })),
-              ]}
-            />
-            <CampoSelect
-              etiqueta="Ficha observada"
+              etiqueta="Ficha relacionada (opcional)"
               nombre="fichaId"
               valor={form.fichaId}
-              alCambiar={(v) => {
-                set('fichaId', v);
-                set('nodoId', v);
-              }}
+              alCambiar={(v) => set('fichaId', v)}
               opciones={[
                 { valor: '', etiqueta: '— Sin asignar —' },
                 ...fichasFiltradas.map((f) => ({ valor: f.valor, etiqueta: f.etiqueta })),
@@ -407,20 +552,14 @@ export default function RutaCaptura() {
                 etiqueta: t.charAt(0).toUpperCase() + t.slice(1),
               }))}
             />
-          </FormBloque>
-
-          <FormBloque
-            numero={3}
-            titulo="Fuente y trazabilidad"
-            descripcion="Quién reporta y cuándo."
-          >
             <CampoTexto
               etiqueta="Fuente o informante"
               nombre="fuente"
               requerido
               valor={form.fuente}
               alCambiar={(v) => set('fuente', v)}
-              placeholder="Nombre, medio o documento"
+              placeholder="Institución, autor o código de entrevista"
+              descripcion="Si necesitas proteger identidad, usa el código acordado por el equipo."
             />
             <CampoTexto
               etiqueta="Referencia, folio, enlace o identificación de entrevista"
@@ -435,12 +574,6 @@ export default function RutaCaptura() {
               requerido
               valor={form.responsable}
               alCambiar={(v) => set('responsable', v)}
-            />
-            <AreaTexto
-              etiqueta="Alcance y límites: colonia, población, periodo y condiciones"
-              nombre="alcance"
-              valor={form.alcance}
-              alCambiar={(v) => set('alcance', v)}
             />
             <label className={styles.campo}>
               <span className={styles.etiqueta}>
@@ -485,14 +618,14 @@ export default function RutaCaptura() {
               {guardado ? 'Borrador guardado ✓' : 'Guardar borrador'}
             </Boton>
             <Boton type="button" variante="secundario" onClick={descargar}>
-              Descargar .md
+              Descargar aportación
             </Boton>
             <Boton
               type="submit"
               variante={completa ? 'primario' : 'secundario'}
-              disabled={!completa}
+              disabled={!completa || enviando}
             >
-              Guardar evidencia
+              {enviando ? 'Enviando…' : 'Enviar aportación'}
             </Boton>
           </div>
         </div>

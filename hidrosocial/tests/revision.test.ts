@@ -162,6 +162,8 @@ describe('Expedientes durables', () => {
         territorio: 'Zona de prueba',
         periodo: '2026-09',
         metodo: 'Registro horario',
+        tipo_valor: 'observado',
+        limitaciones: 'Caso sintético para comprobar persistencia; no representa datos de campo.',
       }),
       indicador,
     );
@@ -186,6 +188,10 @@ describe('Expedientes durables', () => {
       responsable: 'Equipo',
       relacion: 'contradice',
       nodoId: causa,
+      alcance: 'Zona y periodo sintéticos de la prueba.',
+      metodo: 'Lectura de un documento sintético.',
+      interpretacion: 'El caso sintético permite examinar una excepción a la afirmación.',
+      limitaciones: 'Ejemplo ficticio sin pretensión de representar la población.',
     });
     const nota = await guardarNota(validarBorrador(f));
     const g = await parseVault(directorio);

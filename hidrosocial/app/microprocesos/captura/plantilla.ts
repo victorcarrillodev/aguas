@@ -9,80 +9,85 @@ export interface ContextoPlantilla {
 
 const DIR_EVIDENCIA = '9 · Evidencia de campo';
 
-/** Enlace real si hay relPath; negrita provisional para el preview en vivo. */
 function ref(titulo: string, relPath: string): string {
-  if (!relPath) return `**${titulo}**`;
-  return enlaceMarkdown(titulo, DIR_EVIDENCIA, relPath);
+  // Corchetes y saltos dentro de la etiqueta romperían el enlace Markdown.
+  const etiqueta = titulo.replace(/[\r\n]+/g, ' ').replace(/\[/g, '(').replace(/\]/g, ')');
+  if (!relPath) return '**' + etiqueta + '**';
+  return enlaceMarkdown(etiqueta, DIR_EVIDENCIA, relPath);
 }
 
-/**
- * Nota de captura literal (§5): frontmatter + markdown links URL-encoded
- * generados desde el árbol, la ficha y la medición elegidas.
- * Pura: NO importa `node:fs` (apta para el preview en vivo del cliente).
- */
+/** Nota completa y transportable: todos los escalares se serializan como strings JSON. */
 export function renderPlantilla(b: Borrador, ctx: ContextoPlantilla): string {
-  const lentes = (b.lentes?.length ? b.lentes : [b.lente]).join(', ');
   const linkCausa = ref(ctx.causa.titulo, ctx.causa.relPath);
   const linkFicha = ctx.ficha ? ref(ctx.ficha.titulo, ctx.ficha.relPath) : null;
   const linkMedicion = ctx.medicion ? ref(ctx.medicion.titulo, ctx.medicion.relPath) : null;
+  const linkObjetivo = ref(b.afirmacion || 'Afirmación por elegir', b.nodoId || '');
+  const presenta = ['**Evidencia de campo** del árbol ' + linkCausa + '.'];
+  if (linkFicha) presenta.push('Ficha relacionada: ' + linkFicha + '.');
+  if (linkMedicion) presenta.push('Medición relacionada: ' + linkMedicion + '.');
 
-  const presenta: string[] = [`**Evidencia de campo** del árbol ${linkCausa}.`];
-  if (linkFicha) presenta.push(`Observa a ${linkFicha}.`);
-  if (linkMedicion) presenta.push(`Ayuda a capturar ${linkMedicion}.`);
-
-  const haciaAbajo = linkMedicion
-    ? `\n\n**Hacia abajo** — alimenta la captura de ${linkMedicion}.`
-    : '';
-
-  const municipio = b.municipio ? `\nmunicipio: ${JSON.stringify(b.municipio)}` : '';
-  const trazabilidad = Object.entries({
+  const fm = {
+    esquema_version: '2',
+    titulo: b.titulo,
+    enunciado: b.enunciado,
+    observacion: b.observacion,
+    arbol: b.arbol,
+    'tipo-evidencia': b.tipoEvidencia,
+    capa: b.capa,
+    lente: (b.lentes?.length ? b.lentes : [b.lente]).join(', '),
+    mide: ctx.medicion?.titulo ?? '',
+    fecha: b.fecha,
+    fuente: b.fuente,
+    ...(b.municipio ? { municipio: b.municipio } : {}),
     nodo_id: b.nodoId || '',
+    texto_original: b.textoOriginal || '',
     afirmacion: b.afirmacion || '',
     relacion: b.relacion || 'no-concluyente',
     referencia: b.referencia || '',
     responsable: b.responsable || '',
     alcance: b.alcance || '',
+    metodo: b.metodo || '',
+    interpretacion: b.interpretacion || '',
+    limitaciones: b.limitaciones || '',
+    alternativa: b.alternativa || '',
+    ...(b.planId ? { plan_id: b.planId } : {}),
+    ...(b.fichaId ? { ficha_id: b.fichaId } : {}),
+    ...(b.medicionId ? { medicion_id: b.medicionId } : {}),
     estado_documental: 'pendiente',
-  })
-    .map(([k, v]) => `${k}: ${JSON.stringify(v)}`)
-    .join('\n');
-
-  return `---
-titulo: ${JSON.stringify(b.titulo)}
-arbol: ${b.arbol}
-tipo-evidencia: ${b.tipoEvidencia}
-capa: ${b.capa}
-lente: ${lentes}
-mide: ${ctx.medicion?.titulo ?? ''}
-fecha: ${b.fecha}
-fuente: ${JSON.stringify(b.fuente)}${municipio}
-${trazabilidad}
----
-
-# ${b.titulo}
-
-> ${b.enunciado}
-
-${presenta.join(' ')}
-
-## Observación de campo
-
-${b.observacion}
-
-## La cadena
-
-**Afirmación examinada:** ${b.afirmacion || 'Por precisar'}
-
-**Relación declarada:** ${b.relacion || 'no-concluyente'}. La revisión documental está pendiente.${haciaAbajo}
-
-**Alcance:** ${b.alcance || 'Por documentar'}
-
-**Responsable:** ${b.responsable || 'Por registrar'}
-
-## Fuentes
-
-| Tipo | Referencia | Fecha |
-|---|---|---|
-| ${b.tipoEvidencia} | ${(b.referencia || b.fuente).replaceAll('|', '/').replace(/[\r\n]/g, ' ')} | ${b.fecha} |
-`;
+  };
+  const lineas = [
+    '---',
+    ...Object.entries(fm).map(([k, v]) => k + ': ' + JSON.stringify(v)),
+    '---', '',
+    '# ' + b.titulo.replace(/[\r\n]+/g, ' '), '',
+    '> ' + b.enunciado.replace(/\r?\n/g, '\n> '), '',
+    presenta.join(' '), '',
+    '## Afirmación examinada', '',
+    linkObjetivo, '',
+    '**Enunciado conservado al registrar:** ' + (b.textoOriginal || 'Se incorpora al guardar en el servidor.'), '',
+    '**Relación declarada:** ' + (b.relacion || 'no-concluyente') + '. La revisión documental está pendiente.', '',
+    '## Observación de campo', '',
+    b.observacion, '',
+    '## Cómo se obtuvo la información', '',
+    b.metodo || 'Por documentar', '',
+    '## Interpretación de la observación', '',
+    b.interpretacion || 'Por documentar', '',
+    '## Alcance', '',
+    b.alcance || 'Por documentar', '',
+    '## Límites e incertidumbres', '',
+    b.limitaciones || 'Por documentar', '',
+    '## Explicación alternativa', '',
+    b.alternativa || 'No se registró una explicación alternativa.', '',
+  ];
+  if (b.planId) lineas.push('**Plan de contraste:** ' + ref('Consultar plan', b.planId), '');
+  lineas.push(
+    '**Responsable:** ' + (b.responsable || 'Por registrar'), '',
+    '## Fuentes', '',
+    '| Tipo | Referencia | Fecha |',
+    '|---|---|---|',
+    '| ' + b.tipoEvidencia + ' | ' +
+      (b.referencia || b.fuente).replaceAll('|', '/').replace(/[\r\n]/g, ' ') +
+      ' | ' + b.fecha + ' |', '',
+  );
+  return lineas.join('\n');
 }

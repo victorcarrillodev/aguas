@@ -44,7 +44,12 @@ export function estadoRevision(n: VaultNode, registros: VaultNode[]): string {
       r.frontmatter.objeto === 'interpretacion' &&
       !valor(r.frontmatter.propuesta_id),
   );
-  if (decision) return `${decision.frontmatter.decision} · decisión registrada`;
+  if (decision) {
+    const actual = valor(n.frontmatter.enunciado) || valor(n.frontmatter.afirmacion) || n.resumen;
+    if (valor(decision.frontmatter.texto_original) && decision.frontmatter.texto_original !== actual)
+      return 'Enunciado modificado; requiere nueva revisión';
+    return `${decision.frontmatter.decision} · decisión registrada`;
+  }
   if (n.frontmatter.estado === 'en-revision') return 'En revisión';
   return valor(n.frontmatter.estado) || 'Sin validación registrada';
 }
@@ -110,7 +115,7 @@ export function relacionesDe(g: VaultGraph, n: VaultNode) {
     .filter(Boolean))
     agregar(id, 'Bisagra', 'Conecta árboles; no determina por sí sola una dirección causal.');
   for (const x of g.nodos.values())
-    if (x.tipo === 'ficha' && x.frontmatter.padre === n.frontmatter.id)
+    if (valor(n.frontmatter.id) && x.tipo === 'ficha' && x.frontmatter.padre === n.frontmatter.id)
       salida.push({
         id: x.id,
         titulo: x.titulo,
@@ -118,4 +123,31 @@ export function relacionesDe(g: VaultGraph, n: VaultNode) {
         mecanismo: valor(x.frontmatter.produce) || 'Mecanismo por documentar',
       });
   return salida;
+}
+
+export const MOMENTOS_CONTRASTE = ['antes-de-observar', 'con-datos-conocidos'] as const;
+export const TIPOS_VALOR = ['observado', 'estimado'] as const;
+export const ETIQUETAS_DOCUMENTALES: Record<string, string> = {
+  pendiente: 'Revisión documental pendiente',
+  aceptada: 'Respaldo documental aceptado',
+  rechazada: 'Respaldo documental rechazado',
+  revisar: 'Requiere revisión documental',
+};
+
+/** Una revisión documental examina la fuente; no valida por sí sola una explicación causal. */
+export function estadoDocumental(g: VaultGraph, evidencia: VaultNode): string {
+  if (!esEvidencia(evidencia)) return 'pendiente';
+  const decision = registrosDe(g, evidencia.id).find(
+    (r) =>
+      r.frontmatter.registro === 'decision' &&
+      r.frontmatter.objeto === 'documental' &&
+      !valor(r.frontmatter.propuesta_id),
+  );
+  const estado = decision?.frontmatter.decision ?? 'pendiente';
+  return (DECISIONES as readonly string[]).includes(estado) ? estado : 'pendiente';
+}
+
+/** Utilizable para examinar la afirmación; no equivale a evidencia causal concluyente. */
+export function evidenciaUtilizable(g: VaultGraph, evidencia: VaultNode): boolean {
+  return esEvidencia(evidencia) && estadoDocumental(g, evidencia) === 'aceptada';
 }

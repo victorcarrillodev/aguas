@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { Chip } from '~/design-system/gotas/Chip';
 import { colorDeCapa, colorDeNodo, colorDeTipo } from '~/lib/colores';
 import { encodeNodo } from '~/lib/rutas';
+import { ETIQUETAS_DOCUMENTALES } from '~/microprocesos/revision/index';
 import { normalizar } from '~/microprocesos/busqueda/index';
 import type { GrafoRender } from '~/microprocesos/grafo/index';
 import type { CapaId, VaultNodeType } from '~/microprocesos/vault-core/tipos';
@@ -30,7 +31,7 @@ const TIPOS_PILL: { id: VaultNodeType; etiqueta: string }[] = [
   { id: 'efecto', etiqueta: 'Efectos' },
   { id: 'medicion', etiqueta: 'Mediciones' },
   { id: 'problema', etiqueta: 'Problemas' },
-  { id: 'evidencia', etiqueta: 'Evidencias' },
+  { id: 'evidencia', etiqueta: 'Aportaciones y revisiones' },
 ];
 
 const CAPAS: CapaId[] = ['C0', 'C1', 'C2', 'C3', 'C4'];
@@ -127,7 +128,7 @@ export function ExploradorGrafo(d: DatosExplorador) {
           <span className={styles.leyendaCuello}>
             {radiografia
               ? seleccionado
-                ? 'Muestra el corredor explicativo a tres pasos. En rojo: afirmaciones muy conectadas sin evidencia específica.'
+                ? 'Muestra el corredor explicativo a tres pasos. En rojo: afirmaciones sin aportaciones con revisión documental aceptada.'
                 : 'Selecciona una afirmación para aislar su corredor explicativo.'
               : 'Aísla la cadena que impide sostener una conclusión y señala qué evidencia puede destrabarla.'}
           </span>
@@ -236,11 +237,21 @@ export function ExploradorGrafo(d: DatosExplorador) {
               <h2 className={styles.tituloNodo}>{sel.titulo}</h2>
               {d.resumenes[sel.id] ? <p className={styles.resumen}>{d.resumenes[sel.id]}</p> : null}
               <p className={styles.metricas}>{vecinosSel.length} vecinos conectados</p>
+              {['causa', 'ficha', 'medicion', 'problema'].includes(sel.tipo) ? (
+                <p className={styles.metricas}>
+                  {sel.evidencias} aportaciones recibidas · {sel.evidenciasAceptadas ?? 0} con revisión documental aceptada.
+                  Esto no determina si la afirmación es correcta.
+                </p>
+              ) : null}
+              {sel.documental ? (
+                <p className={styles.metricas}>{ETIQUETAS_DOCUMENTALES[sel.documental]}</p>
+              ) : null}
+              {sel.registro === 'contraste' ? <p>Plan de contraste vinculado a una afirmación.</p> : null}
               {radiografia && sel.cuello > 0 ? (
                 <div className={styles.cuello}>
                   <strong>Cuello de botella documental · nivel {sel.cuello}</strong>
                   <p>{sel.motivoCuello}</p>
-                  <Link to={`/captura?nodo=${encodeNodo(sel.id)}`}>Aportar la evidencia que falta</Link>
+                  <Link to={`/nodo/${encodeNodo(sel.id)}`}>Examinar el expediente y preparar el contraste</Link>
                 </div>
               ) : null}
               <details>

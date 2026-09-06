@@ -116,3 +116,87 @@
     grid-template-columns: 1fr;
   }
 }
+
+.laboratorio {
+  border: 1px solid #a6bfae;
+  border-radius: 18px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--surface-container-low);
+  overflow-wrap: anywhere;
+}
+.laboratorio h3 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin: .25rem 0 1rem;
+}
+.laboratorio p {
+  max-width: 78ch;
+  line-height: 1.7;
+}
+.eyebrow {
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+}
+.recorrido {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin: 1.25rem 0;
+}
+.recorrido span {
+  border-radius: 999px;
+  padding: .45rem .8rem;
+  border: 1px solid var(--outline-variant);
+  background: var(--surface-container-lowest);
+  font-size: .85rem;
+}
+.planNuevo summary {
+  cursor: pointer;
+  min-height: 44px;
+  font-weight: 700;
+}
+.plan {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  padding: 1.25rem;
+  border-radius: 12px;
+}
+.plan h4 {
+  margin-top: 0;
+  font-size: 1.05rem;
+}
+.documental {
+  display: inline-block;
+  font-size: .8rem;
+  font-weight: 600;
+  border-left: 3px solid var(--outline);
+  padding: .3rem .7rem;
+  background: var(--surface-container);
+}
+.documental[data-estado="aceptada"] {
+  border-color: #438157;
+}
+.documental[data-estado="rechazada"],
+.documental[data-estado="revisar"] {
+  border-color: #b07325;
+}
+.acciones button:disabled,
+.form button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+.lista dl,
+.detalleRegistro {
+  display: grid;
+  gap: .5rem;
+}
+.lista dt,
+.detalleRegistro dt {
+  font-weight: 600;
+  font-size: .85rem;
+}
+.lista dd,
+.detalleRegistro dd {
+  margin-left: 0;
+  white-space: pre-wrap;
+}

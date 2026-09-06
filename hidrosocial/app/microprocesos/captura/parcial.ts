@@ -1,10 +1,7 @@
 import type { Borrador } from './esquema';
 import type { ContextoPlantilla } from './plantilla';
 
-/**
- * Borrador parcial del formulario (todo opcional) para el preview en vivo
- * del cliente. Puro: NO importa `node:fs` (solo tipos).
- */
+/** Datos todavía incompletos del formulario; puro y utilizable en el cliente. */
 export interface BorradorParcial {
   titulo?: string;
   observacion?: string;
@@ -23,60 +20,56 @@ export interface BorradorParcial {
   referencia?: string;
   responsable?: string;
   alcance?: string;
+  metodo?: string;
+  interpretacion?: string;
+  limitaciones?: string;
+  alternativa?: string;
+  planId?: string;
+  textoOriginal?: string;
 }
 
 export interface OpcionContexto {
   valor: string;
   etiqueta: string;
+  relPath?: string;
 }
 
-/** Campos requeridos del anillo de completitud (título, hallazgo, árbol, tipo, fecha, informante). */
+/** Mide campos completos, no fuerza de evidencia ni validez de conclusiones. */
 const REQUERIDOS: (keyof BorradorParcial)[] = [
-  'titulo',
-  'observacion',
-  'arbol',
-  'tipoEvidencia',
-  'fecha',
-  'fuente',
-  'afirmacion',
-  'referencia',
-  'responsable',
-  'lentes',
+  'titulo', 'observacion', 'arbol', 'nodoId', 'capa', 'tipoEvidencia',
+  'fecha', 'fuente', 'afirmacion', 'referencia', 'responsable',
+  'lentes', 'alcance', 'metodo', 'interpretacion', 'limitaciones',
 ];
 
 function hoy(): string {
   const d = new Date();
-  const m = `${d.getMonth() + 1}`.padStart(2, '0');
-  const dia = `${d.getDate()}`.padStart(2, '0');
-  return `${d.getFullYear()}-${m}-${dia}`;
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') +
+    '-' + String(d.getDate()).padStart(2, '0');
 }
 
-/** Primera frase de la observación como enunciado provisional. */
 function enunciadoDe(observacion: string): string {
   const una = observacion.split(/(?<=[.!?])\s+/)[0]?.trim() ?? '';
   return una || observacion.trim().slice(0, 120) || '…';
 }
 
-/**
- * Convierte el parcial en Borrador válido con valores provisionales
- * (sin lanzar) + % de campos requeridos completos (0–100).
- */
+/** Los valores provisionales solo sirven para visualizar; no validan ni guardan una captura. */
 export function validarBorradorParcial(p: BorradorParcial): {
   borrador: Borrador;
   completitud: number;
 } {
   const completos = REQUERIDOS.filter((k) => (p[k] ?? '').toString().trim() !== '').length;
   const observacion = p.observacion?.trim() ?? '';
+  const lentes = [...new Set((p.lentes ?? []).map((l) => l.trim().toUpperCase()).filter(Boolean))];
   const borrador: Borrador = {
     titulo: p.titulo?.trim() || 'Sin título',
     enunciado: enunciadoDe(observacion),
     observacion: observacion || '…',
     arbol: /^E(10|[1-9])$/.test((p.arbol ?? '').toUpperCase())
-      ? (p.arbol as Borrador['arbol'])
-      : 'E1',
-    capa: /^C[0-4]$/.test((p.capa ?? '').toUpperCase()) ? (p.capa as Borrador['capa']) : 'C0',
-    lente: p.lentes?.[0] ?? 'AMB',
-    lentes: p.lentes?.length ? p.lentes : ['AMB'],
+      ? (p.arbol!.toUpperCase() as Borrador['arbol']) : 'E1',
+    capa: /^C[0-4]$/.test((p.capa ?? '').toUpperCase())
+      ? (p.capa!.toUpperCase() as Borrador['capa']) : 'C0',
+    lente: lentes[0] ?? 'AMB',
+    lentes: lentes.length ? lentes : ['AMB'],
     tipoEvidencia: p.tipoEvidencia?.trim().toLowerCase() || 'observacion',
     fuente: p.fuente?.trim() || '…',
     fecha: p.fecha?.slice(0, 10) || hoy(),
@@ -86,6 +79,12 @@ export function validarBorradorParcial(p: BorradorParcial): {
     referencia: p.referencia,
     responsable: p.responsable,
     alcance: p.alcance,
+    metodo: p.metodo,
+    interpretacion: p.interpretacion,
+    limitaciones: p.limitaciones,
+    alternativa: p.alternativa,
+    planId: p.planId,
+    textoOriginal: p.textoOriginal,
   };
   if (p.fichaId) borrador.fichaId = p.fichaId;
   if (p.medicionId) borrador.medicionId = p.medicionId;
@@ -93,22 +92,24 @@ export function validarBorradorParcial(p: BorradorParcial): {
   return { borrador, completitud: Math.round((completos / REQUERIDOS.length) * 100) };
 }
 
-/**
- * Contexto de plantilla desde las listas del loader (sin grafo):
- * causa por árbol, ficha/medición por relPath.
- */
+/** Preserva rutas reales del loader en los archivos que descargan los investigadores. */
 export function contextoPreview(
   p: BorradorParcial,
   arboles: OpcionContexto[],
   fichas: OpcionContexto[],
   mediciones: OpcionContexto[],
 ): ContextoPlantilla {
-  const arbol = arboles.find((a) => a.valor === (p.arbol ?? 'E1').toUpperCase());
+  const arbol = arboles.find((a) => a.valor === (p.arbol ?? '').toUpperCase());
   const ficha = fichas.find((f) => f.valor === p.fichaId);
   const medicion = mediciones.find((m) => m.valor === p.medicionId);
   return {
-    causa: { relPath: '', titulo: arbol?.etiqueta ?? (p.arbol || 'E1') },
-    ...(ficha ? { ficha: { relPath: '', titulo: ficha.etiqueta } } : {}),
-    ...(medicion ? { medicion: { relPath: '', titulo: medicion.etiqueta } } : {}),
+    causa: {
+      relPath: arbol?.relPath ?? '',
+      titulo: arbol?.etiqueta ?? 'Árbol por elegir',
+    },
+    ...(ficha ? { ficha: { relPath: ficha.relPath || ficha.valor, titulo: ficha.etiqueta } } : {}),
+    ...(medicion ? {
+      medicion: { relPath: medicion.relPath || medicion.valor, titulo: medicion.etiqueta },
+    } : {}),
   };
 }

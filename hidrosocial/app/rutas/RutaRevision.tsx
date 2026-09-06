@@ -5,6 +5,8 @@ import { encodeNodo } from '~/lib/rutas';
 import { getVaultGraph } from '~/microprocesos/cache/index';
 import {
   ETIQUETAS_DATO,
+  estadoDocumental,
+  evidenciaUtilizable,
   esEvidencia,
   estadoDato,
   estadoRevision,
@@ -22,6 +24,8 @@ export async function loader() {
     .map((n) => {
       const registros = registrosDe(g, n.id);
       const ev = registros.filter(esEvidencia);
+      const revisadas = ev.filter((r) => evidenciaUtilizable(g, r));
+      const documentales = ev.map((r) => estadoDocumental(g, r));
       return {
         id: n.id,
         titulo: n.titulo,
@@ -32,7 +36,14 @@ export async function loader() {
         estado: estadoRevision(n, registros),
         dato: estadoDato(n, registros),
         evidencia: ev.length,
+        apoya: ev.filter((r) => r.frontmatter.relacion === 'apoya').length,
         contradice: ev.filter((r) => r.frontmatter.relacion === 'contradice').length,
+        documentadas: revisadas.length,
+        apoyoDocumentado: revisadas.filter((r) => r.frontmatter.relacion === 'apoya').length,
+        contradiceDocumentada: revisadas.filter((r) => r.frontmatter.relacion === 'contradice').length,
+        pendientes: documentales.filter((e) => e === 'pendiente' || e === 'revisar').length,
+        rechazadas: documentales.filter((e) => e === 'rechazada').length,
+        planes: registros.filter((r) => r.frontmatter.registro === 'contraste').length,
         revisiones: registros.filter((r) => !!r.frontmatter.registro).length,
         abierta: n.frontmatter.vigilar === 'true',
         sinClasificar: n.frontmatter.pendiente_clasificar === 'true',
@@ -63,6 +74,8 @@ export default function RutaRevision() {
       (!filtro ||
         (filtro === 'sin-evidencia' && !n.evidencia) ||
         (filtro === 'contraprueba' && n.contradice > 0) ||
+        (filtro === 'documental' && n.pendientes > 0) ||
+        (filtro === 'sin-contraste' && n.planes === 0) ||
         (filtro === 'abierta' && (n.abierta || n.sinClasificar)) ||
         (filtro === 'datos' && n.tipo === 'medicion' && n.dato !== 'incorporado')),
   );
@@ -79,7 +92,12 @@ export default function RutaRevision() {
           Los conteos muestran el avance documental. La gravedad del daño y las prioridades
           requieren criterios y acuerdos propios.
         </p>
-        <Link to="/sistema">Explorar los supuestos del sistema →</Link>
+        <div className={styles.acciones}>
+          <Link to="/sistema">Explorar los supuestos del sistema →</Link>
+          <Link to={`/nodo/${encodeNodo('7 · El método/Cómo aportar y revisar evidencia.md')}`}>
+            Cómo enviar y revisar una aportación
+          </Link>
+        </div>
       </header>
       <section className={styles.tarjeta} aria-label="Comprender el problema">
         <h2>El punto de partida</h2>
@@ -120,14 +138,29 @@ export default function RutaRevision() {
           con evidencia vinculada
         </div>
         <div className={styles.cuenta}>
-          <strong>{filas.filter((n) => n.contradice > 0).length}</strong>afirmaciones con
-          contrapruebas registradas
+          <strong>{filas.filter((n) => n.contradiceDocumentada > 0).length}</strong>afirmaciones con
+          contrapruebas cuyo respaldo documental fue aceptado
         </div>
         <div className={styles.cuenta}>
-          <strong>{filas.filter((n) => n.revisiones > 0).length}</strong>expedientes con revisiones
-          registradas
+          <strong>{filas.filter((n) => n.planes > 0).length}</strong>expedientes con un plan de
+          contraste registrado
         </div>
       </div>
+      <section className={styles.tarjeta}>
+        <h2>Hipótesis rivales: qué nos haría cambiar de opinión</h2>
+        <p>
+          Antes de salir a campo o volver a analizar datos, abre un expediente y crea un plan de
+          contraste: una explicación alternativa, un resultado esperado y el criterio que te haría
+          revisar la afirmación. Vincula las observaciones al plan para comparar lo previsto con lo
+          encontrado. También puedes registrar un plan con datos ya conocidos, indicando ese momento.
+        </p>
+        <p className={styles.meta}>
+          La aceptación documental permite examinar una fuente; no demuestra causalidad. Una
+          contraprueba puede ser útil aunque todavía no permita resolver la discusión. Los registros
+          pendientes, en revisión o rechazados permanecen visibles y no se cuentan como respaldo
+          documental aceptado.
+        </p>
+      </section>
       <section className={styles.tarjeta}>
         <h2>Cinco recorridos para investigar</h2>
         <p>
@@ -158,7 +191,9 @@ export default function RutaRevision() {
             <select value={filtro} onChange={(e) => setFiltro(e.target.value)}>
               <option value="">Todo</option>
               <option value="sin-evidencia">Sin evidencia vinculada</option>
-              <option value="contraprueba">Con contrapruebas</option>
+              <option value="contraprueba">Con contrapruebas recibidas</option>
+              <option value="documental">Revisión documental pendiente</option>
+              <option value="sin-contraste">Sin plan de contraste</option>
               <option value="abierta">Preguntas o clasificación pendientes</option>
               <option value="datos">Datos pendientes</option>
             </select>
@@ -178,8 +213,14 @@ export default function RutaRevision() {
             <p>{n.texto}</p>
             {n.origen ? <p className={styles.meta}>Correspondencia: {n.origen}</p> : null}
             <p className={styles.meta}>
-              {n.evidencia} evidencias · {n.contradice} contrapruebas · {n.revisiones} revisiones
+              {n.evidencia} evidencias recibidas: {n.apoya} declaran apoyo y {n.contradice} contradicción.
             </p>
+            <p className={styles.meta}>
+              Respaldo documental aceptado: {n.documentadas}; de ellas, {n.apoyoDocumentado} declaran
+              apoyo y {n.contradiceDocumentada} contradicción. Pendientes o en revisión: {n.pendientes}.
+              Rechazadas: {n.rechazadas}.
+            </p>
+            <p className={styles.meta}>{n.planes} planes de contraste · {n.revisiones} entradas al historial</p>
             {n.abierta ? <p>Pregunta abierta: revisar su posición causal.</p> : null}
             {n.sinClasificar ? (
               <p className={styles.meta}>Clasificación y atribuciones pendientes de completar.</p>

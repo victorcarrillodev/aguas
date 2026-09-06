@@ -222,6 +222,14 @@ export async function parseVault(vaultPath: string): Promise<VaultGraph> {
         etiqueta: n.frontmatter.registro || n.frontmatter.relacion || 'Relación pendiente',
       });
   }
+  // El plan forma parte del recorrido documental de una aportación.
+  for (const n of nodos.values()) {
+    const plan = nodos.get(n.frontmatter.plan_id || '');
+    if (n.tipo === 'evidencia' && !n.frontmatter.registro && plan?.frontmatter.registro === 'contraste' &&
+      plan.frontmatter.nodo_id === n.frontmatter.nodo_id) {
+      agregar({ origen: n.id, destino: plan.id, tipo: 'revision', etiqueta: 'Aportación vinculada a un plan de contraste' });
+    }
+  }
   return { nodos, aristas, escaneadoEn: Date.now() };
 }
 

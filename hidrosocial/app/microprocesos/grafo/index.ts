@@ -15,6 +15,10 @@ export interface NodoRender {
   size: number;
   /** Evidencias enlazadas a esta afirmación concreta. */
   evidencias: number;
+  /** Revisión documental aceptada; no certifica la interpretación causal. */
+  evidenciasAceptadas?: number;
+  documental?: string;
+  registro?: string;
   /** Prioriza afirmaciones muy conectadas que siguen sin evidencia. */
   cuello: number;
   motivoCuello?: string;
