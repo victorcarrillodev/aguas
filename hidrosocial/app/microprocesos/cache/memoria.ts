@@ -2,11 +2,11 @@ import type { Dirent } from 'node:fs';
 import { readdir, stat } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 
+import { listarDocumentos, postgresConfigurado } from '../persistencia/index.server';
 import { parseVault } from '../vault-core/index';
 import type { FileMeta, VaultGraph } from '../vault-core/tipos';
 
-// Singleton en memoria: grafo + firmas por archivo + marca temporal.
-// TTL 2 s; revalida escaneando mtimes de `.md`/`.canvas`.
+// TTL 2 s: revalida archivos y registros de PostgreSQL, incluidos cambios de otros procesos.
 
 const TTL_MS = 2000;
 
@@ -19,6 +19,9 @@ let grafo: VaultGraph | undefined;
 let firmas: Map<string, FileMeta> = new Map();
 let escaneadoEn = 0;
 let enVuelo: Promise<VaultGraph> | null = null;
+let generacion = 0;
+let rutaCache = '';
+let postgresCache = false;
 
 const EXCLUIDOS = new Set([
   '.obsidian',
@@ -70,32 +73,46 @@ function mismasFirmas(a: Map<string, FileMeta>, b: Map<string, FileMeta>): boole
 
 async function cargar(): Promise<VaultGraph> {
   const vaultPath = getVaultPath();
+  const usaPostgres = postgresConfigurado();
   const ahora = Date.now();
-  if (grafo && ahora - escaneadoEn < TTL_MS) return grafo;
-  const nuevas = await recogerFirmas(vaultPath);
-  if (grafo && mismasFirmas(firmas, nuevas)) {
+  const version = generacion;
+  const mismaFuente = rutaCache === vaultPath && postgresCache === usaPostgres;
+  if (grafo && mismaFuente && ahora - escaneadoEn < TTL_MS) return grafo;
+  const [nuevas, documentos] = await Promise.all([
+    recogerFirmas(vaultPath),
+    usaPostgres ? listarDocumentos() : Promise.resolve([]),
+  ]);
+  // Los mtimes no reflejan cambios en PostgreSQL: siempre incorporar su nueva lectura.
+  const resultado = grafo && mismaFuente && !usaPostgres && mismasFirmas(firmas, nuevas)
+    ? grafo
+    : await parseVault(vaultPath, documentos);
+  // Una lectura iniciada antes del guardado no puede restaurar la caché invalidada.
+  if (version === generacion) {
+    grafo = resultado;
+    firmas = nuevas;
     escaneadoEn = ahora;
-    return grafo;
+    rutaCache = vaultPath;
+    postgresCache = usaPostgres;
   }
-  grafo = await parseVault(vaultPath);
-  firmas = nuevas;
-  escaneadoEn = ahora;
-  return grafo;
+  return resultado;
 }
 
-/** Grafo del vault con caché TTL; reparsea solo si cambiaron mtimes. */
-export async function getVaultGraph(): Promise<VaultGraph> {
+/** Grafo combinado; los cambios externos se incorporan al vencer el TTL. */
+export function getVaultGraph(): Promise<VaultGraph> {
   if (!enVuelo) {
-    enVuelo = cargar().finally(() => {
-      enVuelo = null;
+    const pendiente = cargar().finally(() => {
+      if (enVuelo === pendiente) enVuelo = null;
     });
+    enVuelo = pendiente;
   }
   return enVuelo;
 }
 
-/** Invalida la caché (la llama `captura` tras escribir). */
+/** Invalida inmediatamente después de confirmar una escritura. */
 export function invalidar(): void {
+  generacion += 1;
   grafo = undefined;
   firmas = new Map();
   escaneadoEn = 0;
+  enVuelo = null;
 }

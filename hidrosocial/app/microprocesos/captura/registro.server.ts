@@ -1,7 +1,6 @@
 import { randomUUID } from 'node:crypto';
-import { mkdir, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
-import { getVaultGraph, getVaultPath, invalidar } from '../cache/index';
+import { getVaultGraph, invalidar } from '../cache/index';
+import { crearDocumento } from '../persistencia/index.server';
 import { DECISIONES, ESTADOS_DATO, MOMENTOS_CONTRASTE, TIPOS_VALOR } from '../revision/index';
 
 /** Registro inmutable: agrega al historial sin sustituir el documento de origen. */
@@ -12,9 +11,9 @@ export async function guardarRegistro(fd: FormData, nodoId: string): Promise<str
     throw new Error('Selecciona una afirmación, indicador o evidencia disponible.');
   const campo = (k: string, requerido = false) => {
     const raw = fd.get(k);
-    if (raw !== null && typeof raw !== 'string') throw new Error('El campo ' + k + ' debe contener texto.');
+    if (raw !== null && typeof raw !== 'string') throw new Error(`El campo ${k} debe contener texto.`);
     const v = (raw ?? '').trim();
-    if (requerido && !v) throw new Error('Completa ' + k.replaceAll('_', ' ') + '.');
+    if (requerido && !v) throw new Error(`Completa ${k.replaceAll('_', ' ')}.`);
     if (v.length > 12000) throw new Error('Un campo supera los 12 000 caracteres.');
     return v;
   };
@@ -110,15 +109,11 @@ export async function guardarRegistro(fd: FormData, nodoId: string): Promise<str
     if (datos.estado_dato === 'no-localizado')
       datos.fuentes_consultadas = campo('fuentes_consultadas', true);
   }
-  const titulo = (registro === 'contraste' ? 'Plan de contraste' : registro) + ' · ' + nodo.titulo;
+  const titulo = `${registro === 'contraste' ? 'Plan de contraste' : registro} · ${nodo.titulo}`;
   const fm = { titulo, arbol: nodo.arbol || '', ...datos };
-  const contenido = '---\n' +
-    Object.entries(fm).map(([k, v]) => k + ': ' + JSON.stringify(v)).join('\n') +
-    '\n---\n\n# ' + titulo.replace(/[\r\n]/g, ' ') + '\n\n' + datos.fundamento + '\n';
-  const dir = join(getVaultPath(), '9 · Evidencia de campo');
-  await mkdir(dir, { recursive: true });
-  const nombre = 'revision-' + randomUUID() + '.md';
-  await writeFile(join(dir, nombre), contenido, { encoding: 'utf8', flag: 'wx' });
+  const cuerpo = `# ${titulo.replace(/[\r\n]/g, ' ')}\n\n${datos.fundamento}\n`;
+  const id = `9 · Evidencia de campo/revision-${randomUUID()}.md`;
+  await crearDocumento({ id, metadatos: fm, cuerpo });
   invalidar();
-  return '9 · Evidencia de campo/' + nombre;
+  return id;
 }

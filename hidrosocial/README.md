@@ -53,19 +53,22 @@ bun install
 bun run dev        # http://localhost:3000 (VAULT_PATH=.. por defecto)
 ```
 
-Variables (`VAULT_PATH`, `PORT`): ver `.env.example`.
+Variables de conexión y servidor: ver `.env.example`. Sin PostgreSQL configurado, la web funciona en solo lectura. Para guardar, configura `DATABASE_URL` o `PGHOST` y ejecuta `bun run db:migrate`.
 
 ```bash
 bun run build && bun run start   # producción local
-docker compose up --build        # vault montado en /vault, puerto 3000
+# Docker en el servidor: configura .env y sigue MIGRACION-POSTGRES.md
+docker compose up -d --build     # vault en solo lectura, web en puerto 3005
 ```
 
 Rutas: `/` panel · `/sistema` · `/revision` · `/captura` · `/grafo` · `/grafo/:nodeId` ·
 `/nodo/:slug` · `/healthcheck`.
 
+Consulta [la migración a PostgreSQL](MIGRACION-POSTGRES.md) antes del primer despliegue para respaldar e importar las capturas existentes del servidor. Los registros nuevos se guardan en la base sin cambiar el vault ni hacer push.
+
 ## Microprocesos
 
-`vault-core` (parseo) · `cache` (única lectura del fs) · `captura` (única escritura) ·
+`vault-core` (parseo) · `cache` (lectura del vault y registros guardados) · `captura` (validación de aportaciones) · `persistencia` (PostgreSQL) ·
 `dashboard` (agregaciones) · `grafo` (red para Sigma) · `busqueda` · `sistema`
 (dependencias entre causas y simulación). Cada uno con su `README.md` y su `index.ts`
 como contrato público.

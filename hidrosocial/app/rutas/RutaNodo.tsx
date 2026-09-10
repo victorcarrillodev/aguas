@@ -7,7 +7,7 @@ import { MesaNodo } from '~/design-system/cauces/MesaNodo';
 import { Chip } from '~/design-system/gotas/Chip';
 import { colorDeNodo } from '~/lib/colores';
 import { decodeNodo, encodeNodo, unirPosix } from '~/lib/rutas';
-import { exportarExpediente, getVaultGraph, getVaultPath } from '~/microprocesos/cache/index';
+import { exportarExpediente, getVaultGraph, getVaultPath, leerNota } from '~/microprocesos/cache/index';
 import { guardarRegistro } from '~/microprocesos/captura/registro.server';
 import {
   estadoDato,
@@ -17,7 +17,7 @@ import {
   registrosDe,
   relacionesDe,
 } from '~/microprocesos/revision/index';
-import { leerNota } from '~/microprocesos/vault-core/index';
+import { ConflictoBorrador, ErrorPersistencia } from '~/microprocesos/persistencia/index.server';
 import type { VaultNode } from '~/microprocesos/vault-core/tipos';
 import type { CapaId, VaultNodeType } from '~/microprocesos/vault-core/tipos';
 import styles from './RutaNodo.module.css';
@@ -53,11 +53,21 @@ export async function action({ request, params }: ActionFunctionArgs) {
     await guardarRegistro(await request.formData(), decodeNodo(params.slug ?? ''));
     return json({ ok: true });
   } catch (e) {
-    return json({ error: e instanceof Error ? e.message : 'No se pudo guardar.' }, { status: 400 });
+    const status = e instanceof ErrorPersistencia ? 503 : e instanceof ConflictoBorrador ? 409 : 400;
+    return json({ error: e instanceof Error ? e.message : 'No se pudo guardar.' }, { status });
   }
 }
 
-export async function loader({ params, request }: LoaderFunctionArgs) {
+export async function loader(args: LoaderFunctionArgs) {
+  try {
+    return await cargarNodo(args);
+  } catch (error) {
+    if (error instanceof ErrorPersistencia) throw new Response(error.message, { status: 503 });
+    throw error;
+  }
+}
+
+async function cargarNodo({ params, request }: LoaderFunctionArgs) {
   let relPath: string;
   try {
     relPath = decodeNodo(params.slug ?? '');
@@ -70,7 +80,8 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
   let nota: Awaited<ReturnType<typeof leerNota>>;
   try {
     nota = await leerNota(vaultPath, relPath);
-  } catch {
+  } catch (error) {
+    if (error instanceof ErrorPersistencia) throw error;
     throw new Response('Nota no encontrada', { status: 404 });
   }
   const directos = registrosDe(g, relPath);
@@ -298,7 +309,7 @@ export default function RutaNodo() {
       </div>
       <h1 className={styles.titulo}>{d.titulo}</h1>
       {d.recibido ? (
-        <section role="status" aria-label="Aportación recibida">
+        <section aria-live="polite" aria-label="Aportación recibida">
           <h2>Aportación recibida</h2>
           <p>El registro está guardado. Conserva este enlace para compartirlo o consultar su revisión.</p>
           <p>Referencia del registro: <code>{d.nodo.id}</code></p>

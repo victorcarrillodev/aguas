@@ -1,5 +1,5 @@
-import { leerNota } from '../vault-core/index';
 import type { VaultGraph } from '../vault-core/tipos';
+import { leerNota } from './lector';
 
 /** Incluye las notas completas y todas las revisiones descendientes, sin perder observaciones. */
 export async function exportarExpediente(g: VaultGraph, id: string, vaultPath: string): Promise<string> {

@@ -95,8 +95,7 @@ function lineaBase(cuerpo: string): boolean | undefined {
   return !/no disponible/i.test(seccion);
 }
 
-function construirNodo(relPath: string, texto: string): VaultNode | null {
-  const { datos, cuerpo } = parseFrontmatter(texto);
+function construirNodo(relPath: string, datos: Record<string, string | undefined>, cuerpo: string): VaultNode | null {
   const tipo = tipoDeNota(relPath, datos);
   if (!tipo) return null;
   const arbol = arbolDeNota(relPath, datos);
@@ -121,7 +120,25 @@ function construirNodo(relPath: string, texto: string): VaultNode | null {
   return nodo;
 }
 
-export async function parseVault(vaultPath: string): Promise<VaultGraph> {
+/** Documento operativo independiente del formato de almacenamiento. */
+export interface DocumentoVault {
+  id: string;
+  metadatos: Record<string, string | undefined>;
+  cuerpo: string;
+}
+
+/** Construye el contrato de lectura directamente desde los metadatos de PostgreSQL. */
+export function notaDesdeDatos(
+  relPath: string,
+  datos: Record<string, string | undefined>,
+  cuerpo: string,
+): NotaCompleta {
+  const nodo = construirNodo(relPath, datos, cuerpo);
+  if (!nodo) throw new Error(`Nota ignorada por el clasificador: ${relPath}`);
+  return { nodo, frontmatter: datos, cuerpo, links: extraerLinks(cuerpo, directorioDe(relPath)) };
+}
+
+export async function parseVault(vaultPath: string, adicionales: DocumentoVault[] = []): Promise<VaultGraph> {
   const rels = await recogerArchivos(vaultPath);
   const nodos = new Map<string, VaultNode>();
   const aristas: VaultEdge[] = [];
@@ -143,10 +160,19 @@ export async function parseVault(vaultPath: string): Promise<VaultGraph> {
     } catch {
       continue;
     }
-    const nodo = construirNodo(rel, texto);
+    const { datos, cuerpo } = parseFrontmatter(texto);
+    const nodo = construirNodo(rel, datos, cuerpo);
     if (!nodo) continue;
     nodos.set(rel, nodo);
-    cuerpos.set(rel, parseFrontmatter(texto).cuerpo);
+    cuerpos.set(rel, cuerpo);
+  }
+
+  // PostgreSQL prevalece por identidad; el archivo legado no duplica un registro importado.
+  // Se integra antes de resolver enlaces, canvas y relaciones del expediente.
+  for (const documento of adicionales) {
+    const nota = notaDesdeDatos(documento.id, documento.metadatos, documento.cuerpo);
+    nodos.set(documento.id, nota.nodo);
+    cuerpos.set(documento.id, nota.cuerpo);
   }
 
   // 2) Enlaces markdown → aristas (solo a nodos existentes).
@@ -269,14 +295,7 @@ export async function parseVault(vaultPath: string): Promise<VaultGraph> {
 export async function leerNota(vaultPath: string, relPath: string): Promise<NotaCompleta> {
   const texto = await readFile(join(vaultPath, ...relPath.split('/')), 'utf8');
   const { datos, cuerpo } = parseFrontmatter(texto);
-  const construido = construirNodo(relPath, texto);
-  if (!construido) throw new Error(`Nota ignorada por el clasificador: ${relPath}`);
-  return {
-    nodo: construido,
-    frontmatter: datos,
-    cuerpo,
-    links: extraerLinks(cuerpo, directorioDe(relPath)),
-  };
+  return notaDesdeDatos(relPath, datos, cuerpo);
 }
 
 export interface InfoArbol {

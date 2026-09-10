@@ -9,7 +9,10 @@
     "build": "remix vite:build",
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc --noEmit",
-    "lint": "biome check ."
+    "lint": "biome lint .",
+    "test": "bun test --max-concurrency=1",
+    "db:migrate": "bun scripts/migrate.ts",
+    "db:import": "bun scripts/import-vault.ts"
   },
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.1.0",
@@ -23,13 +26,16 @@
     "graphology-layout-forceatlas2": "^0.10.1",
     "isbot": "^4.4.0",
     "material-symbols": "^0.47.0",
+    "pg": "^8.23.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sigma": "^2.4.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.0",
+    "@electric-sql/pglite": "^0.5.8",
     "@remix-run/dev": "^2.16.0",
+    "@types/pg": "^8.23.1",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
     "typescript": "^5.6.0",

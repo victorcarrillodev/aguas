@@ -1,7 +1,7 @@
 import { json, redirect } from '@remix-run/node';
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
-import { Form, useActionData, useLoaderData, useNavigation } from '@remix-run/react';
-import { useEffect, useMemo, useState } from 'react';
+import { Form, useActionData, useFetcher, useLoaderData, useNavigation } from '@remix-run/react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { FormBloque } from '~/design-system/corrientes/FormBloque';
 import { AreaTexto } from '~/design-system/gotas/AreaTexto';
@@ -15,6 +15,23 @@ import { decodeNodo, encodeNodo, slugificar } from '~/lib/rutas';
 import { CAPAS, LENTES, TIPOS_EVIDENCIA } from '~/lib/taxonomia';
 import { getVaultGraph } from '~/microprocesos/cache/index';
 import { guardarNota, validarBorrador } from '~/microprocesos/captura/index';
+import {
+  ErrorFormularioCaptura,
+  leerFormularioCaptura,
+  sesionBorrador,
+  validarDatosBorrador,
+  versionBorrador,
+} from '~/microprocesos/captura/borrador.server';
+import { VACIO, normalizarEstado } from '~/microprocesos/captura/estado';
+import type { EstadoForm } from '~/microprocesos/captura/estado';
+import {
+  ConflictoBorrador,
+  ErrorPersistencia,
+  guardarBorrador as guardarBorradorServidor,
+  leerBorrador,
+  postgresConfigurado,
+} from '~/microprocesos/persistencia/index.server';
+import type { DatosBorrador } from '~/microprocesos/persistencia/index.server';
 import { RELACIONES } from '~/microprocesos/revision/index';
 import type { ArbolId, CapaId } from '~/microprocesos/vault-core/tipos';
 import styles from './RutaCaptura.module.css';
@@ -33,6 +50,8 @@ interface Datos {
   fichas: Opcion[];
   mediciones: Opcion[];
   error?: string;
+  borrador: EstadoForm | null;
+  version: number;
   inicial?: {
     nodoId: string;
     afirmacion: string;
@@ -43,9 +62,8 @@ interface Datos {
   };
 }
 
-const CLAVE_BORRADOR = 'hidrosocial-borrador';
-
 export async function loader({ request }: LoaderFunctionArgs) {
+  const sesion = await sesionBorrador(request);
   const g = await getVaultGraph();
   const arboles: Opcion[] = [...g.nodos.values()]
     .filter((n) => n.tipo === 'causa')
@@ -100,74 +118,50 @@ export async function loader({ request }: LoaderFunctionArgs) {
   } catch {
     /* Entrada libre sin una afirmación preseleccionada. */
   }
-  return json<Datos>({ arboles, objetivos, fichas, mediciones, inicial });
+  const guardado = postgresConfigurado() ? await leerBorrador(sesion.token) : null;
+  return json<Datos>(
+    {
+      arboles, objetivos, fichas, mediciones, inicial,
+      borrador: guardado && !inicial ? normalizarEstado(guardado.datos) : null,
+      version: guardado?.version ?? 0,
+    },
+    { headers: sesion.headers },
+  );
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  const fd = await request.formData();
+  const sesion = await sesionBorrador(request);
+  let requestId = '';
   try {
+    const fd = await leerFormularioCaptura(request);
+    requestId = String(fd.get('_requestId') ?? '');
+    const version = versionBorrador(fd);
+    if (fd.get('_intent') === 'guardar-borrador') {
+      const datos = validarDatosBorrador(fd);
+      const nuevaVersion = await guardarBorradorServidor(
+        sesion.token,
+        datos as unknown as DatosBorrador,
+        version,
+      );
+      return json(
+        { ok: true, version: nuevaVersion, requestId },
+        { headers: sesion.headers },
+      );
+    }
     const borrador = validarBorrador(fd);
-    const nodo = await guardarNota(borrador);
+    const nodo = await guardarNota(borrador, { token: sesion.token, version });
     const url = new URL(request.url);
     const base = url.pathname.replace(/\/captura\/?$/, '');
-    return redirect(`${base}/nodo/${encodeNodo(nodo.id)}?recibido=1`);
+    const nuevaSesion = await sesionBorrador(request, true);
+    return redirect(`${base}/nodo/${encodeNodo(nodo.id)}?recibido=1`, { headers: nuevaSesion.headers });
   } catch (e) {
     const mensaje = e instanceof Error ? e.message : 'No se pudo guardar la evidencia.';
-    return json({ error: mensaje }, { status: 400 });
+    const status = e instanceof ErrorPersistencia ? 503
+      : e instanceof ConflictoBorrador ? 409
+      : e instanceof ErrorFormularioCaptura ? e.status : 400;
+    return json({ error: mensaje, requestId }, { status, headers: sesion.headers });
   }
 }
-
-interface EstadoForm {
-  titulo: string;
-  observacion: string;
-  arbol: string;
-  fichaId: string;
-  medicionId: string;
-  capa: string;
-  lentes: string[];
-  tipoEvidencia: string;
-  fuente: string;
-  fecha: string;
-  municipio: string;
-  nodoId: string;
-  afirmacion: string;
-  relacion: string;
-  referencia: string;
-  responsable: string;
-  alcance: string;
-  metodo: string;
-  interpretacion: string;
-  limitaciones: string;
-  alternativa: string;
-  planId: string;
-  textoOriginal: string;
-}
-
-const VACIO: EstadoForm = {
-  titulo: '',
-  observacion: '',
-  arbol: '',
-  fichaId: '',
-  medicionId: '',
-  capa: '',
-  lentes: [],
-  tipoEvidencia: 'observacion',
-  fuente: '',
-  fecha: '',
-  municipio: '',
-  nodoId: '',
-  afirmacion: '',
-  relacion: 'no-concluyente',
-  referencia: '',
-  responsable: '',
-  alcance: '',
-  metodo: '',
-  interpretacion: '',
-  limitaciones: '',
-  alternativa: '',
-  planId: '',
-  textoOriginal: '',
-};
 
 function ahoraLocal(): string {
   const d = new Date();
@@ -217,31 +211,53 @@ function Anillo({ valor }: { valor: number }) {
 
 // Cuenca: captura trazable + preview .md en vivo + anillo de campos completos.
 export default function RutaCaptura() {
-  const { arboles, objetivos, fichas, mediciones, inicial } = useLoaderData<Datos>();
+  const { arboles, objetivos, fichas, mediciones, inicial, borrador: borradorGuardado, version: versionInicial } = useLoaderData<Datos>();
   const accion = useActionData<{ error?: string } | undefined>();
+  const guardador = useFetcher<{ ok?: boolean; error?: string; version?: number; requestId?: string }>();
   const navegacion = useNavigation();
   const [form, setForm] = useState<EstadoForm>(VACIO);
   const [guardado, setGuardado] = useState(false);
   const [mensajeLocal, setMensajeLocal] = useState('');
+  const [version, setVersion] = useState(versionInicial);
+  const formularioRef = useRef<HTMLFormElement>(null);
+  const solicitudRef = useRef('');
+  const estadoEnviadoRef = useRef('');
+  const respuestaRef = useRef('__ninguna__');
 
-  // Restaura borrador + fecha por defecto (solo cliente, tras hidratar).
+  // PostgreSQL restaura el borrador del navegador mediante una cookie opaca.
   useEffect(() => {
     if (inicial) {
       setForm({ ...VACIO, ...inicial, fecha: ahoraLocal() });
+      setVersion(versionInicial);
       return;
     }
-    try {
-      const raw = window.localStorage.getItem(CLAVE_BORRADOR);
-      if (raw) {
-        const prev = JSON.parse(raw) as Partial<EstadoForm>;
-        setForm({ ...VACIO, ...prev, lentes: prev.lentes ?? [] });
-        return;
-      }
-    } catch {
-      // Sin borrador guardado.
+    if (borradorGuardado) {
+      setForm(borradorGuardado);
+      setVersion(versionInicial);
+      return;
     }
     setForm((f) => ({ ...f, fecha: ahoraLocal() }));
-  }, [inicial?.nodoId, inicial?.planId]);
+    setVersion(0);
+  }, [borradorGuardado, inicial, versionInicial]);
+
+  useEffect(() => {
+    if (guardador.state !== 'idle' || !guardador.data) return;
+    if (guardador.data.requestId && guardador.data.requestId !== solicitudRef.current) return;
+    const requestId = guardador.data.requestId ?? '';
+    if (requestId === respuestaRef.current) return;
+    respuestaRef.current = requestId;
+    if (guardador.data.ok && typeof guardador.data.version === 'number') {
+      setVersion(guardador.data.version);
+      const sinCambios = JSON.stringify(form) === estadoEnviadoRef.current;
+      setGuardado(sinCambios);
+      setMensajeLocal(sinCambios
+        ? 'Borrador guardado en PostgreSQL. Todavía no se ha enviado.'
+        : 'Se guardó la versión anterior del borrador. Guarda otra vez para incluir los últimos cambios.');
+    } else if (guardador.data.error) {
+      setGuardado(false);
+      setMensajeLocal(guardador.data.error);
+    }
+  }, [form, guardador.data, guardador.state]);
 
   const set = <K extends keyof EstadoForm>(k: K, v: EstadoForm[K]) => {
     setGuardado(false);
@@ -297,13 +313,17 @@ export default function RutaCaptura() {
     : [];
 
   const guardarBorrador = () => {
-    try {
-      window.localStorage.setItem(CLAVE_BORRADOR, JSON.stringify(form));
-      setGuardado(true);
-      setMensajeLocal('Borrador guardado en este navegador. Todavía no se ha enviado.');
-    } catch {
-      setMensajeLocal('Este navegador no permitió guardar el borrador. Puedes descargar una copia cuando esté completa.');
-    }
+    if (!formularioRef.current || guardador.state !== 'idle') return;
+    const requestId = crypto.randomUUID();
+    solicitudRef.current = requestId;
+    estadoEnviadoRef.current = JSON.stringify(form);
+    const datos = new FormData(formularioRef.current);
+    datos.set('_intent', 'guardar-borrador');
+    datos.set('_version', String(version));
+    datos.set('_requestId', requestId);
+    setGuardado(false);
+    setMensajeLocal('Guardando borrador…');
+    guardador.submit(datos, { method: 'post' });
   };
 
   const descargar = () => {
@@ -324,6 +344,7 @@ export default function RutaCaptura() {
   const enunciado = borrador.enunciado === '…' ? '' : borrador.enunciado;
   const completa = completitud >= 100;
   const enviando = navegacion.state === 'submitting';
+  const guardando = guardador.state !== 'idle';
 
   return (
     <div className={styles.cuenca}>
@@ -338,8 +359,10 @@ export default function RutaCaptura() {
           {accion.error}
         </p>
       ) : null}
-      {mensajeLocal ? <p role="status">{mensajeLocal}</p> : null}
-      <Form method="post" className={styles.rejilla}>
+      {mensajeLocal ? <output>{mensajeLocal}</output> : null}
+      <Form method="post" className={styles.rejilla} ref={formularioRef}>
+        <input type="hidden" name="_intent" value="enviar" />
+        <input type="hidden" name="_version" value={version} />
         <div className={styles.formulario}>
           <FormBloque
             numero={1}
@@ -614,8 +637,8 @@ export default function RutaCaptura() {
         <div className={styles.actionBar}>
           <Anillo valor={completitud} />
           <div className={styles.botones}>
-            <Boton type="button" variante="secundario" onClick={guardarBorrador}>
-              {guardado ? 'Borrador guardado ✓' : 'Guardar borrador'}
+            <Boton type="button" variante="secundario" onClick={guardarBorrador} disabled={guardando || enviando}>
+              {guardando ? 'Guardando…' : guardado ? 'Borrador guardado ✓' : 'Guardar borrador'}
             </Boton>
             <Boton type="button" variante="secundario" onClick={descargar}>
               Descargar aportación
@@ -623,7 +646,7 @@ export default function RutaCaptura() {
             <Boton
               type="submit"
               variante={completa ? 'primario' : 'secundario'}
-              disabled={!completa || enviando}
+              disabled={!completa || enviando || guardando}
             >
               {enviando ? 'Enviando…' : 'Enviar aportación'}
             </Boton>

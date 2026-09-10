@@ -35,10 +35,10 @@ export interface Borrador {
 function campo(fd: FormData, nombre: string, maximo = 12000): string {
   const raw = fd.get(nombre);
   if (raw !== null && typeof raw !== 'string')
-    throw new Error('El campo ' + nombre + ' debe contener texto.');
+    throw new Error(`El campo ${nombre} debe contener texto.`);
   const valor = (raw ?? '').trim();
   if (valor.length > maximo)
-    throw new Error('El campo ' + nombre + ' supera los ' + maximo + ' caracteres.');
+    throw new Error(`El campo ${nombre} supera los ${maximo} caracteres.`);
   return valor;
 }
 
@@ -77,17 +77,17 @@ export function validarBorrador(fd: FormData): Borrador {
   if (!observacion) throw new Error('Falta la observación de campo.');
   if (!fuente) throw new Error('Falta la fuente.');
   if (!(ARBOLES as readonly string[]).includes(arbol))
-    throw new Error('Árbol inválido: usa uno de ' + ARBOLES.join(', ') + '.');
+    throw new Error(`Árbol inválido: usa uno de ${ARBOLES.join(', ')}.`);
   if (!(CAPAS.map((c) => c.id) as string[]).includes(capa))
     throw new Error('Capa inválida: usa una de C0–C4.');
   if (lentes.length === 0 || !lentes.every((l) => (LENTES as readonly string[]).includes(l)))
-    throw new Error('Elige al menos una dimensión válida: ' + LENTES.join(', ') + '.');
+    throw new Error(`Elige al menos una dimensión válida: ${LENTES.join(', ')}.`);
   if (!(TIPOS_EVIDENCIA as readonly string[]).includes(tipoEvidencia))
     throw new Error('Tipo de evidencia inválido.');
   if (!(RELACIONES as readonly string[]).includes(relacion))
     throw new Error('Relación con la afirmación inválida.');
   if (!fecha) throw new Error('Fecha inválida: usa aaaa-mm-dd o una fecha y hora local válidas.');
-  const fechaReal = new Date(fecha + 'T12:00:00Z');
+  const fechaReal = new Date(`${fecha}T12:00:00Z`);
   if (!Number.isFinite(fechaReal.getTime()) || fechaReal.toISOString().slice(0, 10) !== fecha)
     throw new Error('La fecha no existe en el calendario.');
 
@@ -120,7 +120,7 @@ export function validarBorrador(fd: FormData): Borrador {
     ['limitaciones', 'los límites o incertidumbres del registro'],
   ];
   for (const [clave, etiqueta] of requeridos)
-    if (!b[clave]) throw new Error('Completa ' + etiqueta + '.');
+    if (!b[clave]) throw new Error(`Completa ${etiqueta}.`);
   if (fichaId) b.fichaId = fichaId;
   if (medicionId) b.medicionId = medicionId;
   if (municipio) b.municipio = municipio;

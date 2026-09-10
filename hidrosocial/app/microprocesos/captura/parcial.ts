@@ -43,8 +43,7 @@ const REQUERIDOS: (keyof BorradorParcial)[] = [
 
 function hoy(): string {
   const d = new Date();
-  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') +
-    '-' + String(d.getDate()).padStart(2, '0');
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
 function enunciadoDe(observacion: string): string {
@@ -65,9 +64,9 @@ export function validarBorradorParcial(p: BorradorParcial): {
     enunciado: enunciadoDe(observacion),
     observacion: observacion || '…',
     arbol: /^E(10|[1-9])$/.test((p.arbol ?? '').toUpperCase())
-      ? (p.arbol!.toUpperCase() as Borrador['arbol']) : 'E1',
+      ? (p.arbol?.toUpperCase() as Borrador['arbol']) : 'E1',
     capa: /^C[0-4]$/.test((p.capa ?? '').toUpperCase())
-      ? (p.capa!.toUpperCase() as Borrador['capa']) : 'C0',
+      ? (p.capa?.toUpperCase() as Borrador['capa']) : 'C0',
     lente: lentes[0] ?? 'AMB',
     lentes: lentes.length ? lentes : ['AMB'],
     tipoEvidencia: p.tipoEvidencia?.trim().toLowerCase() || 'observacion',

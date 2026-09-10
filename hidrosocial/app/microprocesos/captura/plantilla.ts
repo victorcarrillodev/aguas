@@ -12,7 +12,7 @@ const DIR_EVIDENCIA = '9 · Evidencia de campo';
 function ref(titulo: string, relPath: string): string {
   // Corchetes y saltos dentro de la etiqueta romperían el enlace Markdown.
   const etiqueta = titulo.replace(/[\r\n]+/g, ' ').replace(/\[/g, '(').replace(/\]/g, ')');
-  if (!relPath) return '**' + etiqueta + '**';
+  if (!relPath) return `**${etiqueta}**`;
   return enlaceMarkdown(etiqueta, DIR_EVIDENCIA, relPath);
 }
 
@@ -22,9 +22,9 @@ export function renderPlantilla(b: Borrador, ctx: ContextoPlantilla): string {
   const linkFicha = ctx.ficha ? ref(ctx.ficha.titulo, ctx.ficha.relPath) : null;
   const linkMedicion = ctx.medicion ? ref(ctx.medicion.titulo, ctx.medicion.relPath) : null;
   const linkObjetivo = ref(b.afirmacion || 'Afirmación por elegir', b.nodoId || '');
-  const presenta = ['**Evidencia de campo** del árbol ' + linkCausa + '.'];
-  if (linkFicha) presenta.push('Ficha relacionada: ' + linkFicha + '.');
-  if (linkMedicion) presenta.push('Medición relacionada: ' + linkMedicion + '.');
+  const presenta = [`**Evidencia de campo** del árbol ${linkCausa}.`];
+  if (linkFicha) presenta.push(`Ficha relacionada: ${linkFicha}.`);
+  if (linkMedicion) presenta.push(`Medición relacionada: ${linkMedicion}.`);
 
   const fm = {
     esquema_version: '2',
@@ -57,15 +57,15 @@ export function renderPlantilla(b: Borrador, ctx: ContextoPlantilla): string {
   };
   const lineas = [
     '---',
-    ...Object.entries(fm).map(([k, v]) => k + ': ' + JSON.stringify(v)),
+    ...Object.entries(fm).map(([k, v]) => `${k}: ${JSON.stringify(v)}`),
     '---', '',
-    '# ' + b.titulo.replace(/[\r\n]+/g, ' '), '',
-    '> ' + b.enunciado.replace(/\r?\n/g, '\n> '), '',
+    `# ${b.titulo.replace(/[\r\n]+/g, ' ')}`, '',
+    `> ${b.enunciado.replace(/\r?\n/g, '\n> ')}`, '',
     presenta.join(' '), '',
     '## Afirmación examinada', '',
     linkObjetivo, '',
-    '**Enunciado conservado al registrar:** ' + (b.textoOriginal || 'Se incorpora al guardar en el servidor.'), '',
-    '**Relación declarada:** ' + (b.relacion || 'no-concluyente') + '. La revisión documental está pendiente.', '',
+    `**Enunciado conservado al registrar:** ${b.textoOriginal || 'Se incorpora al guardar en el servidor.'}`, '',
+    `**Relación declarada:** ${b.relacion || 'no-concluyente'}. La revisión documental está pendiente.`, '',
     '## Observación de campo', '',
     b.observacion, '',
     '## Cómo se obtuvo la información', '',
@@ -79,15 +79,13 @@ export function renderPlantilla(b: Borrador, ctx: ContextoPlantilla): string {
     '## Explicación alternativa', '',
     b.alternativa || 'No se registró una explicación alternativa.', '',
   ];
-  if (b.planId) lineas.push('**Plan de contraste:** ' + ref('Consultar plan', b.planId), '');
+  if (b.planId) lineas.push(`**Plan de contraste:** ${ref('Consultar plan', b.planId)}`, '');
   lineas.push(
-    '**Responsable:** ' + (b.responsable || 'Por registrar'), '',
+    `**Responsable:** ${b.responsable || 'Por registrar'}`, '',
     '## Fuentes', '',
     '| Tipo | Referencia | Fecha |',
     '|---|---|---|',
-    '| ' + b.tipoEvidencia + ' | ' +
-      (b.referencia || b.fuente).replaceAll('|', '/').replace(/[\r\n]/g, ' ') +
-      ' | ' + b.fecha + ' |', '',
+    `| ${b.tipoEvidencia} | ${(b.referencia || b.fuente).replaceAll('|', '/').replace(/[\r\n]/g, ' ')} | ${b.fecha} |`, '',
   );
   return lineas.join('\n');
 }

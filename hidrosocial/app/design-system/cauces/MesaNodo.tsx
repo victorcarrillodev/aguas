@@ -117,7 +117,7 @@ export function MesaNodo({
         ) : null}
         <div className={styles.acciones}>
           {permiteContraste ? (
-            <Link to={'/captura?nodo=' + encodeNodo(nodo.id)}>Contrastar con evidencia</Link>
+            <Link to={`/captura?nodo=${encodeNodo(nodo.id)}`}>Contrastar con evidencia</Link>
           ) : null}
           <Link to="/revision">Mesa de investigación</Link>
           <button type="button" onClick={exportar} disabled={!exportacion}>
@@ -151,7 +151,7 @@ export function MesaNodo({
             <p className={styles.meta}>El momento declarado y la fecha de guardado no constituyen un prerregistro certificado.</p>
           ) : null}
           {nodo.frontmatter.nodo_id ? (
-            <Link to={'/nodo/' + encodeNodo(nodo.frontmatter.nodo_id)}>Volver al expediente de la afirmación</Link>
+            <Link to={`/nodo/${encodeNodo(nodo.frontmatter.nodo_id)}`}>Volver al expediente de la afirmación</Link>
           ) : null}
         </section>
       ) : null}
@@ -174,7 +174,7 @@ export function MesaNodo({
             <li>
               <strong>El mecanismo.</strong>{' '}
               {valor(nodo.frontmatter.produce)
-                ? 'El mecanismo propuesto es «' + nodo.frontmatter.produce + '». ¿Qué observaríamos si no operara?'
+                ? `El mecanismo propuesto es «${nodo.frontmatter.produce}». ¿Qué observaríamos si no operara?`
                 : '¿Qué pasos observables conectan esta condición con el efecto atribuido?'}
             </li>
             <li>
@@ -182,7 +182,7 @@ export function MesaNodo({
               almacenamiento o época del año? ¿A quién deja fuera el promedio?
             </li>
           </ol>
-          <Link to={'/captura?nodo=' + encodeNodo(nodo.id) + '&relacion=contradice'}>
+          <Link to={`/captura?nodo=${encodeNodo(nodo.id)}&relacion=contradice`}>
             Registrar una contraprueba
           </Link>
         </details>
@@ -259,10 +259,10 @@ export function MesaNodo({
                       ? 'antes de observar los resultados' : 'con datos ya conocidos'}.
                   </p>
                   <div className={styles.acciones}>
-                    <Link to={'/captura?nodo=' + encodeNodo(nodo.id) + '&plan=' + encodeNodo(p.id)}>
+                    <Link to={`/captura?nodo=${encodeNodo(nodo.id)}&plan=${encodeNodo(p.id)}`}>
                       Vincular una observación
                     </Link>
-                    <Link to={'/nodo/' + encodeNodo(p.id)}>Ver registro del plan</Link>
+                    <Link to={`/nodo/${encodeNodo(p.id)}`}>Ver registro del plan</Link>
                   </div>
                   <small>
                     {evidencia.filter((r) => r.frontmatter.plan_id === p.id).length} observaciones
@@ -281,8 +281,8 @@ export function MesaNodo({
           <summary>Cómo se construye la explicación</summary>
           <ul className={styles.lista}>
             {relaciones.map((r) => (
-              <li key={r.id + '-' + r.tipo}>
-                <strong>{r.tipo}</strong> · <Link to={'/nodo/' + encodeNodo(r.id)}>{r.titulo}</Link>
+              <li key={`${r.id}-${r.tipo}`}>
+                <strong>{r.tipo}</strong> · <Link to={`/nodo/${encodeNodo(r.id)}`}>{r.titulo}</Link>
                 <p>{r.mecanismo}</p>
                 <small>
                   Relación propuesta; su evidencia se consulta en el expediente correspondiente.
@@ -304,7 +304,7 @@ export function MesaNodo({
             {evidencia.map((r) => (
               <li key={r.id}>
                 <strong>{r.frontmatter.relacion || 'Relación por precisar'}</strong> ·{' '}
-                <Link to={'/nodo/' + encodeNodo(r.id)}>{r.titulo}</Link>
+                <Link to={`/nodo/${encodeNodo(r.id)}`}>{r.titulo}</Link>
                 <p className={styles.documental} data-estado={documentales[r.id] || 'pendiente'}>
                   {ETIQUETAS_DOCUMENTALES[documentales[r.id] || 'pendiente'] ||
                     ETIQUETAS_DOCUMENTALES.pendiente}
@@ -316,7 +316,7 @@ export function MesaNodo({
                 </small>
                 {r.frontmatter.plan_id ? (
                   <p className={styles.meta}>
-                    <Link to={'/nodo/' + encodeNodo(r.frontmatter.plan_id)}>Plan de contraste vinculado</Link>
+                    <Link to={`/nodo/${encodeNodo(r.frontmatter.plan_id)}`}>Plan de contraste vinculado</Link>
                   </p>
                 ) : null}
               </li>

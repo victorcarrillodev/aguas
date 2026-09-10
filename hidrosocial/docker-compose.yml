@@ -1,20 +1,63 @@
+x-app: &app
+  image: calidad-web:${CALIDAD_IMAGE_TAG:-local}
+  build: .
+  environment: &app-environment
+    VAULT_PATH: /vault
+    PORT: '3000'
+    PGHOST: db
+    PGPORT: '5432'
+    PGUSER: ${POSTGRES_USER:-calidad}
+    PGDATABASE: ${POSTGRES_DB:-calidad}
+    PGPASSWORD: ${POSTGRES_PASSWORD:?Define POSTGRES_PASSWORD en .env}
+  volumes:
+    # El contenido base se consulta; las nuevas aportaciones viven en PostgreSQL.
+    - ../:/vault:ro
+
 services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-calidad}
+      POSTGRES_USER: ${POSTGRES_USER:-calidad}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Define POSTGRES_PASSWORD en .env}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # Solo accesible desde la red interna de Compose.
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -h 127.0.0.1 -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  migrate:
+    <<: *app
+    command: ['bun', 'run', 'db:migrate']
+    restart: 'no'
+    healthcheck:
+      disable: true
+    depends_on:
+      db:
+        condition: service_healthy
+
   calidad:
-    build: .
+    <<: *app
     container_name: calidad-web
     restart: unless-stopped
     ports:
       - '3005:3000'
-    environment:
-      VAULT_PATH: /vault
-      PORT: '3000'
-    volumes:
-      # El vault (padre de hidrosocial/) montado en lectura-escritura:
-      # la app solo escribe en "9 · Evidencia de campo/".
-      - ../:/vault:rw
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
     healthcheck:
-      test: ['CMD', 'bun', '-e', "fetch('http://localhost:3000/calidad/healthcheck').then((r) => { if (!r.ok) process.exit(1) })"]
+      test: ['CMD', 'bun', '-e', "fetch('http://localhost:3000/calidad/healthcheck').then((r) => { if (!r.ok) process.exit(1) }).catch(() => process.exit(1))"]
       interval: 30s
       timeout: 5s
       retries: 3
-      start_period: 10s
+      start_period: 30s
+
+volumes:
+  postgres_data:

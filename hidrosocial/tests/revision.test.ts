@@ -1,7 +1,8 @@
 import { afterAll, beforeAll, describe, expect, test } from 'bun:test';
-import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve, sep } from 'node:path';
+import { PGlite } from '@electric-sql/pglite';
 import { invalidar } from '../app/microprocesos/cache/index';
 import { guardarNota } from '../app/microprocesos/captura/escritor';
 import { validarBorrador } from '../app/microprocesos/captura/esquema';
@@ -18,8 +19,19 @@ import { construirRed } from '../app/microprocesos/sistema/red';
 import { simular } from '../app/microprocesos/sistema/simulacion';
 import { parseFrontmatter } from '../app/microprocesos/vault-core/frontmatter';
 import { parseVault } from '../app/microprocesos/vault-core/index';
+import {
+  establecerRepositorioParaPruebas,
+  Repositorio,
+} from '../app/microprocesos/persistencia/index.server';
+import { migrar } from '../app/microprocesos/persistencia/migraciones';
+import { basePostgresPrueba } from './postgres-prueba';
 
 let directorio: string;
+let pg: PGlite;
+let repo: Repositorio;
+async function cargar() {
+  return parseVault(directorio, await repo.listarDocumentos());
+}
 function obtener(g: Awaited<ReturnType<typeof parseVault>>, id: string) {
   const n = g.nodos.get(id);
   if (!n) throw new Error(`Falta el nodo de prueba ${id}`);
@@ -37,6 +49,11 @@ function fd(valores: Record<string, string>) {
 }
 
 beforeAll(async () => {
+  pg = new PGlite();
+  const db = basePostgresPrueba(pg);
+  await migrar(db, resolve('db/migrations'));
+  repo = new Repositorio(db);
+  establecerRepositorioParaPruebas(repo);
   directorio = await mkdtemp(join(tmpdir(), 'hidrosocial-test-'));
   process.env.VAULT_PATH = directorio;
   for (const dir of ['2 · Las causas', '3 · Las fichas', '6 · Las mediciones'])
@@ -47,23 +64,31 @@ beforeAll(async () => {
     '---\nid: E8\narbol: E8\ndepende_de: []\nsostiene_a: []\n---\n# Fiscalización',
   );
   await writeFile(
+    join(directorio, '3 · Las fichas/E1.2.md'),
+    '---\nid: E1.2\narbol: E1\npadre: E1\n---\n# Causa intermedia',
+  );
+  await writeFile(
     join(directorio, '3 · Las fichas/E1.2.1.md'),
-    '---\nid: E1.2.1\narbol: E1\npadre: E1\nproduce: menos control\n---\n# Muestreo',
+    '---\nid: E1.2.1\narbol: E1\npadre: E1.2\nproduce: menos control\n---\n# Muestreo',
   );
   await writeFile(
     join(directorio, indicador),
     '---\nid: IND-horas\narbol: E1\nlinea_base: null\n---\n# Horas\n## Línea base\nNo disponible.',
   );
   invalidar();
-});
+}, 30_000);
 afterAll(async () => {
+  establecerRepositorioParaPruebas();
+  await pg.close();
   if (anterior === undefined) Reflect.deleteProperty(process.env, 'VAULT_PATH');
   else process.env.VAULT_PATH = anterior;
   invalidar();
-  const absoluto = resolve(directorio);
-  if (absoluto.startsWith(`${resolve(tmpdir())}${sep}hidrosocial-test-`))
-    await rm(absoluto, { recursive: true, force: true });
-});
+  if (directorio) {
+    const absoluto = resolve(directorio);
+    if (absoluto.startsWith(`${resolve(tmpdir())}${sep}hidrosocial-test-`))
+      await rm(absoluto, { recursive: true, force: true });
+  }
+}, 30_000);
 
 describe('Expedientes durables', () => {
   test('preserva texto original, multilínea y decisiones por propuesta', async () => {
@@ -88,7 +113,7 @@ describe('Expedientes durables', () => {
       }),
       causa,
     );
-    const g = await parseVault(directorio);
+    const g = await cargar();
     const registros = registrosDe(g, causa);
     expect(registros).toHaveLength(2);
     expect(
@@ -135,7 +160,7 @@ describe('Expedientes durables', () => {
       }),
       indicador,
     );
-    let g = await parseVault(directorio);
+    let g = await cargar();
     expect(estadoDato(obtener(g, indicador), registrosDe(g, indicador))).toBe('pendiente');
     expect(calcularMetricas(g).medicionesSinLineaBase).toBe(1);
     await expect(
@@ -168,7 +193,7 @@ describe('Expedientes durables', () => {
       indicador,
     );
     invalidar();
-    g = await parseVault(directorio);
+    g = await cargar();
     expect(estadoDato(obtener(g, indicador), registrosDe(g, indicador))).toBe('incorporado');
     expect(calcularMetricas(g).medicionesSinLineaBase).toBe(0);
   });
@@ -194,7 +219,7 @@ describe('Expedientes durables', () => {
       limitaciones: 'Ejemplo ficticio sin pretensión de representar la población.',
     });
     const nota = await guardarNota(validarBorrador(f));
-    const g = await parseVault(directorio);
+    const g = await cargar();
     expect(g.nodos.get(nota.id)?.frontmatter.relacion).toBe('contradice');
     expect(
       registrosDe(g, causa).filter((r) => r.frontmatter.relacion === 'contradice'),
@@ -207,14 +232,14 @@ describe('Expedientes durables', () => {
     await expect(guardarNota(validarBorrador(f))).rejects.toThrow();
   });
   test('rutas ajenas no escriben registros', async () => {
-    const antes = await readdir(join(directorio, '9 · Evidencia de campo'));
+    const antes = await repo.listarDocumentos();
     await expect(guardarRegistro(fd({ registro: 'propuesta' }), '../fuera.md')).rejects.toThrow();
-    expect(await readdir(join(directorio, '9 · Evidencia de campo'))).toEqual(antes);
+    expect(await repo.listarDocumentos()).toEqual(antes);
   });
 });
 
 test('el explorador calcula inclusión, no sostenibilidad ni orden', async () => {
-  const g = await parseVault(directorio);
+  const g = await cargar();
   const red = construirRed(g);
   expect(red.porArbol.get('E8')?.sostieneA).toEqual(['E1']);
   expect(simular(red, ['E1']).fragiles[0].falta).toEqual(['E8']);
@@ -224,7 +249,7 @@ test('el explorador calcula inclusión, no sostenibilidad ni orden', async () =>
 });
 
 test('conserva relaciones semánticas y correspondencia de subyacentes', async () => {
-  const g = await parseVault(directorio);
+  const g = await cargar();
   expect(origenDe(obtener(g, '3 · Las fichas/E1.2.1.md'))).toBe('AP_E1!F11:L11');
   const render = construirGrafoRender(g);
   expect(
