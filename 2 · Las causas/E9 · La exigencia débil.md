@@ -1,5 +1,7 @@
 ---
 id: E9
+padre: PC
+supuesto_E8: "Existen canales vinculantes y fiscalización que traduzcan la exigencia en corrección (Propósito de E8)."
 tipo: causa
 titulo: E9 · La exigencia débil
 aliases: [E9, "Exigencia ciudadana débil"]

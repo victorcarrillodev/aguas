@@ -51,7 +51,8 @@ export default function RutaDashboard() {
           </p>
         </div>
         <div className={styles.acciones}>
-          <Boton to="/sistema">Ver el sistema</Boton>
+          <Boton to="/grafo">Árbol maestro N1–N4</Boton>
+          <Boton to="/sistema" variante="secundario">Supuestos entre árboles</Boton>
           <Boton to="/revision">Investigar y contrastar</Boton>
           <Boton to="/captura" variante="secundario">
             Nueva evidencia
@@ -64,18 +65,20 @@ export default function RutaDashboard() {
 
       <ListaMetricas
         items={[
+          { valor: m.porNivel.N1, etiqueta: 'N1 · Problema central', acento: 'var(--primary)', icono: 'account_tree' },
           {
-            valor: m.porTipo.causa,
-            etiqueta: 'Causas estructurales',
+            valor: m.porNivel.N2,
+            etiqueta: 'N2 · Causas estructurales',
             acento: colorDeCapa('C1'),
             icono: 'account_tree',
           },
           {
-            valor: m.porTipo.ficha,
-            etiqueta: 'Fichas',
+            valor: m.porNivel.N3,
+            etiqueta: 'N3 · Causas directas',
             acento: colorDeCapa('C3'),
             icono: 'description',
           },
+          { valor: m.porNivel.N4, etiqueta: 'N4 · Causas subyacentes', acento: colorDeCapa('C3'), icono: 'account_tree' },
           {
             valor: m.porTipo.medicion,
             etiqueta: 'Mediciones',
@@ -98,6 +101,10 @@ export default function RutaDashboard() {
           },
         ]}
       />
+      <p>Los niveles N cuentan condiciones del árbol; C0–C4 son capas de lectura.
+        Efectos, actores, indicadores y documentos tienen conteos separados.
+        {' '}{m.nodosIntegrados} nodos con integración documentada en la copia local.
+        La presencia de una ficha o una fuente no equivale a aprobación del Consejo.</p>
 
       <div className={styles.columnas}>
         <Tarjeta titulo="Causas estructurales en revisión">
@@ -146,7 +153,7 @@ export default function RutaDashboard() {
             </fieldset>
           </div>
           <TablaMini
-            columnas={['Causa', 'Capa', 'Referencias como supuesto', 'Fichas']}
+            columnas={['Causa N2', 'Capa dominante', 'Referencias como supuesto', 'Directas N3', 'Subyacentes N4', 'N3 sin desglose N4']}
             filas={causas.map((c) => {
               return [
                 <Link key={c.id} to={`/nodo/${encodeNodo(c.id)}`}>
@@ -167,10 +174,12 @@ export default function RutaDashboard() {
                       : `${c.sostieneA} depende${c.sostieneA === 1 ? '' : 'n'} de ella`}
                   </span>
                 </span>,
-                String(c.fichas),
+                String(c.directas), String(c.subyacentes), String(c.directasSinDesglose),
               ];
             })}
           />
+          <p>Un desglose pendiente indica trabajo por desarrollar o deliberar, no ausencia demostrada de causas.
+            La pauta de profundidad no se completa inventando nodos.</p>
           {causas.length === 0 ? (
             <p className={styles.vacio}>Sin causas para este filtro.</p>
           ) : null}

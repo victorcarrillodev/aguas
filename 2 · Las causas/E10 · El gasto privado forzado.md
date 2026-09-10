@@ -1,5 +1,8 @@
 ---
 id: E10
+padre: PC
+supuesto_E1: "Calidad conforme a NOM-127 (Propósito de E1); su incumplimiento empuja a la embotellada."
+supuesto_E2: "Continuidad del servicio (Propósito de E2); su falla empuja a la pipa."
 tipo: causa
 titulo: E10 · El gasto privado forzado
 aliases: [E10, "Gasto privado forzado (embotellada/pipa)"]

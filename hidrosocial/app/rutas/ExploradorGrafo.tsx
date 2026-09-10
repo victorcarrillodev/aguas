@@ -6,6 +6,7 @@ import { colorDeCapa, colorDeNodo, colorDeTipo } from '~/lib/colores';
 import { encodeNodo } from '~/lib/rutas';
 import { ETIQUETAS_DOCUMENTALES } from '~/microprocesos/revision/index';
 import { normalizar } from '~/microprocesos/busqueda/index';
+import { disponerArbol } from '~/microprocesos/grafo/layout-causal';
 import type { GrafoRender } from '~/microprocesos/grafo/index';
 import type { CapaId, VaultNodeType } from '~/microprocesos/vault-core/tipos';
 import styles from './ExploradorGrafo.module.css';
@@ -22,6 +23,7 @@ export interface DatosExplorador {
   capaInicial?: CapaId | null;
   qInicial?: string;
   focoInicial?: string | null;
+  arbolInicial?: string | null;
 }
 
 const TIPOS_PILL: { id: VaultNodeType; etiqueta: string }[] = [
@@ -55,6 +57,14 @@ export function ExploradorGrafo(d: DatosExplorador) {
   const [capa, setCapa] = useState<CapaId | null>(d.capaInicial ?? null);
   const [seleccionado, setSeleccionado] = useState<string | null>(d.focoInicial ?? null);
   const [radiografia, setRadiografia] = useState(false);
+  const inicial = d.grafo.nodos.find((n) => n.id === d.focoInicial);
+  const [vista, setVista] = useState<'causal' | 'documental'>(
+    d.tipoInicial || (inicial && !inicial.nivelCausal) ? 'documental' : 'causal',
+  );
+  const [arbol, setArbol] = useState(d.arbolInicial || inicial?.arbol || 'maestro');
+  const [conexion, setConexion] = useState('');
+  const arboles = useMemo(() => d.grafo.nodos.filter((n) => n.nivelCausal === 'N2')
+    .sort((a, b) => (a.codigo || '').localeCompare(b.codigo || '', 'es', { numeric: true })), [d.grafo]);
 
   const porId = useMemo(() => new Map(d.grafo.nodos.map((n) => [n.id, n])), [d.grafo]);
 
@@ -79,8 +89,11 @@ export function ExploradorGrafo(d: DatosExplorador) {
 
   const filtrados = useMemo(() => {
     const terms = normalizar(q.trim()).split(/\s+/).filter(Boolean);
-    return d.grafo.nodos.filter((n) => {
-      if (tipo && n.tipo !== tipo) return false;
+    const candidatos = d.grafo.nodos.filter((n) => vista !== 'causal' || (n.nivelCausal &&
+      (arbol === 'todos' || terms.length > 0 || capa ||
+        (arbol === 'maestro' ? ['N1', 'N2'].includes(n.nivelCausal) : n.arbol === arbol))));
+    const coincidencias = candidatos.filter((n) => {
+      if (vista === 'documental' && tipo && n.tipo !== tipo) return false;
       if (capa && n.capa !== capa) return false;
       if (corredor && !corredor.has(n.id)) return false;
       if (terms.length > 0) {
@@ -89,13 +102,30 @@ export function ExploradorGrafo(d: DatosExplorador) {
       }
       return true;
     });
-  }, [d.grafo, tipo, capa, q, corredor]);
+    if (vista !== 'causal') return coincidencias;
+    // Un filtro de lectura conserva la cadena hacia arriba, aunque el padre tenga otra capa.
+    const dentro = new Set(coincidencias.map((n) => n.id));
+    const candidatosIds = new Set(candidatos.map((n) => n.id));
+    let cambio = true;
+    while (cambio) {
+      cambio = false;
+      for (const a of d.grafo.aristas) {
+        if (a.tipo === 'causa-propuesta' && dentro.has(a.origen) && candidatosIds.has(a.destino) && !dentro.has(a.destino)) {
+          dentro.add(a.destino); cambio = true;
+        }
+      }
+    }
+    return candidatos.filter((n) => dentro.has(n.id));
+  }, [d.grafo, tipo, capa, q, corredor, vista, arbol]);
 
   const dentro = useMemo(() => new Set(filtrados.map((n) => n.id)), [filtrados]);
   const aristasVisibles = useMemo(
-    () => d.grafo.aristas.filter((a) => dentro.has(a.origen) && dentro.has(a.destino)),
-    [d.grafo, dentro],
+    () => d.grafo.aristas.filter((a) => dentro.has(a.origen) && dentro.has(a.destino) &&
+      (vista === 'causal' ? a.tipo === 'causa-propuesta' : !conexion || a.tipo === conexion)),
+    [d.grafo, dentro, vista, conexion],
   );
+  const dibujados = useMemo(() => vista === 'causal' ? disponerArbol(filtrados, aristasVisibles) : filtrados,
+    [vista, filtrados, aristasVisibles]);
 
   const adyacencia = useMemo(() => {
     const m = new Map<string, string[]>();
@@ -118,6 +148,49 @@ export function ExploradorGrafo(d: DatosExplorador) {
     <div className={styles.explorador}>
       <div className={styles.barra}>
         <div className={styles.modos}>
+          <button type="button" aria-pressed={vista === 'causal'} className={vista === 'causal' ? styles.modoActivo : undefined}
+            onClick={() => { setVista('causal'); setTipo(null); setSeleccionado(null); setRadiografia(false); }}>
+            Árbol causal N1–N4
+          </button>
+          <button type="button" aria-pressed={vista === 'documental'} className={vista === 'documental' ? styles.modoActivo : undefined}
+            onClick={() => { setVista('documental'); setSeleccionado(null); setRadiografia(false); }}>
+            Relaciones y documentos
+          </button>
+          {vista === 'causal' ? (
+            <label>Vista del mismo modelo{' '}
+              <select value={arbol} onChange={(e) => { setArbol(e.target.value); setSeleccionado(null); setQ(''); setCapa(null); }}>
+                <option value="maestro">AP maestro · N1 y N2</option>
+                {arboles.map((n) => <option key={n.id} value={n.arbol}>{n.codigo} · N2, N3 y N4</option>)}
+                <option value="todos">Todos los niveles</option>
+              </select>
+            </label>
+          ) : (
+            <label>Tipo de conexión{' '}
+              <select value={conexion} onChange={(e) => setConexion(e.target.value)}>
+                <option value="">Todas las relaciones</option>
+                <option value="causa-propuesta">Causa propuesta</option>
+                <option value="supuesto">Supuesto externo</option>
+                <option value="bisagra">Bisagra</option>
+                <option value="efecto-propuesto">Efecto propuesto</option>
+                <option value="mide">Indicador de una condición</option>
+                <option value="genera">Actor que genera</option>
+                <option value="debe-resolver">Actor que debe resolver</option>
+                <option value="evidencia">Evidencia de una afirmación</option>
+                <option value="revision">Revisión o plan</option>
+                <option value="enlace">Referencia entre notas</option>
+                <option value="canvas">Enlace de un mapa documental</option>
+              </select>
+            </label>
+          )}
+        </div>
+        <p className={styles.ayuda}>
+          {vista === 'causal'
+            ? 'N indica profundidad causal; el color indica la capa C. Las flechas suben del antecedente a su padre inmediato. Al abrir E1 se conserva el mismo nodo del maestro. Los filtros mantienen sus padres como contexto.'
+            : 'Cada relación conserva su función. Un enlace, una bisagra o una fuente no equivalen a una causa demostrada. Los efectos quedan fuera del conteo N.'}
+        </p>
+        {d.grafo.incidenciasModelo?.length ? <details><summary>Relaciones que requieren conciliación</summary>
+          <ul>{d.grafo.incidenciasModelo.map((x) => <li key={x}>{x}</li>)}</ul></details> : null}
+        <div className={styles.modos}>
           <button
             type="button"
             className={radiografia ? styles.modoActivo : undefined}
@@ -130,7 +203,7 @@ export function ExploradorGrafo(d: DatosExplorador) {
               ? seleccionado
                 ? 'Muestra el corredor explicativo a tres pasos. En rojo: afirmaciones sin aportaciones con revisión documental aceptada.'
                 : 'Selecciona una afirmación para aislar su corredor explicativo.'
-              : 'Aísla la cadena que impide sostener una conclusión y señala qué evidencia puede destrabarla.'}
+              : 'Señala afirmaciones sin respaldo documental aceptado. No calcula su verdad ni su importancia causal.'}
           </span>
         </div>
         <div className={styles.buscador}>
@@ -146,7 +219,7 @@ export function ExploradorGrafo(d: DatosExplorador) {
             className={styles.entrada}
           />
         </div>
-        <fieldset className={styles.pillsGrupo}>
+        {vista === 'documental' ? <fieldset className={styles.pillsGrupo}>
           <legend className={styles.leyenda}>Filtrar por tipo</legend>
           <div className={styles.pills}>
             <button
@@ -172,7 +245,7 @@ export function ExploradorGrafo(d: DatosExplorador) {
               </button>
             ))}
           </div>
-        </fieldset>
+        </fieldset> : null}
         <fieldset className={styles.pillsGrupo}>
           <legend className={styles.leyenda}>Filtrar por capa</legend>
           <div className={styles.pills}>
@@ -206,11 +279,12 @@ export function ExploradorGrafo(d: DatosExplorador) {
       <div className={styles.cuerpo}>
         <div className={styles.lienzo}>
           <WrapperSigma
-            nodos={filtrados}
+            nodos={dibujados}
             aristas={aristasVisibles}
             foco={seleccionado ?? undefined}
             onSeleccionar={setSeleccionado}
             radiografia={radiografia}
+            causal={vista === 'causal'}
           />
         </div>
 
@@ -232,9 +306,16 @@ export function ExploradorGrafo(d: DatosExplorador) {
               </button>
               <div className={styles.chips}>
                 <Chip color={colorDeTipo(sel.tipo)}>{sel.tipo}</Chip>
+                {sel.nivelCausal ? <Chip color={colorDeTipo(sel.tipo)}>{sel.nivelCausal}</Chip> : null}
                 {sel.capa ? <Chip color={colorDeCapa(sel.capa)}>{sel.capa}</Chip> : null}
               </div>
               <h2 className={styles.tituloNodo}>{sel.titulo}</h2>
+              {sel.nivelCausal === 'N2' ? <button type="button" className={styles.vecino}
+                onClick={() => { setVista('causal'); setArbol(sel.arbol || 'maestro'); setTipo(null); setCapa(null); setQ(''); setRadiografia(false); }}>
+                Abrir árbol {sel.codigo} · conservar este nodo como N2
+              </button> : null}
+              {sel.nivelCausal === 'N3' && !d.grafo.aristas.some((a) => a.tipo === 'causa-propuesta' && a.destino === sel.id) ?
+                <p>Sin causas N4 desarrolladas. El desglose está pendiente; no significa que no existan antecedentes.</p> : null}
               {d.resumenes[sel.id] ? <p className={styles.resumen}>{d.resumenes[sel.id]}</p> : null}
               <p className={styles.metricas}>{vecinosSel.length} vecinos conectados</p>
               {['causa', 'ficha', 'medicion', 'problema'].includes(sel.tipo) ? (
@@ -249,7 +330,7 @@ export function ExploradorGrafo(d: DatosExplorador) {
               {sel.registro === 'contraste' ? <p>Plan de contraste vinculado a una afirmación.</p> : null}
               {radiografia && sel.cuello > 0 ? (
                 <div className={styles.cuello}>
-                  <strong>Cuello de botella documental · nivel {sel.cuello}</strong>
+                  <strong>Respaldo documental pendiente</strong>
                   <p>{sel.motivoCuello}</p>
                   <Link to={`/nodo/${encodeNodo(sel.id)}`}>Examinar el expediente y preparar el contraste</Link>
                 </div>
@@ -312,9 +393,9 @@ export function ExploradorGrafo(d: DatosExplorador) {
       </div>
 
       <output className={styles.status}>
-        {filtrados.length} nodos · {aristasVisibles.length} relaciones
-        {radiografia ? ' · radiografía activa' : ''} · densidad{' '}
-        {d.densidad.toFixed(3)} · modularidad {d.modularidad.toFixed(2)}
+        {filtrados.length} {vista === 'causal' ? 'nodos causales en esta vista' : 'notas'} · {aristasVisibles.length} relaciones
+        {radiografia ? ' · radiografía activa' : ''}
+        {vista === 'documental' ? ` · red documental completa: densidad ${d.densidad.toFixed(3)} · modularidad ${d.modularidad.toFixed(2)}` : ' · propuestas sujetas a revisión'}
       </output>
     </div>
   );

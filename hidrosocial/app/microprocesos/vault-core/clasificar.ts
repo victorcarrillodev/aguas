@@ -1,5 +1,5 @@
 import { capaDeArbol } from '~/lib/taxonomia';
-import type { ArbolId, CapaId, VaultNodeType } from './tipos';
+import type { ArbolId, CapaId, NivelCausal, VaultNodeType } from './tipos';
 
 const ARBOLES_VALIDOS = new Set(['E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9', 'E10']);
 
@@ -67,7 +67,7 @@ export function arbolDeNota(
 /**
  * Capa del nodo: frontmatter (`Macroprocesos`→C1, `Factores`→C3,
  * `Actores`→C2, o C0–C4 directo); si no, herencia del árbol para
- * causas/fichas; actores→C2 y problema→C0 por defecto.
+ * causas/fichas; actores→C2. Una nota del problema no recibe una capa por su profundidad.
  */
 export function capaDeNodo(
   tipo: VaultNodeType,
@@ -78,6 +78,15 @@ export function capaDeNodo(
   if (cruda && CAPA_POR_NOMBRE[cruda]) return CAPA_POR_NOMBRE[cruda];
   if (arbol && (tipo === 'causa' || tipo === 'ficha')) return capaDeArbol(arbol);
   if (tipo === 'actor') return 'C2';
-  if (tipo === 'problema') return 'C0';
+  return undefined;
+}
+
+/** Solo los códigos y papeles causales del modelo reciben un nivel N. */
+export function nivelCausalDe(tipo: VaultNodeType, codigo: string | undefined): NivelCausal | undefined {
+  if (tipo === 'problema' && codigo === 'PC') return 'N1';
+  if (tipo === 'causa' && /^E(?:10|[1-9])$/.test(codigo ?? '')) return 'N2';
+  if (tipo !== 'ficha') return undefined;
+  if (/^E(?:10|[1-9])\.[1-9]\d*$/.test(codigo ?? '')) return 'N3';
+  if (/^E(?:10|[1-9])\.[1-9]\d*\.[1-9]\d*$/.test(codigo ?? '')) return 'N4';
   return undefined;
 }

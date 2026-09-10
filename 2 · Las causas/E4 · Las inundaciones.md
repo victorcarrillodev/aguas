@@ -1,5 +1,7 @@
 ---
 id: E4
+padre: PC
+supuesto_E8: "Se sancionan descargas irregulares y factibilidades sin drenaje (Propósito de E8)."
 tipo: causa
 titulo: E4 · Las inundaciones
 aliases: [E4, "Inundaciones y contaminación de agua de lluvia"]

@@ -1,4 +1,4 @@
-import type { CapaId, VaultGraph, VaultNode, VaultNodeType } from '../vault-core/tipos';
+import type { ArbolId, CapaId, NivelCausal, VaultGraph, VaultNode, VaultNodeType } from '../vault-core/tipos';
 import { construirGrafoRender } from './construir';
 import type { FiltroGrafo } from './construir';
 import { densidad, grado, modularidad } from './red';
@@ -8,6 +8,9 @@ export interface NodoRender {
   slug: string;
   titulo: string;
   tipo: VaultNodeType;
+  codigo?: string;
+  nivelCausal?: NivelCausal;
+  arbol?: ArbolId;
   capa?: CapaId;
   color: string;
   x: number;
@@ -34,6 +37,7 @@ export interface AristaRender {
 export interface GrafoRender {
   nodos: NodoRender[];
   aristas: AristaRender[];
+  incidenciasModelo?: string[];
 }
 
 /** Recorre aristas (ambas direcciones) hasta la profundidad dada. */

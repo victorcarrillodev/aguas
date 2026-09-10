@@ -293,6 +293,7 @@ export default function RutaNodo() {
         ← Volver al grafo
       </Link>
       <div className={styles.chips}>
+        {d.nodo.nivelCausal ? <Chip color={colorDeNodo(d.tipo, d.capa)}>{d.nodo.codigo} · {d.nodo.nivelCausal}</Chip> : null}
         <Chip color={colorDeNodo(d.tipo, d.capa)}>{d.capa ? `${d.tipo} · ${d.capa}` : d.tipo}</Chip>
       </div>
       <h1 className={styles.titulo}>{d.titulo}</h1>

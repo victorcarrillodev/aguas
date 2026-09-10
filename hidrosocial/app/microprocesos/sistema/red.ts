@@ -124,13 +124,12 @@ export function construirRed(g: VaultGraph): RedSistema {
     if (ES_ARBOL.has(id)) causas.set(id as ArbolId, n);
   }
 
-  // Fichas colgadas de cada causa (aristas de jerarquía ficha → causa).
+  // Pertenencia por árbol: contar fichas no requiere dibujar atajos causales.
   const fichasPorCausa = new Map<string, number>();
-  for (const a of g.aristas) {
-    if (a.tipo !== 'jerarquia') continue;
-    if (g.nodos.get(a.origen)?.tipo !== 'ficha') continue;
-    if (g.nodos.get(a.destino)?.tipo !== 'causa') continue;
-    fichasPorCausa.set(a.destino, (fichasPorCausa.get(a.destino) ?? 0) + 1);
+  for (const n of g.nodos.values()) {
+    if (n.tipo !== 'ficha' || !n.arbol) continue;
+    const causa = causas.get(n.arbol);
+    if (causa) fichasPorCausa.set(causa.id, (fichasPorCausa.get(causa.id) ?? 0) + 1);
   }
 
   const dependeDe = new Map<ArbolId, ArbolId[]>();

@@ -4,7 +4,9 @@ titulo: Las cinco capas
 
 # Las cinco capas
 
-Todo el diagnóstico se lee en cinco pisos, del más profundo al más abstracto. Cada nodo se sitúa en el piso donde **más pesa** —su capa dominante—, aunque toque varios.
+Las capas C0–C4 son ejes de lectura. La profundidad causal se registra por separado: N1 problema central, N2 causas estructurales, N3 causas directas y N4 causas subyacentes. Un nodo puede tocar varias capas y tener una dominante; su capa no determina su nivel N.
+
+La lectura debe quedar explicada, no solo coloreada. El Excel del 9 de septiembre añade una matriz para documentarla: [Trazabilidad de la lectura por capas](./Trazabilidad%20de%20la%20lectura%20por%20capas.md).
 
 ## C0 · Ciclo hidrosocial
 

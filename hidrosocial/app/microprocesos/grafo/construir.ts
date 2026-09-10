@@ -77,6 +77,9 @@ export function construirGrafoRender(g: VaultGraph, filtro?: FiltroGrafo): Grafo
       slug: encodeNodo(n.id),
       titulo: n.titulo,
       tipo: n.tipo,
+      codigo: n.codigo,
+      nivelCausal: n.nivelCausal,
+      arbol: n.arbol,
       capa: n.capa,
       color: colorDeNodo(n.tipo, n.capa),
       x: p.x,
@@ -96,5 +99,5 @@ export function construirGrafoRender(g: VaultGraph, filtro?: FiltroGrafo): Grafo
         : undefined,
     };
   });
-  return { nodos: salida, aristas };
+  return { nodos: salida, aristas, incidenciasModelo: g.incidenciasModelo };
 }

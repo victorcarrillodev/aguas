@@ -1,5 +1,7 @@
 ---
 id: E6
+padre: PC
+supuesto_E8: "La vigilancia y sanción sobre extracción/descarga operan (Propósito de E8)."
 tipo: causa
 titulo: E6 · El mercado negro
 aliases: [E6, "Mercado negro del agua"]

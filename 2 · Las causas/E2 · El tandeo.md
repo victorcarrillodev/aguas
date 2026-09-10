@@ -1,5 +1,8 @@
 ---
 id: E2
+padre: PC
+supuesto_E7: "La inversión en reposición de red se ejecuta (Propósito de E7)."
+supuesto_E6: "La fuente no se sobreexplota por el circuito informal (Propósito de E6)."
 tipo: causa
 titulo: E2 · El tandeo
 aliases: [E2, "Servicio discontinuo (tandeo)"]

@@ -80,6 +80,7 @@ const FILAS: Record<string, string[]> = {
 /** Correspondencia cotejada; no atribuye al Excel texto posterior. */
 export function origenDe(n: VaultNode): string {
   const id = valor(n.frontmatter.id);
+  if (n.nivelCausal === 'N1' && id === 'PC') return 'AP_maestro!C12:C13';
   if (n.tipo === 'causa' && n.arbol) return `Nodos!F${Number(n.arbol.slice(1)) + 3}`;
   if (n.tipo === 'ficha' && n.arbol) {
     const fila = FILAS[n.arbol]?.indexOf(id.slice(n.arbol.length + 1)) ?? -1;

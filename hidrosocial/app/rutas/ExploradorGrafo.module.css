@@ -34,6 +34,17 @@
   cursor: pointer;
 }
 
+.modos select {
+  max-width: 100%;
+  min-height: var(--min-touch);
+  padding: var(--esp-1) var(--esp-2);
+  border: 1px solid var(--outline);
+  border-radius: var(--radio);
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: inherit;
+}
+
 .modoActivo {
   background: #173e32 !important;
   color: white !important;

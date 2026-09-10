@@ -1,4 +1,4 @@
-import type { ArbolId, CapaId, VaultNodeType } from '../vault-core/tipos';
+import type { ArbolId, CapaId, NivelCausal, VaultNodeType } from '../vault-core/tipos';
 import { calcularMetricas, criticidadDe } from './metricas';
 
 export interface EvidenciaReciente {
@@ -10,6 +10,8 @@ export interface EvidenciaReciente {
 
 export interface MetricasDashboard {
   totalNotas: number;
+  porNivel: Record<NivelCausal, number>;
+  nodosIntegrados: number;
   porTipo: Record<VaultNodeType, number>;
   porCapa: Record<CapaId, number>;
   porArbol: Record<ArbolId, number>;
@@ -25,6 +27,9 @@ export interface MetricasDashboard {
     capa: CapaId;
     atribucion?: string;
     fichas: number;
+    directas: number;
+    subyacentes: number;
+    directasSinDesglose: number;
     /** Nº de árboles que declaran a éste como supuesto. */
     sostieneA: number;
     /** Nº de supuestos propios. */

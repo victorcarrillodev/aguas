@@ -1,5 +1,6 @@
 ---
 id: E8
+padre: PC
 tipo: causa
 titulo: E8 · La fiscalización invertida
 aliases: [E8, "Fiscalización legislativa invertida"]

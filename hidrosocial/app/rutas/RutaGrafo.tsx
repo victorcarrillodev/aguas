@@ -44,6 +44,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
     tipoInicial: tipo,
     capaInicial: capa,
     qInicial: q,
+    arbolInicial: ['maestro', 'todos', ...[...g.nodos.values()].filter((n) => n.nivelCausal === 'N2').map((n) => n.arbol)]
+      .includes(url.searchParams.get('arbol') || '') ? url.searchParams.get('arbol') : null,
   };
   return json(datos);
 }
@@ -54,10 +56,10 @@ export default function RutaGrafo() {
   return (
     <div className={styles.cuenca}>
       <div className={styles.cabecera}>
-        <h1 className={styles.titulo}>Explorador del grafo</h1>
+        <h1 className={styles.titulo}>Árbol maestro y relaciones del diagnóstico</h1>
         <p className={styles.subtitulo}>
-          {datos.grafo.nodos.length} nodos · {datos.grafo.aristas.length} relaciones · clic en un
-          nodo para inspeccionarlo · activa la radiografía para encontrar el cuello de botella
+          Abre una causa estructural para seguir sus antecedentes N3 y N4. Las capas C0–C4
+          describen cómo se lee cada condición; no determinan su profundidad causal.
         </p>
       </div>
       <ExploradorGrafo {...datos} />

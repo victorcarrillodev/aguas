@@ -73,7 +73,7 @@ Cuarenta y dos conexiones declaradas: 30 bisagras y 12 supuestos.
 
 ## Lo que revela contarlas
 
-Si se cuenta cuántas conexiones recibe cada árbol y cuántas emite, aparece la estructura real del sistema:
+El conteo describe las referencias registradas en esta lectura documental del modelo. No mide intensidad causal ni comprueba la explicación:
 
 | Árbol | Recibe | Emite | Saldo |
 |---|---|---|---|
@@ -88,7 +88,7 @@ Si se cuenta cuántas conexiones recibe cada árbol y cuántas emite, aparece la
 | [E10 · El gasto privado forzado](../2%20%C2%B7%20Las%20causas/E10%20%C2%B7%20El%20gasto%20privado%20forzado.md) | 3 | 5 | -2 |
 | [E1 · La calidad del agua](../2%20%C2%B7%20Las%20causas/E1%20%C2%B7%20La%20calidad%20del%20agua.md) | 3 | 6 | -3 |
 
-**[E8 · La fiscalización invertida](../2%20%C2%B7%20Las%20causas/E8%20%C2%B7%20La%20fiscalizaci%C3%B3n%20invertida.md) recibe ocho y no emite ninguna.** Todo el sistema declara depender de ella; ella no declara depender de nada. Ésa es la firma estructural de una raíz — y confirma, con el conteo, lo que el modelo afirma con palabras. → [La raíz maestra](../1%20%C2%B7%20El%20problema/La%20ra%C3%ADz%20maestra.md)
+**[E8 · La fiscalización invertida](../2%20%C2%B7%20Las%20causas/E8%20%C2%B7%20La%20fiscalizaci%C3%B3n%20invertida.md) recibe ocho referencias en esta tabla.** El conteo combina supuestos y bisagras; no demuestra ocho mecanismos independientes ni confirma una raíz causal. La ausencia de referencias salientes tampoco prueba independencia. La [raíz maestra](../1%20%C2%B7%20El%20problema/La%20ra%C3%ADz%20maestra.md) propuesta incluye medición y fiscalización, y requiere revisión.
 
 **Los saldos negativos son exactamente lo que la gente ve:** la calidad, la tarifa, el gasto en garrafón. Los tres síntomas visibles son los más dependientes de otros árboles. Los saldos positivos —la fiscalización y la captura del presupuesto— son los que nadie ve. **El sistema está ordenado al revés de como se percibe.**
 
@@ -96,7 +96,7 @@ Si se cuenta cuántas conexiones recibe cada árbol y cuántas emite, aparece la
 
 ## Los cuatro circuitos cerrados
 
-Siguiendo esas conexiones aparecen cuatro bucles que se retroalimentan.
+Los siguientes recorridos son hipótesis interpretativas para discutir. Cada paso necesita mecanismo, alcance y evidencia; no constituyen cuatro bucles causales verificados ni incorporan causas nuevas aprobadas.
 
 **El de la calidad.** El tandeo despresuriza la red y obliga a almacenar → el agua se degrada → crece la desconfianza → el hogar se pasa al garrafón → el problema se resuelve de forma individual → la exigencia colectiva se fragmenta → sin presión, el tandeo no se corrige.
 
@@ -106,4 +106,4 @@ Siguiendo esas conexiones aparecen cuatro bucles que se retroalimentan.
 
 **El de la legitimidad.** Se gasta en imagen → el usuario deja de creer que su pago se traduce en servicio → baja la disposición a pagar → hay menos ingreso → se necesita más imagen para sostener la percepción.
 
-Ninguno de los cuatro se interrumpe solo. Por eso importa tanto [E8 · La fiscalización invertida](../2%20%C2%B7%20Las%20causas/E8%20%C2%B7%20La%20fiscalizaci%C3%B3n%20invertida.md): **nada los rompe desde fuera porque nadie mide y nadie sanciona.**
+El papel que la medición y la fiscalización tendrían en estos recorridos forma parte de la hipótesis del diagnóstico. Las referencias del grafo no permiten predecir por sí solas qué intervención los modificaría.

@@ -1,5 +1,7 @@
 ---
 id: E5
+padre: PC
+supuesto_E8: "Se vigila y sanciona la descarga fuera de norma (Propósito de E8)."
 tipo: causa
 titulo: E5 · La carga a la cuenca
 aliases: [E5, "Carga contaminante en la cuenca"]

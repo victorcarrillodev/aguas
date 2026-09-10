@@ -1,5 +1,7 @@
 ---
 id: E3
+padre: PC
+supuesto_E8: "Existe fiscalización/regulación que verifique la estructura de costos (Propósito de E8)."
 tipo: causa
 titulo: E3 · La tarifa
 aliases: [E3, "Inadecuado modelo tarifario"]

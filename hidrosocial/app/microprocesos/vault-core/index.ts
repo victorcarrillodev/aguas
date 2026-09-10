@@ -4,7 +4,7 @@ import { join } from 'node:path';
 
 import { encodeNodo } from '~/lib/rutas';
 import { parseCanvas } from './canvas';
-import { arbolDeNota, capaDeNodo, tipoDeNota } from './clasificar';
+import { arbolDeNota, capaDeNodo, nivelCausalDe, tipoDeNota } from './clasificar';
 import { parseFrontmatter } from './frontmatter';
 import { extraerLinks } from './markdown-links';
 import type {
@@ -107,6 +107,8 @@ function construirNodo(relPath: string, texto: string): VaultNode | null {
     slug: encodeNodo(relPath),
     relPath,
     frontmatter: datos,
+    codigo: datos.id?.trim() || undefined,
+    nivelCausal: nivelCausalDe(tipo, datos.id?.trim()),
     resumen: extraerResumen(cuerpo),
   };
   if (arbol) nodo.arbol = arbol;
@@ -168,7 +170,7 @@ export async function parseVault(vaultPath: string): Promise<VaultGraph> {
     }
   }
 
-  // 4) Jerarquía ficha→causa y medicion→causa por `arbol`.
+  // La pertenencia al árbol es un atributo, nunca un atajo causal hacia E#.
   const causaPorArbol = new Map<string, string>();
   for (const n of nodos.values()) {
     if (n.tipo === 'causa' && n.arbol && !causaPorArbol.has(n.arbol)) {
@@ -176,25 +178,42 @@ export async function parseVault(vaultPath: string): Promise<VaultGraph> {
     }
   }
   for (const n of nodos.values()) {
-    if ((n.tipo === 'ficha' || n.tipo === 'medicion') && n.arbol) {
+    if (n.tipo === 'medicion' && n.arbol) {
       const causa = causaPorArbol.get(n.arbol);
-      if (causa) agregar({ origen: n.id, destino: causa, tipo: 'jerarquia' });
+      if (causa) agregar({ origen: n.id, destino: causa, tipo: 'mide', etiqueta: 'Indicador propuesto de esta condición; no es una causa.' });
     }
   }
 
-  // Relaciones semánticas explícitas; la jerarquía anterior conserva la agrupación por árbol.
-  const porCodigo = new Map(
-    [...nodos.values()].filter((n) => n.frontmatter.id).map((n) => [n.frontmatter.id, n.id]),
-  );
+  // No resolver una identidad duplicada eligiendo silenciosamente el último archivo.
+  const porCodigo = new Map<string, string>();
+  const duplicados = new Set<string>();
+  const incidenciasModelo: string[] = [];
   for (const n of nodos.values()) {
-    const padre = porCodigo.get(n.frontmatter.padre);
-    if (padre)
+    if (!n.codigo) continue;
+    if (porCodigo.has(n.codigo) || duplicados.has(n.codigo)) {
+      porCodigo.delete(n.codigo);
+      if (!duplicados.has(n.codigo)) incidenciasModelo.push(`Código duplicado: ${n.codigo}. Requiere conciliación.`);
+      duplicados.add(n.codigo);
+    } else porCodigo.set(n.codigo, n.id);
+  }
+  for (const n of nodos.values()) {
+    const padre = porCodigo.get(n.frontmatter.padre || '');
+    const superior = padre ? nodos.get(padre) : undefined;
+    const padreEsperado = n.nivelCausal === 'N2' ? 'PC' : n.codigo?.split('.').slice(0, -1).join('.');
+    const padreValido = !!(n.nivelCausal && superior?.nivelCausal &&
+      Number(n.nivelCausal.slice(1)) === Number(superior.nivelCausal.slice(1)) + 1 &&
+      superior.codigo === padreEsperado && porCodigo.get(n.codigo || '') === n.id);
+    if (padre && padreValido)
       agregar({
         origen: n.id,
         destino: padre,
         tipo: 'causa-propuesta',
-        etiqueta: n.frontmatter.produce || 'Mecanismo por documentar',
+        etiqueta: n.nivelCausal === 'N2'
+          ? 'Causa estructural propuesta del problema central (AP_maestro); relación en revisión.'
+          : n.frontmatter.produce || 'Mecanismo por documentar',
       });
+    else if (n.nivelCausal && n.nivelCausal !== 'N1')
+      incidenciasModelo.push(`${n.codigo}: falta un padre inmediato válido (${padreEsperado}).`);
     for (const [clave, tipo] of [
       ['depende_de', 'supuesto'],
       ['bisagra_hacia', 'bisagra'],
@@ -208,9 +227,23 @@ export async function parseVault(vaultPath: string): Promise<VaultGraph> {
             tipo,
             etiqueta:
               tipo === 'supuesto'
-                ? 'Declara un supuesto externo; en revisión'
-                : 'Contacto entre árboles; dirección causal pendiente',
+                ? n.frontmatter[`supuesto_${codigo}`] || 'Supuesto externo en revisión; consultar la condición en el expediente.'
+                : `Contacto en revisión: ${n.frontmatter.enunciado || n.titulo}. No establece por sí solo dirección causal.`,
           });
+      }
+    }
+    for (const codigo of (n.frontmatter.efectos || '').split(',').map((v) => v.trim())) {
+      const efecto = nodos.get(porCodigo.get(codigo) || '');
+      if (n.nivelCausal && efecto?.tipo === 'efecto')
+        agregar({ origen: n.id, destino: efecto.id, tipo: 'efecto-propuesto', etiqueta: 'Efecto propuesto; fuera del conteo de niveles N.' });
+    }
+    for (const [clave, tipo] of [['genera', 'genera'], ['debe_resolver', 'debe-resolver']] as const) {
+      for (const codigo of (n.frontmatter[clave] || '').split(',').map((v) => v.trim())) {
+        const actor = nodos.get(porCodigo.get(codigo) || '');
+        if (actor?.tipo === 'actor') agregar({
+          origen: actor.id, destino: n.id, tipo,
+          etiqueta: tipo === 'genera' ? 'Actor al que el diagnóstico atribuye generar la condición; en revisión.' : 'Actor al que el diagnóstico atribuye resolver la condición; en revisión.',
+        });
       }
     }
     const destino = n.frontmatter.nodo_id;
@@ -230,7 +263,7 @@ export async function parseVault(vaultPath: string): Promise<VaultGraph> {
       agregar({ origen: n.id, destino: plan.id, tipo: 'revision', etiqueta: 'Aportación vinculada a un plan de contraste' });
     }
   }
-  return { nodos, aristas, escaneadoEn: Date.now() };
+  return { nodos, aristas, escaneadoEn: Date.now(), incidenciasModelo };
 }
 
 export async function leerNota(vaultPath: string, relPath: string): Promise<NotaCompleta> {

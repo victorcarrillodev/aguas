@@ -1,5 +1,8 @@
 export type CapaId = 'C0' | 'C1' | 'C2' | 'C3' | 'C4';
 
+/** Profundidad en el árbol maestro; independiente de las capas C0–C4. */
+export type NivelCausal = 'N1' | 'N2' | 'N3' | 'N4';
+
 export type ArbolId = 'E1' | 'E2' | 'E3' | 'E4' | 'E5' | 'E6' | 'E7' | 'E8' | 'E9' | 'E10';
 
 export type VaultNodeType =
@@ -21,6 +24,10 @@ export interface VaultEdge {
     | 'canvas'
     | 'jerarquia'
     | 'causa-propuesta'
+    | 'efecto-propuesto'
+    | 'mide'
+    | 'genera'
+    | 'debe-resolver'
     | 'supuesto'
     | 'bisagra'
     | 'evidencia'
@@ -35,6 +42,9 @@ export interface VaultNode {
   slug: string; // base64url del relPath (para rutas)
   relPath: string; // igual que id
   frontmatter: Record<string, string | undefined>;
+  /** Identidad del diagnóstico (PC, E1, E1.2…), independiente de la ruta de lectura. */
+  codigo?: string;
+  nivelCausal?: NivelCausal;
   resumen: string; // primer blockquote "> ..." o primeros 160 chars del cuerpo
   arbol?: ArbolId;
   capa?: CapaId;
@@ -45,6 +55,7 @@ export interface VaultGraph {
   nodos: Map<string, VaultNode>;
   aristas: VaultEdge[];
   escaneadoEn: number; // Date.now()
+  incidenciasModelo?: string[];
 }
 
 export interface FileMeta {

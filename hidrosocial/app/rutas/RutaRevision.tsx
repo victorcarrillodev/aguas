@@ -147,9 +147,9 @@ export default function RutaRevision() {
         </div>
       </div>
       <section className={styles.tarjeta}>
-        <h2>Hipótesis rivales: qué nos haría cambiar de opinión</h2>
+        <h2>Planes de contraste opcionales</h2>
         <p>
-          Antes de salir a campo o volver a analizar datos, abre un expediente y crea un plan de
+          Si ayuda a tu investigación, abre un expediente y crea un plan de
           contraste: una explicación alternativa, un resultado esperado y el criterio que te haría
           revisar la afirmación. Vincula las observaciones al plan para comparar lo previsto con lo
           encontrado. También puedes registrar un plan con datos ya conocidos, indicando ese momento.
@@ -162,11 +162,14 @@ export default function RutaRevision() {
         </p>
       </section>
       <section className={styles.tarjeta}>
-        <h2>Cinco recorridos para investigar</h2>
+        <h2>Deliberar e integrar el diagnóstico</h2>
         <p>
-          Comprender el problema → examinar la explicación → contrastar evidencia → deliberar →
-          preparar la medición. Abre un expediente para seguir el recorrido completo.
+          Desglosar en AP → aplicar las cuatro reglas y documentar la lectura por capas →
+          revisar con el Consejo → integrar lo aprobado en Nodos → contar en el Tablero.
+          La captura de un documento no completa automáticamente ese recorrido.
         </p>
+        <p>El Excel del 9 de septiembre añade una matriz de Trazabilidad. Su captura por capas
+          todavía está pendiente de implementar. <Link to={`/nodo/${encodeNodo('7 · El método/Trazabilidad de la lectura por capas.md')}`}>Consultar sus reglas</Link>.</p>
         <div className={styles.filtros}>
           <label>
             Buscar afirmación

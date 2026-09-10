@@ -1,5 +1,8 @@
 ---
 id: E1
+padre: PC
+supuesto_E7: "Los recursos de operación y mantenimiento llegan a las plantas (Propósito de E7). Si se drenan, la calidad cae."
+supuesto_E5: "La fuente no recibe carga contaminante (Propósito de E5). Bisagra: calidad en origen."
 tipo: causa
 titulo: E1 · La calidad del agua
 aliases: [E1, "Incumplimiento de calidad (NOM-127)"]

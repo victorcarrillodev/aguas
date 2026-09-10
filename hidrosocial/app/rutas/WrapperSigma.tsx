@@ -12,6 +12,7 @@ interface Props {
   /** Clic en un nodo → selección en el inspector (no navega). */
   onSeleccionar?: (id: string | null) => void;
   radiografia?: boolean;
+  causal?: boolean;
 }
 
 interface ControlSigma {
@@ -26,7 +27,7 @@ interface ControlSigma {
  * oculta el resto (`hidden`), nodos arrastrables y toolbar flotante
  * (zoom/reset/pantalla completa).
  */
-export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar, radiografia = false }: Props) {
+export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar, radiografia = false, causal = false }: Props) {
   const marco = useRef<HTMLDivElement>(null);
   const contenedor = useRef<HTMLDivElement>(null);
   const control = useRef<ControlSigma | null>(null);
@@ -61,10 +62,10 @@ export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar, radi
           graph.addNode(n.id, {
             x: n.x,
             y: n.y,
-            size: radiografia && n.cuello ? n.size + Math.min(7, n.cuello) : n.size,
-            label: n.titulo,
+            size: !causal && radiografia && n.cuello ? n.size + Math.min(7, n.cuello) : n.size,
+            label: causal ? `${n.codigo || n.titulo} · ${n.nivelCausal || ''}` : n.titulo,
             color: radiografia && n.cuello ? '#ba1a1a' : n.color,
-            forceLabel: radiografia && n.cuello >= 3,
+            forceLabel: causal || (radiografia && n.cuello >= 3),
           });
         }
       }
@@ -103,13 +104,13 @@ export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar, radi
         allowInvalidContainer: true,
         renderEdgeLabels: false,
         defaultNodeColor: '#7EA6E0',
-        labelRenderedSizeThreshold: 9,
-        labelDensity: 0.07,
+        labelRenderedSizeThreshold: causal ? 0 : 9,
+        labelDensity: causal ? 1 : 0.07,
         labelColor: { color: '#0b1c30' },
       });
       sigma.setSetting('nodeReducer', (node: string, data: Record<string, unknown>) => {
         const resaltado = resaltadoRef.current;
-        if (!resaltado) return data;
+        if (!resaltado || causal) return data;
         if (node === resaltado || adyacencia.get(resaltado)?.has(node)) return data;
         return { ...data, hidden: true };
       });
@@ -118,7 +119,7 @@ export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar, radi
         if (!resaltado) return data;
         const extremos = graph.extremities(edge) as string[];
         if (extremos.includes(resaltado)) return { ...data, size: 2.5 };
-        return { ...data, hidden: true };
+        return causal ? data : { ...data, hidden: true };
       });
       let movido = false;
       sigma.on('clickNode', ({ node }: { node: string }) => {
@@ -163,7 +164,7 @@ export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar, radi
         }
       });
       const focoInicial = focoRef.current;
-      if (focoInicial && graph.hasNode(focoInicial)) {
+      if (!causal && focoInicial && graph.hasNode(focoInicial)) {
         const pos = graph.getNodeAttributes(focoInicial) as { x: number; y: number };
         sigma.getCamera().animate({ ...pos, ratio: 0.6 }, { duration: 300 });
       }
@@ -191,7 +192,7 @@ export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar, radi
       graphRef.current = null;
       renderer?.kill();
     };
-  }, [nodos, aristas, radiografia]);
+  }, [nodos, aristas, radiografia, causal]);
 
   // Cambios de foco: reutiliza la instancia viva (sin reconstruir sigma).
   // Solo actualiza el resaltado, refresca y anima la cámara al nodo foco.
@@ -200,15 +201,15 @@ export default function WrapperSigma({ nodos, aristas, foco, onSeleccionar, radi
     const sigma = sigmaRef.current;
     if (!sigma) return;
     sigma.refresh();
-    if (foco && graphRef.current?.hasNode(foco)) {
+    if (!causal && foco && graphRef.current?.hasNode(foco)) {
       const pos = graphRef.current.getNodeAttributes(foco) as { x: number; y: number };
       sigma.getCamera().animate({ ...pos, ratio: 0.6 }, { duration: 300 });
     }
-  }, [foco]);
+  }, [foco, causal]);
 
   return (
     <div ref={marco} className={styles.marco}>
-      <div ref={contenedor} className={styles.lienzo} role="img" aria-label="Grafo del vault" />
+      <div ref={contenedor} className={styles.lienzo} role="img" aria-label={causal ? 'Árbol causal por niveles N; las flechas apuntan al padre inmediato' : 'Red de relaciones y documentos'} />
       <div className={styles.toolbar} role="toolbar" aria-label="Controles del grafo">
         <button type="button" title="Acercar" onClick={() => control.current?.acercar()}>
           <span className="material-symbols-outlined" aria-hidden="true">

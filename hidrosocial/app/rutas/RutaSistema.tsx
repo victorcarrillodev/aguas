@@ -137,13 +137,15 @@ export default function RutaSistema() {
   return (
     <div className={styles.cuenca}>
       <header className={styles.hero}>
-        <p className={styles.antetitulo}>Lógica del modelo</p>
+        <p className={styles.antetitulo}>Relaciones externas entre árboles</p>
         <h1 className={styles.titulo}>Qué supone cada explicación</h1>
         <p className={styles.entrada}>
           Las diez causas estructurales no son independientes: cada una declara de qué otras
           depende. Las relaciones son propuestas del diagnóstico en revisión. Este explorador
           comprueba su inclusión en una selección; no predice resultados ni sostenibilidad.
         </p>
+        <p>Todos los árboles de esta vista son N2. Su distribución por supuestos no representa
+          los niveles causales N1–N4. <Link to="/grafo">Abrir el árbol maestro y su desglose</Link>.</p>
       </header>
 
       <div className={styles.kpis}>

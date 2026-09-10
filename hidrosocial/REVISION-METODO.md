@@ -1,5 +1,7 @@
 # Revisión del método y de las aportaciones científicas
 
+> **Alcance histórico.** Este documento revisó el archivo del 31 de agosto. Para la jerarquía N1–N4, la separación entre nivel causal y capa C0–C4, y la nueva matriz de Trazabilidad del archivo del 9 de septiembre, prevalece [Lógica del diagnóstico y comparación del Excel del 9 de septiembre](./LOGICA-DEL-DIAGNOSTICO.md). Esta revisión conserva su valor para el flujo de evidencia y los planes de contraste.
+
 Revisión del 6 de septiembre de 2026. Base: el Excel `260831_DX_correlacion_AP_capas.xlsx`, la bóveda y el código de Hidrosocial. Se examinó la estructura y el flujo documental; no se verificó en campo la verdad de las afirmaciones ni se ejecutó la aplicación.
 
 ## Qué entendiste bien

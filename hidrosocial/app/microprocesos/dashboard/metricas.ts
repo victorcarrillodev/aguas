@@ -1,6 +1,6 @@
 import { esEvidencia, estadoDato, registrosDe } from '../revision/index';
 import { construirRed } from '../sistema/index';
-import type { ArbolId, CapaId, VaultGraph, VaultNode, VaultNodeType } from '../vault-core/tipos';
+import type { ArbolId, CapaId, NivelCausal, VaultGraph, VaultNode, VaultNodeType } from '../vault-core/tipos';
 import type { EvidenciaReciente, MetricasDashboard } from './index';
 
 /**
@@ -26,6 +26,12 @@ function extraerFecha(n: VaultNode): string {
 }
 
 export function calcularMetricas(g: VaultGraph): MetricasDashboard {
+  const porNivel: Record<NivelCausal, number> = { N1: 0, N2: 0, N3: 0, N4: 0 };
+  const causales = [...new Map([...g.nodos.values()].filter((n) => n.nivelCausal && n.codigo)
+    .map((n) => [n.codigo, n])).values()];
+  for (const n of causales) if (n.nivelCausal) porNivel[n.nivelCausal] += 1;
+  const nodosIntegrados = causales.filter((n) => n.frontmatter.estado === 'integrado' &&
+    !!n.frontmatter.acta_integracion?.trim()).length;
   const porTipo = {
     problema: 0,
     causa: 0,
@@ -64,15 +70,11 @@ export function calcularMetricas(g: VaultGraph): MetricasDashboard {
     }
   }
 
-  // Fichas por causa (aristas de jerarquía ficha→causa).
+  // Pertenecer al mismo árbol no convierte a cada ficha en causa directa de E#.
   const fichasPorCausa = new Map<string, number>();
-  for (const a of g.aristas) {
-    if (a.tipo !== 'jerarquia') continue;
-    const origen = g.nodos.get(a.origen);
-    const destino = g.nodos.get(a.destino);
-    if (origen?.tipo === 'ficha' && destino?.tipo === 'causa') {
-      fichasPorCausa.set(a.destino, (fichasPorCausa.get(a.destino) ?? 0) + 1);
-    }
+  for (const n of g.nodos.values()) {
+    if (n.tipo !== 'ficha' || !n.arbol) continue;
+    fichasPorCausa.set(n.arbol, (fichasPorCausa.get(n.arbol) ?? 0) + 1);
   }
 
   // La red del sistema es la fuente de las relaciones entre árboles.
@@ -87,7 +89,11 @@ export function calcularMetricas(g: VaultGraph): MetricasDashboard {
         titulo: n.titulo,
         capa: (n.capa ?? 'C1') as CapaId,
         atribucion: n.frontmatter.ambito ?? n.frontmatter.atribucion,
-        fichas: fichasPorCausa.get(n.id) ?? 0,
+        fichas: fichasPorCausa.get(n.arbol || '') ?? 0,
+        directas: causales.filter((x) => x.arbol === n.arbol && x.nivelCausal === 'N3').length,
+        subyacentes: causales.filter((x) => x.arbol === n.arbol && x.nivelCausal === 'N4').length,
+        directasSinDesglose: causales.filter((x) => x.arbol === n.arbol && x.nivelCausal === 'N3' &&
+          !g.aristas.some((a) => a.tipo === 'causa-propuesta' && a.destino === x.id && g.nodos.get(a.origen)?.nivelCausal === 'N4')).length,
         sostieneA: enRed?.sostieneA.length ?? 0,
         dependeDe: enRed?.dependeDe.length ?? 0,
         requiere: enRed?.profundidad ?? 0,
@@ -103,6 +109,8 @@ export function calcularMetricas(g: VaultGraph): MetricasDashboard {
 
   return {
     totalNotas: g.nodos.size,
+    porNivel,
+    nodosIntegrados,
     porTipo,
     porCapa,
     porArbol,

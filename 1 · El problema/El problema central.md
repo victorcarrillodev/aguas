@@ -1,11 +1,17 @@
 ---
+id: PC
+efectos: [EF-dhays, EF-transferencia-regresiva, EF-acuifero-se-agota]
+tipo: problema-central
+enunciado: "Los habitantes del AMG, la cuenca-activo y el erario público padecen un servicio-derecho al agua y saneamiento deficiente, inequitativo e insostenible, operado por debajo de su idoneidad."
+estado: en-revision
+fuente: "260831_DX_correlacion_AP_capas.xlsx · AP_maestro!C12:C13"
 titulo: El problema central
 aliases: [PC, Problema central]
 ---
 
 # El problema central
 
-> **> **Quién lo padece:** los habitantes del AMG, la cuenca-activo y el erario público.**
+> **Quién lo padece:** los habitantes del AMG, la cuenca-activo y el erario público.
 > **Qué padecen:** un servicio-derecho al agua y saneamiento **deficiente, inequitativo e insostenible**, operado por debajo de su idoneidad.
 
 Conviene detenerse en la primera línea. La población afectada no son solo las personas: el enunciado incluye a la **cuenca** y al **erario**. No como contexto, sino como víctimas. Es lo que después permite hablar de una transferencia del costo *hacia quien menos tiene y hacia el bien común*, y no solo de un mal servicio.
@@ -37,7 +43,7 @@ Los tres son necesarios. Quitar cualquiera deja el problema mal enunciado: *defi
 
 ## Lo que sostiene el conjunto
 
-Debajo de las diez hay dos capas más, que no son causas sino condiciones de posibilidad:
+El modelo propone además dos elementos de la explicación de conjunto. No son nuevas capas C ni niveles N:
 
 **[El basamento](./El%20basamento.md)** — el arreglo institucional fragmentado y sin árbitro que permite que las causas operen sin consecuencia.
 
@@ -47,7 +53,7 @@ Y una advertencia que ordena la lectura entera:
 
 > **La regulación es la raíz maestra, no el problema central.**
 
-Es la distinción que separa *lo que la gente padece* —agua sucia, tandeo, tarifa, gasto en garrafón— de *lo que impide corregirlo*. Las diez causas son reales y hay que atacarlas. Pero mientras el doble sello siga en pie, cada corrección se deshará.
+Es la distinción entre la condición que se investiga y la explicación propuesta de su persistencia. Tanto las diez causas como el papel de la medición y la fiscalización siguen sujetos a revisión; el árbol por sí solo no demuestra que una intervención vaya a funcionar o fracasar.
 
 ## Lo que produce hacia arriba
 

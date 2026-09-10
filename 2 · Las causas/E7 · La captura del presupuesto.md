@@ -1,5 +1,7 @@
 ---
 id: E7
+padre: PC
+supuesto_E8: "Texto del Excel por revisar: «el contrapeso legislativo no fiscaliza el gasto ni impone sanción; sin ello, la captura persiste» (AP_E7!E18). Precisar si describe la falla o la condición requerida."
 tipo: causa
 titulo: E7 · La captura del presupuesto
 aliases: [E7, "Captura presupuestal del organismo"]
