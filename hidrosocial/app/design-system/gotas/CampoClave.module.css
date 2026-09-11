@@ -1,0 +1,79 @@
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+}
+
+.etiqueta {
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.req {
+  color: #b91c1c;
+}
+
+.marco {
+  position: relative;
+  display: block;
+}
+
+.entrada {
+  width: 100%;
+  min-height: var(--min-touch);
+  /* Hueco a la derecha para el conmutador de visibilidad (44px + holgura). */
+  padding: var(--esp-2) 3rem var(--esp-2) var(--esp-3);
+  font-family: var(--fuente-ui);
+  font-size: 1rem;
+  color: var(--on-surface);
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--radio);
+}
+
+.entrada:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.entrada:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.entrada[aria-invalid='true'] {
+  border-color: var(--error);
+}
+
+.ojo {
+  position: absolute;
+  top: 50%;
+  right: var(--esp-1);
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--min-touch);
+  min-height: var(--min-touch);
+  padding: 0;
+  color: var(--on-surface-variant);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radio);
+  cursor: pointer;
+}
+
+.ojo:hover {
+  color: var(--on-surface);
+  background: var(--surface-container);
+}
+
+.ojo:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+.ojo:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

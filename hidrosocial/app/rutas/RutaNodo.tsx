@@ -9,6 +9,7 @@ import { colorDeNodo } from '~/lib/colores';
 import { decodeNodo, encodeNodo, unirPosix } from '~/lib/rutas';
 import { exportarExpediente, getVaultGraph, getVaultPath, leerNota } from '~/microprocesos/cache/index';
 import { guardarRegistro } from '~/microprocesos/captura/registro.server';
+import { ErrorFormularioCaptura, leerFormularioCaptura } from '~/microprocesos/captura/borrador.server';
 import {
   estadoDato,
   estadoDocumental,
@@ -18,6 +19,7 @@ import {
   relacionesDe,
 } from '~/microprocesos/revision/index';
 import { ConflictoBorrador, ErrorPersistencia } from '~/microprocesos/persistencia/index.server';
+import { requerirSesion } from '~/microprocesos/sesion/index.server';
 import type { VaultNode } from '~/microprocesos/vault-core/tipos';
 import type { CapaId, VaultNodeType } from '~/microprocesos/vault-core/tipos';
 import styles from './RutaNodo.module.css';
@@ -49,16 +51,19 @@ interface Datos {
 }
 
 export async function action({ request, params }: ActionFunctionArgs) {
+  await requerirSesion(request);
   try {
-    await guardarRegistro(await request.formData(), decodeNodo(params.slug ?? ''));
+    await guardarRegistro(await leerFormularioCaptura(request), decodeNodo(params.slug ?? ''));
     return json({ ok: true });
   } catch (e) {
-    const status = e instanceof ErrorPersistencia ? 503 : e instanceof ConflictoBorrador ? 409 : 400;
+    const status = e instanceof ErrorPersistencia ? 503 : e instanceof ConflictoBorrador ? 409
+      : e instanceof ErrorFormularioCaptura ? e.status : 400;
     return json({ error: e instanceof Error ? e.message : 'No se pudo guardar.' }, { status });
   }
 }
 
 export async function loader(args: LoaderFunctionArgs) {
+  await requerirSesion(args.request);
   try {
     return await cargarNodo(args);
   } catch (error) {

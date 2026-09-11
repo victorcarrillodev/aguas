@@ -45,3 +45,11 @@ No está implementado todavía el formulario de Trazabilidad. La carga de adjunt
 Conciliar 3.B.1 con E4.5/E5.4; resolver la posición de E10.5, marcada «¿copa?»; desarrollar los N4 faltantes sin imponer una cuota como validación; aclarar la redacción negativa del supuesto AP_E7!E18. En Nodos aún hay un registro en la fila 3 que las fórmulas de Tablero iniciadas en fila 4 no cuentan. El archivo nuevo conserva estos asuntos.
 
 Referencias: Cómo usar!A5, B10, A67:B75, A95 y A100:B111; Trazabilidad!A2:N5, F8:N8 y A84; AP_maestro!C12:C34. Las instrucciones de las hojas se interpretaron como descripción del método de los autores, no como autorización para ejecutar acciones en el equipo.
+
+## Cotejo con la imagen de la convención DX
+
+La imagen adjunta «Convención del diagnóstico DX · esqueleto de 4 niveles de causa» confirma las reglas existentes: PC es N1, E1–E10 son N2 y cada E# conserva su identidad al abrir AP_E#. Las directas E#.j son N3 y las subyacentes E#.j.k son N4 terminal. Los efectos no suman un nivel y C0–C4 permanecen como atributos independientes.
+
+Hasta cinco directas por árbol y tres a cinco subyacentes por directa son rangos ampliables por acuerdo. No se impone una cuota automática ni se crean registros para completarla. Los puntos delimitan el ID: E10.2 no se interpreta como E1.0.2. Las bisagras no duplican nodos ni se convierten automáticamente en aristas de padre inmediato.
+
+Las pruebas de convención comprueban niveles, terminalidad, delimitación de IDs y separación de capas. El cotejo es del modelo y del código; no sustituye una revisión visual de la aplicación ni concilia las decisiones metodológicas pendientes del equipo.

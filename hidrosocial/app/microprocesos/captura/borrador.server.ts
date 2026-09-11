@@ -2,13 +2,14 @@ import { randomUUID } from 'node:crypto';
 import { createCookie } from '@remix-run/node';
 import { ARBOLES, CAPAS, LENTES, TIPOS_EVIDENCIA } from '~/lib/taxonomia';
 import { RELACIONES } from '../revision/index';
+import { mismoOrigen, peticionSegura, RUTA_BASE } from '../sesion/sesion.server';
 import { VACIO } from './estado';
 import type { EstadoForm } from './estado';
 
 const cookieBorrador = createCookie('calidad-borrador', {
   httpOnly: true,
   sameSite: 'lax',
-  path: '/calidad',
+  path: RUTA_BASE || '/',
   maxAge: 60 * 60 * 24 * 30,
 });
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -26,7 +27,7 @@ export async function sesionBorrador(request: Request, nueva = false) {
     'Cache-Control': 'private, no-store',
     Vary: 'Cookie',
     'Set-Cookie': await cookieBorrador.serialize(token, {
-      secure: new URL(request.url).protocol === 'https:',
+      secure: peticionSegura(request),
     }),
   });
   return { token, headers };
@@ -43,8 +44,7 @@ export class ErrorFormularioCaptura extends Error {
 
 /** Limita también peticiones sin Content-Length antes de interpretar el formulario. */
 export async function leerFormularioCaptura(request: Request): Promise<FormData> {
-  const origen = request.headers.get('Origin');
-  if (origen && origen !== new URL(request.url).origin)
+  if (!mismoOrigen(request))
     throw new ErrorFormularioCaptura('La solicitud debe enviarse desde esta aplicación.', 403);
   const lector = request.body?.getReader();
   const trozos: Uint8Array[] = [];

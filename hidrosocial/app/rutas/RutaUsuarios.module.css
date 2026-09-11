@@ -1,0 +1,119 @@
+/* Cuenca del padrón: columna única con el alta arriba y las cuentas abajo. */
+
+.cuenca {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+}
+
+.cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-4);
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.titulo {
+  margin: 0;
+  font-family: var(--fuente-titular);
+  font-size: var(--texto-titulo);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.subtitulo {
+  margin: var(--esp-2) 0 0;
+  max-width: 46rem;
+  color: var(--on-surface-variant);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* Credencial recién emitida: se ve una vez, así que destaca. */
+.credencial {
+  padding: var(--esp-4) var(--esp-5);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--secondary);
+  border-left: 4px solid var(--secondary);
+  border-radius: var(--radio);
+}
+
+.credencialTitulo {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  margin: 0;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.datos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-5);
+  margin: var(--esp-4) 0 0;
+}
+
+.datos dt {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+}
+
+.datos dd {
+  margin: var(--esp-1) 0 0;
+}
+
+.dato {
+  font-family: var(--fuente-datos);
+  font-size: 1rem;
+}
+
+.clave {
+  font-family: var(--fuente-datos);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  user-select: all;
+  overflow-wrap: anywhere;
+}
+
+.credencialPie {
+  margin: var(--esp-4) 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+}
+
+.hecho,
+.aviso {
+  display: block;
+  padding: var(--esp-3) var(--esp-4);
+  border-radius: var(--radio);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.hecho {
+  color: #0b3f3a;
+  background: var(--secondary-container);
+  border: 1px solid rgba(0, 106, 97, 0.28);
+}
+
+.aviso {
+  color: var(--on-surface);
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+}
+
+.correoNota {
+  margin: var(--esp-4) 0 0;
+  padding-top: var(--esp-3);
+  border-top: 1px solid var(--outline-variant);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+}

@@ -11,6 +11,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "biome lint .",
     "test": "bun test --max-concurrency=1",
+    "clave": "bun scripts/clave.ts",
+    "correo:prueba": "bun scripts/correo-prueba.ts",
     "db:migrate": "bun scripts/migrate.ts",
     "db:import": "bun scripts/import-vault.ts"
   },

@@ -33,3 +33,12 @@
   font-size: 0.75rem;
   color: var(--on-surface-variant);
 }
+
+.entrada:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.entrada[aria-invalid='true'] {
+  border-color: var(--error);
+}

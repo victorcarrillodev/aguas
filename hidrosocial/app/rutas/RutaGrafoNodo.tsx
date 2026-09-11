@@ -5,11 +5,13 @@ import { Link, useLoaderData } from '@remix-run/react';
 import { decodeNodo } from '~/lib/rutas';
 import { getVaultGraph } from '~/microprocesos/cache/index';
 import { construirGrafoRender, densidad, modularidad } from '~/microprocesos/grafo/index';
+import { requerirSesion } from '~/microprocesos/sesion/index.server';
 import type { DatosExplorador } from './ExploradorGrafo';
 import { ExploradorGrafo } from './ExploradorGrafo';
 import styles from './RutaGrafoNodo.module.css';
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ params, request }: LoaderFunctionArgs) {
+  await requerirSesion(request);
   let id: string;
   try {
     id = decodeNodo(params.nodeId ?? '');

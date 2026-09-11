@@ -25,6 +25,7 @@ import {
 } from '../app/microprocesos/persistencia/index.server';
 import { migrar } from '../app/microprocesos/persistencia/migraciones';
 import { basePostgresPrueba } from './postgres-prueba';
+import { establecerBaseParaPruebas } from '../app/microprocesos/sesion/usuarios.server';
 
 let directorio: string;
 let pg: PGlite;
@@ -51,6 +52,7 @@ function fd(valores: Record<string, string>) {
 beforeAll(async () => {
   pg = new PGlite();
   const db = basePostgresPrueba(pg);
+  establecerBaseParaPruebas(db);
   await migrar(db, resolve('db/migrations'));
   repo = new Repositorio(db);
   establecerRepositorioParaPruebas(repo);
@@ -79,6 +81,7 @@ beforeAll(async () => {
 }, 30_000);
 afterAll(async () => {
   establecerRepositorioParaPruebas();
+  establecerBaseParaPruebas();
   await pg.close();
   if (anterior === undefined) Reflect.deleteProperty(process.env, 'VAULT_PATH');
   else process.env.VAULT_PATH = anterior;
@@ -257,4 +260,56 @@ test('conserva relaciones semánticas y correspondencia de subyacentes', async (
   ).toBe(true);
   expect(render.aristas.some((a) => a.tipo === 'supuesto')).toBe(true);
   expect(parseFrontmatter('---\nx: "a\\nb"\n---\nTexto').datos.x).toBe('a\nb');
+});
+
+test('el guardado autenticado redirige sin repetir el basename y abre la evidencia', async () => {
+  const { action } = await import('../app/rutas/RutaCaptura');
+  const { loader: leerNodo, action: revisarNodo } = await import('../app/rutas/RutaNodo');
+  const { iniciarSesion } = await import('../app/microprocesos/sesion/sesion.server');
+  const entorno = { ...process.env };
+  try {
+    process.env.SESSION_SECRET = 'secreto-sintetico-de-prueba-de-mas-de-32-caracteres';
+    process.env.ROOT_USUARIO = 'prueba-ruta';
+    process.env.ROOT_CLAVE = 'clave-sintetica-para-pruebas';
+    process.env.ROOT_CLAVE_HASH = '';
+    process.env.CONFIAR_PROXY = '0';
+    const acceso = await iniciarSesion(new Request('http://localhost/calidad/acceso'), 'prueba-ruta', '/');
+    const cookie = acceso.headers.get('Set-Cookie')?.split(';')[0] || '';
+    const campos = fd({
+      _version: '0', titulo: 'Prueba de ruta', enunciado: 'Observación', observacion: 'Caso sintético',
+      arbol: 'E1', capa: 'C1', lentes: 'BIO', tipoEvidencia: 'documento', fuente: 'Prueba',
+      fecha: '2026-09-10', afirmacion: 'Servicio discontinuo', referencia: 'Referencia sintética',
+      responsable: 'Equipo', relacion: 'no-concluyente', nodoId: causa,
+      alcance: 'Zona sintética', metodo: 'Documento sintético',
+      interpretacion: 'Sin conclusión poblacional', limitaciones: 'Datos ficticios',
+    });
+    const respuesta = await action({
+      request: new Request('http://localhost/calidad/captura', { method: 'POST', body: campos,
+        headers: { Cookie: cookie, Origin: 'http://localhost' } }), params: {}, context: {},
+    });
+    expect(respuesta.status).toBe(302);
+    const destino = respuesta.headers.get('Location') || '';
+    expect(destino).toMatch(/^\/nodo\/[^/]+\?recibido=1$/);
+    const url = new URL(`/calidad${destino}`, 'http://localhost');
+    const slug = url.pathname.split('/').pop() || '';
+    const pagina = await leerNodo({ request: new Request(url, { headers: { Cookie: cookie } }),
+      params: { slug }, context: {} });
+    expect(pagina.status).toBe(200);
+    expect((await pagina.json()).recibido).toBe(true);
+
+    // La ruta de revisiones debe rechazar el envío antes de tocar la persistencia.
+    const antes = (await repo.listarDocumentos()).length;
+    for (const [headers, body, status] of [
+      [{}, 'registro=propuesta', 403],
+      [{ Origin: 'http://localhost' }, 'a'.repeat(160_001), 413],
+    ] as const) {
+      const rechazada = await revisarNodo({ request: new Request(url, {
+        method: 'POST', headers: { Cookie: cookie, 'Content-Type': 'application/x-www-form-urlencoded', ...headers }, body,
+      }), params: { slug }, context: {} });
+      expect(rechazada.status).toBe(status);
+    }
+    expect((await repo.listarDocumentos()).length).toBe(antes);
+  } finally {
+    process.env = entorno;
+  }
 });

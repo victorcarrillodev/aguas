@@ -10,6 +10,15 @@ interface Props {
   alCambiar?: (v: string) => void;
   placeholder?: string;
   descripcion?: string;
+  /** Pista de autocompletado del navegador (p. ej. `username`). */
+  autocompletar?: string;
+  maxLongitud?: number;
+  /** Foco al montar: sólo cuando el campo es la única acción de la pantalla. */
+  autoFoco?: boolean;
+  /** Marca el campo como erróneo y lo enlaza con el texto que lo explica. */
+  invalido?: boolean;
+  describePor?: string;
+  deshabilitado?: boolean;
 }
 
 /** Gota: input de texto con etiqueta (controlado o no controlado). */
@@ -22,6 +31,12 @@ export function CampoTexto({
   alCambiar,
   placeholder,
   descripcion,
+  autocompletar,
+  maxLongitud,
+  autoFoco,
+  invalido,
+  describePor,
+  deshabilitado,
 }: Props) {
   return (
     <label className={styles.campo}>
@@ -43,6 +58,16 @@ export function CampoTexto({
         value={valor}
         onChange={alCambiar ? (e) => alCambiar(e.target.value) : undefined}
         placeholder={placeholder}
+        autoComplete={autocompletar}
+        autoCapitalize={autocompletar ? 'none' : undefined}
+        autoCorrect={autocompletar ? 'off' : undefined}
+        spellCheck={autocompletar ? false : undefined}
+        maxLength={maxLongitud}
+        // biome-ignore lint/a11y/noAutofocus: sólo lo pide la pantalla de acceso.
+        autoFocus={autoFoco}
+        aria-invalid={invalido || undefined}
+        aria-describedby={describePor}
+        disabled={deshabilitado}
       />
       {descripcion ? <span className={styles.descripcion}>{descripcion}</span> : null}
     </label>

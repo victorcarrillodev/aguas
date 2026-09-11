@@ -4,6 +4,7 @@ import { useLoaderData } from '@remix-run/react';
 
 import { getVaultGraph } from '~/microprocesos/cache/index';
 import { construirGrafoRender, densidad, modularidad } from '~/microprocesos/grafo/index';
+import { requerirSesion } from '~/microprocesos/sesion/index.server';
 import type { CapaId, VaultNodeType } from '~/microprocesos/vault-core/tipos';
 import type { DatosExplorador } from './ExploradorGrafo';
 import { ExploradorGrafo } from './ExploradorGrafo';
@@ -23,6 +24,7 @@ const TIPOS = new Set([
 const CAPAS = new Set(['C0', 'C1', 'C2', 'C3', 'C4']);
 
 export async function loader({ request }: LoaderFunctionArgs) {
+  await requerirSesion(request);
   const url = new URL(request.url);
   const tipoParam = url.searchParams.get('tipo');
   const capaParam = url.searchParams.get('capa');

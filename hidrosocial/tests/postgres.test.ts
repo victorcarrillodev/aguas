@@ -12,7 +12,10 @@ let repo: Repositorio;
 beforeAll(async () => {
   pg = new PGlite();
   const db = basePostgresPrueba(pg);
-  expect(await migrar(db, resolve('db/migrations'))).toEqual(['001_persistencia.sql']);
+  expect(await migrar(db, resolve('db/migrations'))).toEqual([
+    '001_persistencia.sql',
+    '002_usuarios.sql',
+  ]);
   expect(await migrar(db, resolve('db/migrations'))).toEqual([]);
   repo = new Repositorio(db);
 }, 30_000);

@@ -1,0 +1,34 @@
+/* Sólo lo propio de la cuenca: el aviso de que el servidor todavía no tiene
+   acceso configurado. La pantalla la pone el cauce PanelAcceso. */
+
+.bloqueo {
+  margin: 0 0 var(--esp-4);
+  padding: var(--esp-3);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--on-surface);
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+}
+
+.bloqueo p {
+  margin: 0 0 var(--esp-2);
+}
+
+.bloqueo p:last-child {
+  margin-bottom: 0;
+}
+
+.bloqueoTitulo {
+  font-weight: 700;
+}
+
+.bloqueoAyuda {
+  color: var(--on-surface-variant);
+}
+
+.bloqueoAyuda code {
+  font-family: var(--fuente-datos);
+  font-size: 0.8125rem;
+}

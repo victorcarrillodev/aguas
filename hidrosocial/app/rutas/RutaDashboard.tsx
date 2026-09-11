@@ -1,4 +1,5 @@
 import { json } from '@remix-run/node';
+import type { LoaderFunctionArgs } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import { useState } from 'react';
 
@@ -12,9 +13,11 @@ import { encodeNodo } from '~/lib/rutas';
 import { getVaultGraph } from '~/microprocesos/cache/index';
 import { calcularMetricas } from '~/microprocesos/dashboard/index';
 import type { MetricasDashboard } from '~/microprocesos/dashboard/index';
+import { requerirSesion } from '~/microprocesos/sesion/index.server';
 import styles from './RutaDashboard.module.css';
 
-export async function loader() {
+export async function loader({ request }: LoaderFunctionArgs) {
+  await requerirSesion(request);
   const g = await getVaultGraph();
   const metricas = calcularMetricas(g);
   return json(metricas);

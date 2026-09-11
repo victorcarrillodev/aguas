@@ -11,8 +11,17 @@ const ENLACES = [
   { to: '/grafo', etiqueta: 'Grafo', fin: false },
 ];
 
+interface Props {
+  /** Usuario de la sesión abierta; el encabezado sólo se pinta con sesión. */
+  usuario: string;
+  /** El padrón sólo se enseña al root; la puerta real la pone el loader. */
+  esRoot?: boolean;
+  /** Testigo CSRF del cierre de sesión (viene del loader raíz). */
+  testigo: string;
+}
+
 /** Cauce: header sticky + nav píldora (≥1024px) + buscador con Ctrl+K → `/grafo?q=`. */
-export function EncabezadoApp() {
+export function EncabezadoApp({ usuario, esRoot, testigo }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const [params] = useSearchParams();
@@ -74,6 +83,35 @@ export function EncabezadoApp() {
             ))}
           </ul>
         </nav>
+        <div className={styles.sesion}>
+          {esRoot ? (
+            <NavLink
+              to="/usuarios"
+              className={({ isActive }) => (isActive ? styles.padronActivo : styles.padron)}
+              title="Padrón de usuarios"
+            >
+              <span className="material-symbols-outlined" aria-hidden="true">
+                manage_accounts
+              </span>
+              <span className={styles.textoPadron}>Usuarios</span>
+            </NavLink>
+          ) : null}
+          <span className={styles.usuario} title={`Sesión de ${usuario}`}>
+            <span className="material-symbols-outlined" aria-hidden="true">
+              account_circle
+            </span>
+            {usuario}
+          </span>
+          <Form method="post" action="/salir">
+            <input type="hidden" name="_csrf" value={testigo} />
+            <button type="submit" className={styles.salir} aria-label="Cerrar sesión">
+              <span className="material-symbols-outlined" aria-hidden="true">
+                logout
+              </span>
+              <span className={styles.textoSalir}>Salir</span>
+            </button>
+          </Form>
+        </div>
       </div>
     </header>
   );

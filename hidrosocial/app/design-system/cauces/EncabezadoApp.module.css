@@ -46,6 +46,7 @@
     align-items: center;
     gap: var(--esp-2);
     margin-left: auto;
+    margin-right: var(--esp-2);
     background: var(--surface-container);
     border: 1px solid var(--outline-variant);
     border-radius: 999px;
@@ -73,6 +74,126 @@
   .buscador:focus-within {
     outline: 2px solid var(--primary);
     outline-offset: 1px;
+  }
+}
+
+/* Sesión: en móvil sólo el icono de salida; el nombre aparece en ≥768px. */
+.sesion {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  margin-left: auto;
+}
+
+@media (min-width: 1024px) {
+  .sesion {
+    margin-left: 0;
+  }
+}
+
+.usuario {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .usuario {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--esp-1);
+    max-width: 12rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+  }
+}
+
+/* Entrada al padrón: sólo para root. Icono en móvil, con texto en ≥768px. */
+.padron,
+.padronActivo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-2);
+  min-height: var(--min-touch);
+  min-width: var(--min-touch);
+  padding: var(--esp-2);
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+@media (min-width: 768px) {
+  .padron,
+  .padronActivo {
+    padding: var(--esp-2) var(--esp-3);
+  }
+}
+
+.padron:hover {
+  background: var(--surface-container-high);
+}
+
+.padronActivo {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.textoPadron {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .textoPadron {
+    display: inline;
+  }
+}
+
+.salir {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-2);
+  min-height: var(--min-touch);
+  min-width: var(--min-touch);
+  padding: var(--esp-2);
+  font-family: var(--fuente-ui);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .salir {
+    padding: var(--esp-2) var(--esp-4);
+    border-color: var(--outline-variant);
+  }
+}
+
+.salir:hover {
+  background: var(--surface-container-high);
+}
+
+.salir:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.textoSalir {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .textoSalir {
+    display: inline;
   }
 }
 

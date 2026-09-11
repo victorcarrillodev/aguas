@@ -1,0 +1,156 @@
+/* Padrón: tarjetas apiladas en móvil, tres columnas a partir de 768px. Se evita
+   una tabla porque cada fila lleva formularios de acción propios. */
+
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+}
+
+.fila,
+.filaInactiva {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-3);
+  padding: var(--esp-4);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+}
+
+.filaInactiva {
+  background: var(--surface-container);
+  opacity: 0.75;
+}
+
+@media (min-width: 768px) {
+  .fila,
+  .filaInactiva {
+    grid-template-columns: minmax(0, 2fr) auto minmax(0, 1.4fr);
+    align-items: center;
+  }
+}
+
+.identidad {
+  min-width: 0;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  margin: 0;
+  font-weight: 700;
+  font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+
+.tuya {
+  padding: 2px var(--esp-2);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--secondary);
+  background: var(--secondary-container);
+  border-radius: 999px;
+}
+
+.correo {
+  margin: var(--esp-1) 0 0;
+  font-family: var(--fuente-datos);
+  font-size: 0.8125rem;
+  color: var(--on-surface-variant);
+  overflow-wrap: anywhere;
+}
+
+.meta {
+  margin: var(--esp-1) 0 0;
+  font-size: 0.75rem;
+  color: var(--on-surface-variant);
+}
+
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+}
+
+@media (min-width: 768px) {
+  .acciones {
+    justify-content: flex-end;
+  }
+}
+
+.boton,
+.peligro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-1);
+  min-height: var(--min-touch);
+  padding: var(--esp-2) var(--esp-3);
+  font-family: var(--fuente-ui);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--secondary);
+  background: transparent;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radio);
+  cursor: pointer;
+}
+
+.boton:hover {
+  background: var(--surface-container-high);
+}
+
+.peligro {
+  color: var(--error);
+  border-color: rgba(186, 26, 26, 0.35);
+}
+
+.peligro:hover {
+  background: var(--error-container);
+}
+
+.boton:disabled,
+.peligro:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.boton:focus-visible,
+.peligro:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+/* En móvil sólo el icono: tres acciones con texto no caben. */
+.textoAccion {
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .textoAccion {
+    display: inline;
+  }
+}
+
+.nota {
+  font-size: 0.75rem;
+  color: var(--on-surface-variant);
+}
+
+.vacio {
+  margin: 0;
+  color: var(--on-surface-variant);
+}

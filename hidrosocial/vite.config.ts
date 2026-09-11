@@ -17,7 +17,14 @@ export default defineConfig({
       // Las cuencas viven en app/rutas/ (D7); se mapean aquí en vez de app/routes/.
       routes(defineRoutes) {
         return defineRoutes((route) => {
-          route('/', 'rutas/RutaDashboard.tsx', { index: true });
+          route('/acceso', 'rutas/RutaAcceso.tsx');
+          route('/salir', 'rutas/SalidaSalir.tsx');
+          route('/usuarios', 'rutas/RutaUsuarios.tsx');
+          // Índice sin `path`: con `'/'` la ruta queda `index + path` a la vez y
+          // el router del navegador deja de emparejarla al navegar en cliente
+          // (sólo casa `root`, pantalla en blanco hasta recargar). `defineRoutes`
+          // convierte '' en «sin path».
+          route('', 'rutas/RutaDashboard.tsx', { index: true });
           route('/sistema', 'rutas/RutaSistema.tsx');
           route('/revision', 'rutas/RutaRevision.tsx');
           route('/captura', 'rutas/RutaCaptura.tsx');

@@ -1,4 +1,5 @@
 import { json } from '@remix-run/node';
+import type { LoaderFunctionArgs } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import { useMemo, useState } from 'react';
 
@@ -17,10 +18,12 @@ import {
   simular,
 } from '~/microprocesos/sistema/index';
 import type { ArbolSistema, IncidenciaActor } from '~/microprocesos/sistema/index';
+import { requerirSesion } from '~/microprocesos/sesion/index.server';
 import type { ArbolId } from '~/microprocesos/vault-core/tipos';
 import styles from './RutaSistema.module.css';
 
-export async function loader() {
+export async function loader({ request }: LoaderFunctionArgs) {
+  await requerirSesion(request);
   const g = await getVaultGraph();
   const red = construirRed(g);
   return json({

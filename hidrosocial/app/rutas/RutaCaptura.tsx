@@ -33,6 +33,7 @@ import {
 } from '~/microprocesos/persistencia/index.server';
 import type { DatosBorrador } from '~/microprocesos/persistencia/index.server';
 import { RELACIONES } from '~/microprocesos/revision/index';
+import { requerirSesion } from '~/microprocesos/sesion/index.server';
 import type { ArbolId, CapaId } from '~/microprocesos/vault-core/tipos';
 import styles from './RutaCaptura.module.css';
 
@@ -63,6 +64,7 @@ interface Datos {
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {
+  await requerirSesion(request);
   const sesion = await sesionBorrador(request);
   const g = await getVaultGraph();
   const arboles: Opcion[] = [...g.nodos.values()]
@@ -130,6 +132,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
+  await requerirSesion(request);
   const sesion = await sesionBorrador(request);
   let requestId = '';
   try {
@@ -150,10 +153,8 @@ export async function action({ request }: ActionFunctionArgs) {
     }
     const borrador = validarBorrador(fd);
     const nodo = await guardarNota(borrador, { token: sesion.token, version });
-    const url = new URL(request.url);
-    const base = url.pathname.replace(/\/captura\/?$/, '');
     const nuevaSesion = await sesionBorrador(request, true);
-    return redirect(`${base}/nodo/${encodeNodo(nodo.id)}?recibido=1`, { headers: nuevaSesion.headers });
+    return redirect(`/nodo/${encodeNodo(nodo.id)}?recibido=1`, { headers: nuevaSesion.headers });
   } catch (e) {
     const mensaje = e instanceof Error ? e.message : 'No se pudo guardar la evidencia.';
     const status = e instanceof ErrorPersistencia ? 503
