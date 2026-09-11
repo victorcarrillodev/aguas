@@ -22,14 +22,14 @@ x-app: &app
     CORREO_ENVIAR: ${CORREO_ENVIAR:-1}
     SMTP_HOST: ${SMTP_HOST_DOCKER:-host.docker.internal}
     SMTP_PORT: ${SMTP_PORT:-25}
-  extra_hosts:
-    # En Linux `host.docker.internal` no existe por omisión; esto lo define.
-    - 'host.docker.internal:host-gateway'
     PGHOST: db
     PGPORT: '5432'
     PGUSER: ${POSTGRES_USER:-calidad}
     PGDATABASE: ${POSTGRES_DB:-calidad}
     PGPASSWORD: ${POSTGRES_PASSWORD:?Define POSTGRES_PASSWORD en .env}
+  extra_hosts:
+    # En Linux `host.docker.internal` no existe por omisión; esto lo define.
+    - 'host.docker.internal:host-gateway'
   volumes:
     # El contenido base se consulta; las nuevas aportaciones viven en PostgreSQL.
     - ../:/vault:ro
